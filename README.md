@@ -23,7 +23,10 @@ Have you ever felt stuck on a coding problem, found the solution on google but w
 
 ## **Tools**
 
-ReactJS, MongoDB, MUI (Material UI), GraphQL
+- ReactJS
+- MongoDB
+- MUI (Material UI)
+- GraphQL
 
 ## **Motivation**
 
@@ -31,7 +34,9 @@ We wanted a place to catch up and teach each other after our web-development pro
 
 ## **Installation**
 
-- download or clone repo - navigate to respective folder - npm i
+- download or clone repo 
+- navigate to respective folder 
+- npm i
 
 ## **Usage**
 
