@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Logic Lounge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href="https://choosealicense.com/licenses/mit">
+<img src="https://img.shields.io/badge/License-MIT-blue" />
+</a>
 
-## Available Scripts
+## _Table of Contents_
 
-In the project directory, you can run:
+- [Description](#description)
+- [Tools](#tools)
+- [Motivation](#motivation)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contribution](#contribution)
+- [Testing](#testing)
+- [License](#license)
+- [Screenshots](#screenshots)
+- [Questions](#questions)
 
-### `npm start`
+## **Description**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Have you ever felt stuck on a coding problem, found the solution on google but wanted to understand why it worked? We did too! Well that was until we built Logic Lounge. A match based tutoring web application that connects users to experts in the matter of seconds.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## **Tools**
 
-### `npm test`
+ReactJS, MongoDB, MUI (Material UI), GraphQL
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## **Motivation**
 
-### `npm run build`
+We wanted a place to catch up and teach each other after our web-development program ended.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## **Installation**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- download or clone repo - navigate to respective folder - npm i
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **Usage**
 
-### `npm run eject`
+It's as simple as logging in or signing up, match with a tutor and you're all set!
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## **Contribution**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+See contact info below
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## **Testing**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+N/A
 
-## Learn More
+## **Screenshots**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Add your screenshots here:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![ALT TEXT](URL)
 
-### Code Splitting
+## **Links**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Add any relevant links for this project below:
 
-### Analyzing the Bundle Size
+[Your Website](URL)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## License
 
-### Making a Progressive Web App
+This project is licensed under the terms of the MIT license.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Detailed information about this license can be found here: [License Info](https://choosealicense.com/licenses/mit)
 
-### Advanced Configuration
+## Questions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Any question about this project contact us here:
 
-### Deployment
+- [Cornelius](https://github.com/ValentaCodes)
+- [Kameron](https://github.com/kfarshchian)
+- [Gustavo](https://github.com/0zrk23)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- <ValentaCodes@gmail.com>
+- <kfarshchian@gmail.com>
+- <gus.carrillo1221@gmail.com>
