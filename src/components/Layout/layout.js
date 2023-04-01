@@ -1,13 +1,12 @@
-import './index.scss';
-import Navbar from '../navbar';
+import Navbar from '../Navbar/navbar';
 import { Outlet } from 'react-router-dom';
-import Footer from '../footer'
+import Footer from '../Footer/footer'
 
 
 const Layout = () => {
     return (
     <div className="App">
-     <Navbar /> 
+     <Navbar/> 
         <div className='page'>
             <span className='tags top-tags'> </span>
 

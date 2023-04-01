@@ -4,7 +4,7 @@ const Navbar = () => {
 
     return (
         <div>
-            
+            <p>hi</p>
         </div>
     )
 }
