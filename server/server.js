@@ -12,7 +12,11 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
+  cache: "bounded",
 });
+
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
