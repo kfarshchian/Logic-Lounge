@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import Auth from '../../utils/auth';
-// import { Button } from '@mui/material';
-// import {motion} from 'framer-motion'
+import { Typography } from '@mui/material';
+import "./navbar.scss"
 
 const pageNames = ['Profile','Find a Match','Chatroom']
 const pageLinks = ['/profile/','/match','/chatroom']
@@ -17,10 +16,32 @@ const Header = () => {
     <div className='navbar'>
       <div className='logo'>
         {/**Logo goes here */}
-        
+        <Typography 
+          sx={{
+            fontFamily: 'monospace'
+          }}
+          variant='h3'
+        >
+
+        </Typography>
       </div>
       <div className='page-links'>
-        {
+        <>
+          <Link to='/'>
+            Home
+          </Link>
+          {
+            pageNames.map((page,index) => (
+              <Link 
+                key={`${page}`} 
+                to={page !== 'Profile' ? `${pageLinks[index]}` : `${pageLinks[index]}${Auth.getProfile().data._id}`}
+              >
+                {page}
+              </Link>
+            ))
+          }
+        </>
+        {/* {
           Auth.loggedIn() && (
             <>
               <Link to='/'>
@@ -38,7 +59,7 @@ const Header = () => {
               }
             </>
           )
-        }
+        } */}
       </div>
       <div className='user-links'>
         {Auth.loggedIn() ? (
