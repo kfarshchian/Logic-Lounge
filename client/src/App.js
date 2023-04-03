@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import SingleThought from './pages/SingleThought';
 import Header from './components/Navbar';
 import Footer from './components/Footer';
+import Profile from './pages/Profile';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -62,6 +63,10 @@ function App() {
               <Route 
                 path="/thoughts/:thoughtId" 
                 element={<SingleThought />} 
+              />
+              <Route
+                path='/profile'
+                element={<Profile />}
               />
             </Routes>
           </div>
