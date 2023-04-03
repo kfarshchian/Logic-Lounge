@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Auth from '../../utils/auth';
 // import { Button } from '@mui/material';
-import {motion} from 'framer-motion'
+// import {motion} from 'framer-motion'
 
 const pageNames = ['Profile','Find a Match','Chatroom']
 const pageLinks = ['/profile/','/match','/chatroom']
@@ -16,6 +16,7 @@ const Header = () => {
   return (
     <div className='navbar'>
       <div className='logo'>
+        {/**Logo goes here */}
         
       </div>
       <div className='page-links'>
