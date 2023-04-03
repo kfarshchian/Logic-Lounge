@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 
 import Auth from '../../utils/auth';
 // import { Button } from '@mui/material';
-// import {motion} from 'framer-motion'
+import {motion} from 'framer-motion'
+
+const pageNames = ['Profile','Find a Match','Chatroom']
+const pageLinks = ['/profile/','/match','/chatroom']
 
 const Header = () => {
   const logout = (event) => {
@@ -13,29 +16,28 @@ const Header = () => {
   return (
     <div className='navbar'>
       <div className='logo'>
+        
+      </div>
+      <div className='page-links'>
         {
           Auth.loggedIn() && (
             <>
-              <Link 
-                to='/'
-              >
+              <Link to='/'>
                 Home
               </Link>
-              <Link to={`/users/${Auth.getProfile().data._id}`}>
-                Profile
-              </Link>
-              <Link to="/match">
-                Find a Match
-              </Link>
-              <Link to='/chatroom'>
-                Chatroom
-              </Link>
+              {
+                pageNames.map((page,index) => (
+                  <Link 
+                    key={`${page}`} 
+                    to={page !== 'Profile' ? `${pageLinks[index]}` : `${pageLinks[index]}${Auth.getProfile().data._id}`}
+                  >
+                    {page}
+                  </Link>
+                ))
+              }
             </>
           )
         }
-      </div>
-      <div className='page-links'>
-
       </div>
       <div className='user-links'>
         {Auth.loggedIn() ? (
@@ -45,9 +47,14 @@ const Header = () => {
             </button>
           </>
         ) : (
-          <Link to="/login">
-            Login
-          </Link>
+          <>
+            <Link to="/login">
+              Login
+            </Link>
+            <Link to='/signup'>
+              Sign Up
+            </Link>
+          </>
         )}
       </div>
     </div>
