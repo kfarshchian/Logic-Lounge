@@ -28,20 +28,20 @@ import Grid from '@mui/material/Grid';
 //   }));
   
   function Profile() {
-    const classes = useStyles();
+    // const classes = useStyles();
   
     return (
-      <div className={classes.root}>
+      <div className=''>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4} md={3}>
-            <Avatar className={classes.avatar} />
-            <Typography variant="h6" className={classes.name}>
+            <Avatar className='' />
+            <Typography variant="h6" className=''>
               Full Name
             </Typography>
-            <Typography variant="body1" className={classes.bio}>
+            <Typography variant="body1" className=''>
               Bio
             </Typography>
-            <Button variant="contained" color="primary" className={classes.button}>
+            <Button variant="contained" color="primary" className=''>
               Edit Profile
             </Button>
           </Grid>
