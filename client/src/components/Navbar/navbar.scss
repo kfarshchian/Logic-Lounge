@@ -1,6 +1,6 @@
-body{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-}
+// body{
+//     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+// }
 
 a {
     color: black; /* blue colors for links too */
@@ -40,22 +40,17 @@ a {
     flex-grow: 10;
 }
 
-.user-link,
-.page-link{
+.user-link{
     margin: 0 1rem;
     font-size: 1rem;
 }
 
-.motion-container{
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
 
-@media screen and (max-width: 750px) {
-    .logo,
-    .user-links,
-    .page-links{
-        display: none;
-    }
-}
+
+// @media screen and (max-width: 750px) {
+//     .logo,
+//     .user-links,
+//     .page-links{
+//         display: none;
+//     }
+// }
