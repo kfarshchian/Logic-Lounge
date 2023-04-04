@@ -21,7 +21,7 @@ const linkVariants = {
     }
   }
 
-function PageLink({page, pageLink}) {
+function PageLink({ page, pageLink}) {
   return (
     <motion.div
       className='motion-container'
@@ -29,7 +29,6 @@ function PageLink({page, pageLink}) {
       initial='initial'
       whileHover='hover'
       whileTap='tap'
-      key={`${page}`}
     >
       <Link 
         className='page-link'

@@ -38,7 +38,7 @@ const Header = () => {
         >
           {
             pageNames.map((page,index) => (
-              <PageLink page={page} pageLink={pageLinks[index]}/>
+              <PageLink key={page} page={page} pageLink={pageLinks[index]}/>
             ))
           }
         </motion.div>
