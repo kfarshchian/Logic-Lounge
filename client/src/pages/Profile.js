@@ -1,31 +1,31 @@
 import React from 'react';
-import { makeStyles } from '@@mui/material/styles';
+// import { makeStyles } from '@@material-ui/core/styles';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    avatar: {
-      width: theme.spacing(12),
-      height: theme.spacing(12),
-      margin: theme.spacing(2),
-    },
-    name: {
-      fontWeight: 'bold',
-      marginBottom: theme.spacing(2),
-    },
-    bio: {
-      marginBottom: theme.spacing(2),
-    },
-    button: {
-      margin: theme.spacing(1),
-    },
-  }));
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//       flexGrow: 1,
+//     },
+//     avatar: {
+//       width: theme.spacing(12),
+//       height: theme.spacing(12),
+//       margin: theme.spacing(2),
+//     },
+//     name: {
+//       fontWeight: 'bold',
+//       marginBottom: theme.spacing(2),
+//     },
+//     bio: {
+//       marginBottom: theme.spacing(2),
+//     },
+//     button: {
+//       margin: theme.spacing(1),
+//     },
+//   }));
   
   function Profile() {
     const classes = useStyles();
