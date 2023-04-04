@@ -17,6 +17,9 @@ const resolvers = {
     thought: async (parent, { thoughtId }) => {
       return Thought.findOne({ _id: thoughtId });
     },
+    tutors: async () => {
+      return User.find();
+    },
   },
 
   Mutation: {

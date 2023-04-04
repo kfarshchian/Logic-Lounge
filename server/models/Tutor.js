@@ -15,7 +15,7 @@ const tutorSchema = new Schema({
   bio:{
     type: String,
   },
-  languages: {
+  skills: {
     type: String,
     required: true,
   },

@@ -22,7 +22,7 @@ const typeDefs = gql`
     tutorName: String
     img: String
     bio: String
-    languages: String
+    skills: String
   }
 
   type Comment {
