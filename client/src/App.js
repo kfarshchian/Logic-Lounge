@@ -14,6 +14,9 @@ import Login from './pages/Login';
 import SingleThought from './pages/SingleThought';
 import Header from './components/Navbar';
 import Footer from './components/Footer';
+import Profile from './pages/Profile';
+import Match from './pages/match';
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -63,7 +66,15 @@ function App() {
                 path="/thoughts/:thoughtId" 
                 element={<SingleThought />} 
               />
-            </Routes>
+              <Route
+                path='/profile'
+                element={<Profile />}
+              />  
+              <Route
+                path='/match'
+                element={<Match />}
+              />
+                </Routes>
           </div>
           <Footer />
         </div>

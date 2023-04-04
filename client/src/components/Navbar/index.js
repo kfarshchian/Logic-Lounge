@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
-import { Typography } from '@mui/material';
+import {motion} from 'framer-motion'
 import "./navbar.scss"
+import { Typography } from '@mui/material';
+import PageLink from '../PageLink/PageLink';
 
-const pageNames = ['Find a Match','Chatroom']
-const pageLinks = ['/match','/chatroom']
+const pageNames = ['Home', 'Profile','Find a Match','Chatroom']
+const pageLinks = ['/','/profile','/match','chatroom']
+
+
 
 const Header = () => {
   const logout = (event) => {
@@ -13,67 +17,50 @@ const Header = () => {
     Auth.logout();
   };
   return (
-    <div className='navbar'>
-      <div className='logo'>
-        <Link to='/'>
-          {/**Logo goes here */}
-          <Typography 
-            sx={{
-              fontFamily: 'monospace',
-            }}
-            variant='h5'
-          >
-            Logic Lounge
-          </Typography>
-        </Link>
-      </div>
-      <div className='page-links'>
-        <Link className='page-link' to='/'>
-          Home
-        </Link>
-        {
-          pageNames.map((page,index) => (
-            <Link 
-              className='page-link'
-              key={`${page}`} 
-              to={`${pageLinks[index]}`}
+    <>
+      <div className='navbar'>
+        <div className='logo'>
+          <Link to='/'>
+            {/**Logo goes here */}
+            <Typography 
+              sx={{
+                fontFamily: 'Franklin Gothic Medium'    
+              }} 
+              variant='h5'
             >
-              {page}
-            </Link>
-          ))
-        }
-        <Link 
-          className='page-link'
-          to='/profile'
+              Logic Lounge  
+            </Typography> 
+          </Link>
+        </div>
+        <motion.div 
+          className='page-links'
+
         >
-          Profile
-        </Link>
+          {
+            pageNames.map((page,index) => (
+              <PageLink key={page} page={page} pageLink={pageLinks[index]}/>
+            ))
+          }
+        </motion.div>
+        <div className='user-links'>
+          {Auth.loggedIn() ? (
+            <>
+              <button onClick={logout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <PageLink page='Login' pageLink="/login"/>
+              <PageLink page='Sign Up' pageLink="/signup"/>
+            </>
+          )}
+        </div>
+        <div className='navbar app'>
+
+        </div>
       </div>
-      <div className='user-links'>
-        {Auth.loggedIn() ? (
-          <>
-            <button onClick={logout}>
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link 
-              className='user-link'
-              to="/login"
-            >
-              Login
-            </Link>
-            <Link 
-              className='user-link'
-              to='/signup'
-            >
-              Sign Up
-            </Link>
-          </>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 

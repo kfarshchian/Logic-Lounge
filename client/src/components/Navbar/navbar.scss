@@ -1,3 +1,12 @@
+// body{
+//     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+// }
+
+a {
+    color: black; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}
+
 .navbar{
     position: sticky;
     display: flex;
@@ -19,13 +28,29 @@
     align-items: center;
 }
 
+.logo{
+    margin: 0 1rem 0 0;
+}
+
+.logo-text{
+    font-size: 1.5rem
+}
+
 .page-links{
     flex-grow: 10;
 }
 
-.user-link,
-.page-link{
+.user-link{
     margin: 0 1rem;
-    text-decoration: none;
-    color: black;
+    font-size: 1rem;
 }
+
+
+
+// @media screen and (max-width: 750px) {
+//     .logo,
+//     .user-links,
+//     .page-links{
+//         display: none;
+//     }
+// }

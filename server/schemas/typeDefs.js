@@ -17,6 +17,14 @@ const typeDefs = gql`
     comments: [Comment]!
   }
 
+  type Tutor {
+    _id: ID
+    tutorName: String
+    img: String
+    bio: String
+    languages: String
+  }
+
   type Comment {
     _id: ID
     commentText: String
@@ -34,6 +42,7 @@ const typeDefs = gql`
     user(username: String!): User
     thoughts(username: String): [Thought]
     thought(thoughtId: ID!): Thought
+    tutors: [Tutor]
   }
 
   type Mutation {
