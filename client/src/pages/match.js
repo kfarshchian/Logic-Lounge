@@ -1,6 +1,6 @@
 import React from 'react'
 
-const match = () => {
+const Match = () => {
   return (
     <div>
         <p>TUTOR</p>
@@ -8,4 +8,4 @@ const match = () => {
   )
 }
 
-export default match;
+export default Match;

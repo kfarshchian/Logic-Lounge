@@ -15,6 +15,8 @@ import SingleThought from './pages/SingleThought';
 import Header from './components/Navbar';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
+import Match from './pages/match';
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -67,8 +69,12 @@ function App() {
               <Route
                 path='/profile'
                 element={<Profile />}
+              />  
+              <Route
+                path='/match'
+                element={<Match />}
               />
-            </Routes>
+                </Routes>
           </div>
           <Footer />
         </div>
