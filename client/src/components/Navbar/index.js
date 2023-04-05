@@ -6,8 +6,8 @@ import "./navbar.scss"
 import { Typography } from '@mui/material';
 import PageLink from '../PageLink/PageLink';
 
-const pageNames = ['Home', 'Profile','Find a Match','Chatroom']
-const pageLinks = ['/','/profile','/match','chatroom']
+const pageNames = ['Home', 'Profile','Find a Match','Chatrooms']
+const pageLinks = ['/','/profile','/match','/chatrooms']
 
 const Header = () => {
   const logout = (event) => {
