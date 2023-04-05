@@ -19,10 +19,16 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  thoughts: [
+  skills: [
+    {
+      type: Schema.Types.Array,
+      ref: 'Skill',
+    },
+  ],
+  tutor: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      ref: 'Tutor',
     },
   ],
 });
