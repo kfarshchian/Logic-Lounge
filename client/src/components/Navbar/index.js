@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
-import {motion} from 'framer-motion'
+// import {motion} from 'framer-motion'
 import "./navbar.scss"
 import { Typography } from '@mui/material';
 import PageLink from '../PageLink/PageLink';
 
-const pageNames = ['Home', 'Profile','Find a Match','Chatroom']
-const pageLinks = ['/','/profile','/match','chatroom']
-
-
+const pageNames = ['Home', 'Profile','Find a Match','Chatrooms']
+const pageLinks = ['/','/profile','/match','/chatrooms']
 
 const Header = () => {
   const logout = (event) => {
@@ -19,6 +17,7 @@ const Header = () => {
   return (
     <>
       <div className='navbar'>
+        {/* This is the logo section */}
         <div className='logo'>
           <Link to='/'>
             {/**Logo goes here */}
@@ -32,16 +31,18 @@ const Header = () => {
             </Typography> 
           </Link>
         </div>
-        <motion.div 
+        {/* This is the page link sections */}
+        <div 
           className='page-links'
-
         >
           {
+            // This maps through the page names array and creates a page link Component matching that page
             pageNames.map((page,index) => (
               <PageLink key={page} page={page} pageLink={pageLinks[index]}/>
             ))
           }
-        </motion.div>
+        </div>
+        {/* This is the user link sections */}
         <div className='user-links'>
           {Auth.loggedIn() ? (
             <>
@@ -50,7 +51,7 @@ const Header = () => {
               </button>
             </>
           ) : (
-            <>
+            <> 
               <PageLink page='Login' pageLink="/login"/>
               <PageLink page='Sign Up' pageLink="/signup"/>
             </>
