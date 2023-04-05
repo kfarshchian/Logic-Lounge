@@ -9,4 +9,4 @@ function Chatrooms() {
   )
 }
 
-export default Chatroom
+export default Chatrooms
