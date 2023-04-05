@@ -16,6 +16,7 @@ import Header from './components/Navbar';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import Match from './pages/match';
+import Chatrooms from './pages/Chatrooms/Chatrooms';
 
 
 // Construct our main GraphQL API endpoint
@@ -74,8 +75,12 @@ function App() {
                 path='/match'
                 element={<Match />}
               />
-                </Routes>
-          </div>
+              <Route
+                path='/chatrooms'
+                element={<Chatrooms />}
+              />
+              </Routes>
+            </div>
           <Footer />
         </div>
       </Router>
