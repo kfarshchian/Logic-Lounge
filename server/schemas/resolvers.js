@@ -17,9 +17,22 @@ const resolvers = {
     thought: async (parent, { thoughtId }) => {
       return Thought.findOne({ _id: thoughtId });
     },
+    tutors: async () => {
+      return Tutor.find();
+    },
   },
 
   Mutation: {
+    addTutor: async (parent, {tutorName, skills}) => {
+      const tutor = await Tutor.create({tutorName, skills});
+      return {tutor}
+    },
+    removeTutor: async (parent, { tutorId }) => {
+      return Tutor.findOneAndDelete({ _id: tutorId });
+    },
+    updateTutor: async (parent, { tutorId, tutorName, bio, img, skills }) => {
+      return Tutor.findOneAndUpdate({ _id: tutorId, tutorName, bio, img, skills });
+    },
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);

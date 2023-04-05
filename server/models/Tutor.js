@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const tutorSchema = new Schema({
   tutorName: {
@@ -15,7 +14,7 @@ const tutorSchema = new Schema({
   bio:{
     type: String,
   },
-  languages: {
+  skills: {
     type: String,
     required: true,
   },
