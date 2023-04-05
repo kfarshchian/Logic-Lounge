@@ -75,6 +75,8 @@ function App() {
                 element={<Match />}
               />
                 </Routes>
+              <Route
+                path='/chatrooms'
           </div>
           <Footer />
         </div>
