@@ -57,12 +57,12 @@ const Login = (props) => {
           alignItems: 'center',
         }}
       >
-        <Typography variant='h6'>Sign Up</Typography>
+        <Typography variant='h6'>Log In</Typography>
         <div>
           {data ? (
             <p>
               Success! You may now head{' '}
-              <Link to='/'>back to the homepage.</Link>
+              <Link to='/profile'>to your profile.</Link>
             </p>
           ) : (
             <FormControl
