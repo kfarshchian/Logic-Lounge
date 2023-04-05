@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
-// import {motion} from 'framer-motion'
 import "./navbar.scss"
 import { Typography } from '@mui/material';
 import PageLink from '../PageLink/PageLink';
 
-const pageNames = ['Home', 'Profile','Find a Match','Chatrooms']
-const pageLinks = ['/','/profile','/match','/chatrooms']
+const pageNames = ['Profile','Find a Match','Chatrooms']
+const pageLinks = ['/profile','/match','/chatrooms']
 
 const Header = () => {
   const logout = (event) => {
@@ -35,11 +34,14 @@ const Header = () => {
         <div 
           className='page-links'
         >
+          <PageLink page={'Home'} pageLink={'/'}/>
           {
-            // This maps through the page names array and creates a page link Component matching that page
-            pageNames.map((page,index) => (
-              <PageLink key={page} page={page} pageLink={pageLinks[index]}/>
-            ))
+            Auth.loggedIn() && (
+              // This maps through the page names array and creates a page link Component matching that page
+              pageNames.map((page,index) => (
+                <PageLink key={page} page={page} pageLink={pageLinks[index]}/>
+              ))
+            )
           }
         </div>
         {/* This is the user link sections */}
