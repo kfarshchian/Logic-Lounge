@@ -77,7 +77,7 @@ const typeDefs = gql`
     removeSkillFromUser(userId: ID!, skillId: ID!): User
     # This will permanently delete a skill from database (ONLY USE IN TESTING)
     removeSkill(skillId: ID!): Skill
-    login(email: String!, password: String!): Auth
+    login(username: String!, password: String!): Auth
     addThought(thoughtText: String!, thoughtAuthor: String!): Thought
     addComment(
       thoughtId: ID!

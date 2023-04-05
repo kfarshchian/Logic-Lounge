@@ -75,11 +75,11 @@ const resolvers = {
     removeSkill: async (parent, { skillId }) => {
       return Skill.findByIdAndDelete(skillId).lean();
     },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
 
       if (!user) {
-        throw new AuthenticationError('No user found with this email address');
+        throw new AuthenticationError('No user found with this username');
       }
 
       const correctPw = await user.isCorrectPassword(password);
