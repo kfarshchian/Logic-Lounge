@@ -25,6 +25,10 @@ const typeDefs = gql`
     skills: String
   }
 
+  type Skill {
+    skillName: String
+  }
+
   type Comment {
     _id: ID
     commentText: String
@@ -46,6 +50,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    addTutor(tutorName: String!, img: String, bio: String, skills: String!): Tutor
+    removeTutor(tutorId: ID!): Tutor
+    updateTutor(tutorId: ID! tutorName: String, img: String, bio: String, skills: String): Tutor
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addThought(thoughtText: String!, thoughtAuthor: String!): Thought
