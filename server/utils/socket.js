@@ -3,7 +3,7 @@
  * 'test-query' events, and disconnections
  * @param {io instance from socket.io} io 
  */
-export default function(io) {
+module.exports = function(io) {
   // listen for new client connections
   io.on('connection', (socket) => {
     console.log('New client connected');

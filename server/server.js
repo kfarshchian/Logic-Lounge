@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http'); //import http module
 const socketIO = require('socket.io'); //import socketIO module
-const attachSocketEvents = require('./utils/socket'); //import socket events
+// const {socketEvents} = require('./utils/socket.js'); //import socket events
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
@@ -17,7 +17,8 @@ const server = http.createServer(app);
 // attach Socket.io to the server instance for real time communication
 const io = socketIO(server); 
 // attach the socket events from the socket.js file so for socket.io to listen to
-attachSocketEvents(io);
+// socketEvents(io);
+require('./utils/socket')(io);
 
 const apolloServer = new ApolloServer({
   typeDefs,
