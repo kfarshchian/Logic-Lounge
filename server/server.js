@@ -1,14 +1,25 @@
 const express = require('express');
+const http = require('http'); //import http module
+const socketIO = require('socket.io'); //import socketIO module
+const attachSocketEvents = require('./utils/socket'); //import socket events
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
-
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
-const app = express();
-const server = new ApolloServer({
+const app = express(); //creates an instance of an express server
+
+
+// create server instance using http module with the app instance
+const server = http.createServer(app); 
+// attach Socket.io to the server instance for real time communication
+const io = socketIO(server); 
+// attach the socket events from the socket.js file so for socket.io to listen to
+attachSocketEvents(io);
+
+const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
@@ -30,18 +41,25 @@ app.get('/', (req, res) => {
 });
 
 
-// Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
-  await server.start();
-  server.applyMiddleware({ app });
-  
+  await apolloServer.start();
+  // This is attaching the apollo server as middleware, which will handle any incoming
+  // requests from the apollo server, which then turns the requests into queries and
+  // mutations.
+  apolloServer.applyMiddleware({ app }); 
+
   db.once('open', () => {
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+      console.log(`Use GraphQL at http://localhost:${PORT}${apolloServer.graphqlPath}`);
     })
   })
-  };
-  
-// Call the async function to start the server
-  startApolloServer(typeDefs, resolvers);
+};
+
+startApolloServer(typeDefs, resolvers);
+
+// The changes made above do not affect how the rest of the server runs
+// TL,DR it is creating a socket.io middleware for the express server
+// of which the requests are handled by the Apollo Server. This lets
+// socket.io listen to the requests handled by the Apollo Server and 
+// can update the client in real time
