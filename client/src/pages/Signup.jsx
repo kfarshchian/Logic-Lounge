@@ -2,7 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
-import { Button, TextField, FormControl, Typography, Box } from '@mui/material';
+import {
+  Button,
+  TextField,
+  FormControl,
+  Typography,
+  Box,
+  MenuItem,
+  Select,
+  InputLabel,
+  Checkbox,
+  OutlinedInput,
+  ListItemText,
+} from '@mui/material';
 import Auth from '../utils/auth';
 
 const Signup = () => {
@@ -37,38 +49,39 @@ const Signup = () => {
   };
 
   // This allows us to list each in out selection
-  // const [skill, setSkill] = useState([]);
-  // const skillChange = (event) => {
-  //   const {
-  //     target: { value },
-  //   } = event;
-  //   setSkill(typeof value === 'string' ? value.split(',') : value);
-  // };
+  const [skill, setSkill] = useState([]);
+  const skillChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSkill(typeof value === 'string' ? value.split(',') : value);
+  };
 
   // This controls how the skills look when the popup menu renders
-  // const ITEM_HEIGHT = 48;
-  // const ITEM_PADDING_TOP = 8;
-  // const MenuProps = {
-  //   PaperProps: {
-  //     style: {
-  //       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-  //       width: 250,
-  //     },
-  //   },
-  // };
-  // const skills = [
-  //   'JavaScript',
-  //   'HTML',
-  //   'CSS',
-  //   'React',
-  //   'Linux',
-  //   'LinkedIn',
-  //   'Python',
-  //   'MySQL',
-  //   'MongoDB',
-  //   'GoLang',
-  //   'Algorithms & Data Structures',
-  // ];
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  const skills = [
+    'JavaScript',
+    'HTML',
+    'CSS',
+    'React',
+    'Linux',
+    'LinkedIn',
+    'Python',
+    'MySQL',
+    'MongoDB',
+    'GoLang',
+    'Algorithms & Data Structures',
+  ];
 
   return (
     <>
@@ -130,26 +143,26 @@ const Signup = () => {
                   value={formState.password}
                 />
                 {/* This is for the skill the selection */}
-                {/* <FormControl margin='normal'>
-                <InputLabel>Skills</InputLabel>
-                <Select
-                sx={{ minWidth: '15rem', width: 'fitContent' }}
-                multiple
-                id='selection'
-                value={skill}
-                onChange={skillChange}
-                input={<OutlinedInput label='Skill' />}
-                renderValue={(selected) => selected.join(',')}
-                MenuProps={MenuProps}
-                >
-                {skills.map((newSkill) => (
-                  <MenuItem key={newSkill} value={newSkill}>
-                  <Checkbox checked={skill.indexOf(newSkill) > -1} />
-                  <ListItemText primary={newSkill} />
-                  </MenuItem>
-                  ))}
+                <FormControl margin='normal'>
+                  <InputLabel>Skills</InputLabel>
+                  <Select
+                    sx={{ minWidth: '15rem', maxWidth: '20rem' }}
+                    multiple
+                    id='selection'
+                    value={skill}
+                    onChange={skillChange}
+                    input={<OutlinedInput label='Skill' />}
+                    renderValue={(selected) => selected.join(',')}
+                    MenuProps={MenuProps}
+                  >
+                    {skills.map((newSkill) => (
+                      <MenuItem key={newSkill} value={newSkill}>
+                        <Checkbox checked={skill.indexOf(newSkill) > -1} />
+                        <ListItemText primary={newSkill} />
+                      </MenuItem>
+                    ))}
                   </Select>
-                </FormControl> */}
+                </FormControl>
                 {/* NOTE: wtf is formik validation */}
                 <Button
                   color='secondary'

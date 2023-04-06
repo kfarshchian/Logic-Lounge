@@ -34,8 +34,8 @@ We wanted a place to catch up and teach each other after our web-development pro
 
 ## **Installation**
 
-- download or clone repo 
-- navigate to respective folder 
+- download or clone repo
+- navigate to respective folder
 - npm i
 
 ## **Usage**
@@ -75,7 +75,11 @@ Any question about this project contact us here:
 - [Cornelius](https://github.com/ValentaCodes)
 - [Kameron](https://github.com/kfarshchian)
 - [Gustavo](https://github.com/0zrk23)
+- [Jeremiah](https://github.com/MiahHub)
+- [Anthony](https://github.com/Anthonyshakurangelos)
 
 - <ValentaCodes@gmail.com>
 - <kfarshchian@gmail.com>
 - <gus.carrillo1221@gmail.com>
+- <msgrmiah@gmail.com>
+- <anthonyshakurangelos@gmail.com>
