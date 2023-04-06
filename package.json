@@ -9,7 +9,8 @@
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
-    "react": "cd client && npm run start"
+    "react": "cd client && npm run start",
+    "nodemon": "cd server && npm run watch"
   },
   "keywords": [],
   "author": "",
