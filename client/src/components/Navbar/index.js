@@ -5,8 +5,8 @@ import "./navbar.scss"
 import { Typography } from '@mui/material';
 import PageLink from '../PageLink/PageLink';
 
-const pageNames = ['Profile','Find a Match','Chatrooms']
-const pageLinks = ['/profile','/match','/chatrooms']
+const pageNames = ['Find a Match','Chatrooms']
+const pageLinks = ['/match','/chatrooms']
 
 const Header = () => {
   const logout = (event) => {
@@ -43,6 +43,7 @@ const Header = () => {
               ))
             )
           }
+          <PageLink page={page} pageLink={`/users/${Auth.getProfile.data._id}`}/>
         </div>
         {/* This is the user link sections */}
         <div className='user-links'>
