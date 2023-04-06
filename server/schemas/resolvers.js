@@ -1,9 +1,17 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought, Tutor, Skill } = require('../models');
+const { User, Thought, Tutor, Skill, Chatroom } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
+    //Resolver for finding chatrooms
+    chatrooms: async () => {
+      return Chatroom.find();
+    },
+    //Resolver for finding single chatroom by name
+    chatroom: async (parent,{chatroomName},context) => {
+      return Chatroom.findOne({chatroomName: chatroomName});
+    },
     users: async () => {
       return User.find().populate('skills').lean();
     },
@@ -26,6 +34,17 @@ const resolvers = {
   },
 
   Mutation: {
+    //Adds a message to a chatroom
+    addMessage: async (parent, {chatroomName, messageText, userId},context) => {
+      const user = await User.findById(userId);
+      const chatroomInstance = await Chatroom.findOne({chatroomName: chatroomName})
+      //Creates a new message document from the messages subschema
+      const newMessage = chatroomInstance.messages.create({messageText: messageText, messageAuthor: user.username});
+      chatroomInstance.messages.push(newMessage)
+      //save updated chatroom instance
+      chatroomInstance.save();
+      return chatroomInstance.toJSON();
+    },
     addTutor: async (parent, { tutorName, skills }) => {
       const tutor = await Tutor.create({ tutorName, skills });
       return { tutor };
@@ -124,6 +143,7 @@ const resolvers = {
         { new: true }
       );
     },
+
   },
 };
 
