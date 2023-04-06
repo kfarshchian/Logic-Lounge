@@ -41,3 +41,4 @@ export const QUERY_SINGLE_THOUGHT = gql`
     }
   }
 `;
+

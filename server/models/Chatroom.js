@@ -2,7 +2,7 @@ const {Schema, model} = require('mongoose');
 const dateFormate = require('../utils/dateFormat');
 
 const messageSchema = new Schema({
-  text: {
+  messageText: {
     type: String,
     required: 'Message must have text!',
     minLength: 1,
@@ -22,7 +22,7 @@ const messageSchema = new Schema({
 })
 
 const chatroomSchema = new Schema({
-  chatroom: {
+  chatroomName: {
     type: String,
     required: 'Chatroom must have a name!',
     minlength: 1,
