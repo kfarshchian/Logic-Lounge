@@ -43,7 +43,7 @@ const Header = () => {
               ))
             )
           }
-          <PageLink page={page} pageLink={`/users/${Auth.getProfile.data._id}`}/>
+          <PageLink page={'Profile'} pageLink={`/users/${Auth.getProfile.data._id}`}/>
         </div>
         {/* This is the user link sections */}
         <div className='user-links'>
