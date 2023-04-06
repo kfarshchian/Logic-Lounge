@@ -68,7 +68,7 @@ function App() {
                 element={<SingleThought />} 
               />
               <Route
-                path='/profile'
+                path='/users/:userId'
                 element={<Profile />}
               />  
               <Route
