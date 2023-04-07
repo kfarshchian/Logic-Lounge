@@ -7,12 +7,12 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 // import { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_SINGLE_USER, QUERY_ME} from "../utils/queries";
+import { QUERY_SINGLE_USER, QUERY_ME } from "../utils/queries";
 
-import Auth from '../utils/auth';
+// import Auth from "../utils/auth";
 
 // const [matches, setMatches] = useState([]);
 
@@ -41,23 +41,18 @@ const MatchImage = styled(Avatar)(({ theme }) => ({
   margin: theme.spacing(2),
 }));
 
- function Profile() {
+function Profile() {
+  const {userId} = useParams();
+  console.log(userId);
+  const { loading, error, data } = useQuery( QUERY_SINGLE_USER, {
+    variables: { _id: userId },
+  }); // fetch the user data using GraphQL query and user ID
 
-//   const { userId } = useParams(); 
-  console.log('hit')
-  const { loading, error, data } =  useQuery( QUERY_SINGLE_USER, {
-    variables: {username: 'Anthony Angelos'}
-  } ); // fetch the user data using GraphQL query and user ID
-  let user ;
-   if (data)  {
-   user = data.user
-   }
+  console.log(data, loading, error);
 
-  console.log(data)
+  const user = data?.user || data?.user || {};
 
-//   const user = data?.me || data?.user || {};
-
-//   if (Auth.loggedIn() && Auth.getProfile().data._id === username) {
+//   if (Auth.loggedIn() && Auth.getProfile().data._id === userId) {
 //     return <Navigate to="/me" />;
 //   }
 
@@ -69,8 +64,6 @@ const MatchImage = styled(Avatar)(({ theme }) => ({
     console.error(error);
     return <div>Error loading user data.</div>;
   }
-
-  
 
   const styles = {
     root: {
@@ -107,7 +100,7 @@ const MatchImage = styled(Avatar)(({ theme }) => ({
             <Avatar style={styles.avatar} />
             <Typography variant="h6" style={styles.name}>
               {user.username}
-              {/* {userId ? `${user.username}`:''} */}
+              {/* {user ? `${user.username}`:''} */}
             </Typography>
             <Typography variant="body1" style={styles.bio}>
               {/* {skills} */}

@@ -7,8 +7,8 @@ const resolvers = {
     users: async () => {
       return User.find().populate('skills').lean();
     },
-    user: async (parent, { username }) => {
-      return User.findOne({ username });
+    user: async (parent, { _id }) => {
+      return User.findOne( {_id });
     },
     skills: async () => {
       return Skill.find();
