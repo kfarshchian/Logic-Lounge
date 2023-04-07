@@ -6,10 +6,15 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
+// import { useState, useEffect } from 'react';
+// import { Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { QUERY_SINGLE_USER, QUERY_ME } from "../utils/queries";
 
-// import Card from "@mui/material/Card";
-// import CardContent from "@mui/material/CardContent";
-// import Auth from '../../utils/auth';
+// import Auth from "../utils/auth";
+
+// const [matches, setMatches] = useState([]);
 
 const ProfileBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -37,8 +42,29 @@ const MatchImage = styled(Avatar)(({ theme }) => ({
 }));
 
 function Profile() {
+  const {userId} = useParams();
+  console.log(userId);
+  const { loading, error, data } = useQuery( QUERY_SINGLE_USER, {
+    variables: { _id: userId },
+  }); // fetch the user data using GraphQL query and user ID
 
-    
+  console.log(data, loading, error);
+
+  const user = data?.user || data?.user || {};
+
+//   if (Auth.loggedIn() && Auth.getProfile().data._id === userId) {
+//     return <Navigate to="/me" />;
+//   }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    console.error(error);
+    return <div>Error loading user data.</div>;
+  }
+
   const styles = {
     root: {
       flexGrow: 1,
@@ -62,7 +88,7 @@ function Profile() {
     },
     button: {
       margin: "8px",
-      backgroundColor: '#4F2683 '
+      backgroundColor: "#4F2683 ",
     },
   };
 
@@ -73,10 +99,11 @@ function Profile() {
           <ProfileBox>
             <Avatar style={styles.avatar} />
             <Typography variant="h6" style={styles.name}>
-              Full Name
+              {user.username}
+              {/* {user ? `${user.username}`:''} */}
             </Typography>
             <Typography variant="body1" style={styles.bio}>
-              Bio
+              {/* {skills} */}
             </Typography>
             <Typography variant="body1" style={styles.interest}>
               Interest
@@ -86,11 +113,13 @@ function Profile() {
             </Button>
           </ProfileBox>
         </Grid>
+        {/* {matches.length > 0 && ( */}
         <Grid item xs={12} sm={6} md={4}>
           <Typography variant="h4" gutterBottom>
             Matches
           </Typography>
           <Stack direction="column" justifyContent="center">
+            {/* {matches.map(match => ( */}
             <MatchBox>
               <MatchImage />
               <Typography variant="h6" gutterBottom>
@@ -112,149 +141,11 @@ function Profile() {
               </Typography>
               <Typography variant="body1">Match Bio</Typography>
             </MatchBox>
+            {/* ))} */}
           </Stack>
         </Grid>
       </Grid>
     </div>
-
-    // const styles = {
-    //     root: {
-    //       flexGrow: 1,
-    //     },
-    //     avatar: {
-    //       width: "144px",
-    //       height: "144px",
-    //       margin: "16px",
-    //     },
-    //     name: {
-    //       fontWeight: "bold",
-    //       marginBottom: "16px",
-    //     },
-    //     bio: {
-    //       marginBottom: "16px",
-    //     },
-    //     button: {
-    //       margin: "8px",
-    //     },
-    //     matchContainer: {
-    //       display: "flex",
-    //       flexDirection: "column",
-    //       alignItems: "center",
-    //       marginBottom: "16px",
-    //     },
-    //     matchBarContainer: {
-    //       display: "flex",
-    //       alignItems: "center",
-    //       justifyContent: "space-between",
-    //       width: "100%",
-    //       height: "48px",
-    //       backgroundColor: "#eee",
-    //       borderRadius: "24px",
-    //       padding: "0 16px",
-    //       marginBottom: "8px",
-    //     },
-    //     matchBarFill: {
-    //       height: "100%",
-    //       borderRadius: "24px",
-    //       backgroundColor: "#3f51b5",
-    //       transition: "width 0.5s",
-    //     },
-    //     matchBarLabel: {
-    //       fontWeight: "bold",
-    //       color: "#333",
-    //     },
-    //   };
-
-    //   const matches = [
-    //     { name: "Match 1", value: 0.8 },
-    //     { name: "Match 2", value: 0.6 },
-    //     { name: "Match 3", value: 0.4 },
-    //     { name: "Match 4", value: 0.2 },
-    //     { name: "Match 5", value: 0.1 },
-    //   ];
-
-    //   return (
-    //     <div style={styles.root}>
-    //       <Grid container spacing={3}>
-    //         <Grid item xs={12} sm={4} md={3}>
-    //           <Avatar style={styles.avatar} />
-    //           <Typography variant="h6" style={styles.name}>
-    //             Full Name
-    //           </Typography>
-    //           <Typography variant="body1" style={styles.bio}>
-    //             Bio
-    //           </Typography>
-    //         </Grid>
-    //         <Grid item xs={12} sm={8} md={9}>
-    //           Interest
-    //         </Grid>
-    //         <Grid item xs={12} sm={6} md={4}>
-    //           <Box style={styles.matchContainer}>
-    //             {matches.map((match) => (
-    //               <div key={match.name} style={styles.matchBarContainer}>
-    //                 <div
-    //                   style={{
-    //                     ...styles.matchBarFill,
-    //                     width: `${match.value * 100}%`,
-    //                   }}
-    //                 />
-    //                 <Typography variant="body1" style={styles.matchBarLabel}>
-    //                   {match.name}
-    //                 </Typography>
-    //               </div>
-    //             ))}
-    //           </Box>
-    //         </Grid>
-    //         <Grid item xs={12} sm={6} md={8}>
-    //           About Me
-    //         </Grid>
-    //         <Grid item xs={12}>
-    //           <Button variant="contained" color="primary" style={styles.button}>
-    //             Edit Profile
-    //           </Button>
-    //         </Grid>
-    //       </Grid>
-    //     </div>
-    //   const styles = {
-    //     root: {
-    //       flexGrow: 1,
-    //     },
-    //     avatar: {
-    //       width: "144px",
-    //       height: "144px",
-    //       margin: "16px",
-    //     },
-    //     name: {
-    //       fontWeight: "bold",
-    //       marginBottom: "16px",
-    //     },
-    //     bio: {
-    //       marginBottom: "16px",
-    //     },
-    //     button: {
-    //       margin: "8px",
-    //     },
-    //   };
-    //   return (
-    //     <div style={styles.root}>
-    //       <Grid container spacing={3}>
-    //         <Grid item xs={12} sm={4} md={3}>
-    //           <Avatar style={styles.avatar} />
-    //           <Typography variant="h6" style={styles.name}>
-    //             Full Name
-    //           </Typography>
-    //           <Typography variant="body1" style={styles.bio}>
-    //             Bio
-    //           </Typography>
-    //         </Grid>
-    //         <Grid item xs={12} sm={8} md={9}>
-    //           Interest
-    //         </Grid>
-    //           <Button variant="contained" color="primary" style={styles.button}>
-    //             Edit Profile
-    //           </Button>
-    //       </Grid>
-    //     </div>
   );
 }
 
