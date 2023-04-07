@@ -68,11 +68,16 @@ const typeDefs = gql`
       bio: String
       skills: String
     ): Tutor
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      skills: [String]!
+    ): Auth
     # This is creating anew skill for database
     addNewSkill(skillName: String!): Skill
     # This allows us to assign a skill from database to user
-    addSkillToUser(userId: ID!, skillId: ID!): User
+    addSkillToUser(userId: ID!, skillName: [String]!): User
     # This will remove a skill from a user
     removeSkillFromUser(userId: ID!, skillId: ID!): User
     # This will permanently delete a skill from database (ONLY USE IN TESTING)
