@@ -34,6 +34,10 @@ const resolvers = {
   },
 
   Mutation: {
+    addTutor: async (parent, { tutorName, skills, image, bio }) => {
+      const tutor = await Tutor.create({ tutorName, skills, image, bio });
+      return { tutor };
+    },
     //Adds a message to a chatroom
     addMessage: async (parent, {chatroomName, messageText, userId},context) => {
       const user = await User.findById(userId);
@@ -45,19 +49,26 @@ const resolvers = {
       chatroomInstance.save();
       return chatroomInstance.toJSON();
     },
-    addTutor: async (parent, { tutorName, skills }) => {
-      const tutor = await Tutor.create({ tutorName, skills });
-      return { tutor };
+       //Adds a message to a chatroom
+    addMessage: async (parent, {chatroomName, messageText, userId},context) => {
+      const user = await User.findById(userId);
+      const chatroomInstance = await Chatroom.findOne({chatroomName: chatroomName})
+      //Creates a new message document from the messages subschema
+      const newMessage = chatroomInstance.messages.create({messageText: messageText, messageAuthor: user.username});
+      chatroomInstance.messages.push(newMessage)
+      //save updated chatroom instance
+      chatroomInstance.save();
+      return chatroomInstance.toJSON();
     },
     removeTutor: async (parent, { tutorId }) => {
       return Tutor.findOneAndDelete({ _id: tutorId });
     },
-    updateTutor: async (parent, { tutorId, tutorName, bio, img, skills }) => {
+    updateTutor: async (parent, { tutorId, tutorName, bio, image, skills }) => {
       return Tutor.findOneAndUpdate({
         _id: tutorId,
         tutorName,
         bio,
-        img,
+        image,
         skills,
       });
     },

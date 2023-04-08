@@ -58,3 +58,13 @@ export const QUERY_SINGLE_THOUGHT = gql`
   }
 `;
 
+export const MATCH_TUTOR = gql`
+query Query {
+  tutors {
+    _id
+    tutorName
+    skills
+    
+  }
+}
+`;

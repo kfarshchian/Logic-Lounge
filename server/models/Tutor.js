@@ -7,17 +7,16 @@ const tutorSchema = new Schema({
     unique: true,
     trim: true,
   },
-  img: {
-    data: Buffer,
-    contentType: String
+  image: {
+    Type: String
   },
   bio:{
     type: String,
   },
-  skills: {
+  skills: [{
     type: String,
     required: true,
-  },
+  }],
   
 });
 
