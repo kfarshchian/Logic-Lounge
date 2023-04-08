@@ -36,6 +36,8 @@ const resolvers = {
   Mutation: {
     addTutor: async (parent, { tutorName, skills, image, bio }) => {
       const tutor = await Tutor.create({ tutorName, skills, image, bio });
+      return { tutor };
+    },
     //Adds a message to a chatroom
     addMessage: async (parent, {chatroomName, messageText, userId},context) => {
       const user = await User.findById(userId);
@@ -46,10 +48,6 @@ const resolvers = {
       //save updated chatroom instance
       chatroomInstance.save();
       return chatroomInstance.toJSON();
-    },
-    addTutor: async (parent, { tutorName, skills }) => {
-      const tutor = await Tutor.create({ tutorName, skills });
-      return { tutor };
     },
        //Adds a message to a chatroom
     addMessage: async (parent, {chatroomName, messageText, userId},context) => {
