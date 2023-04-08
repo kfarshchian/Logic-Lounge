@@ -1,8 +1,9 @@
 const db = require('../config/connection');
-const { User, Thought, Tutor } = require('../models');
+const { User, Thought, Tutor, Chatroom  } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const thoughtSeeds = require('./thoughtSeeds.json');
 const tutorSeeds = require('./tutorSeeds.json')
+const chatroomSeeds = require('./chatroomSeeds.json')
 
 db.once('open', async () => {
   try {
@@ -11,6 +12,10 @@ db.once('open', async () => {
     await Tutor.deleteMany({});
     await Tutor.create(tutorSeeds);
     await User.create(userSeeds);
+
+    await Chatroom.collection.drop();
+
+    await Chatroom.insertMany(chatroomSeeds);
 
     for (let i = 0; i < thoughtSeeds.length; i++) {
       const { _id, thoughtAuthor } = await Thought.create(thoughtSeeds[i]);

@@ -1,6 +1,19 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  type Chatroom {
+    _id: ID
+    chatroomName: String
+    messages: [Message]!
+  }
+
+  type Message {
+    _id: ID
+    messageText: String
+    createdAt: String
+    messageAuthor: String
+  }
+  
   type User {
     _id: ID
     username: String
@@ -45,15 +58,23 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
-    user(username: String!): User
+    user(_id: String!): User
     skills: [Skill]
     skill(skillName: String!): Skill
     thoughts(username: String): [Thought]
     thought(thoughtId: ID!): Thought
     tutors: [Tutor]
+    chatrooms: [Chatroom]
+    chatroom(chatroomName: String!): Chatroom
   }
 
   type Mutation {
+    #Adds a message to the given chatroom, by the specified user
+    addMessage(
+      chatroomName: String!
+      messageText: String!
+      userId: ID!
+    ): Chatroom
     addTutor(
       tutorName: String!
       image: String
@@ -77,6 +98,7 @@ const typeDefs = gql`
     removeSkillFromUser(userId: ID!, skillId: ID!): User
     # This will permanently delete a skill from database (ONLY USE IN TESTING)
     removeSkill(skillId: ID!): Skill
+
     login(username: String!, password: String!): Auth
     addThought(thoughtText: String!, thoughtAuthor: String!): Thought
     addComment(
