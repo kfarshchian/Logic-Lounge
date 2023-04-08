@@ -1,13 +1,15 @@
 const db = require('../config/connection');
-const { User, Thought } = require('../models');
+const { User, Thought, Tutor } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const thoughtSeeds = require('./thoughtSeeds.json');
+const tutorSeeds = require('./tutorSeeds.json')
 
 db.once('open', async () => {
   try {
     await Thought.deleteMany({});
     await User.deleteMany({});
-
+    await Tutor.deleteMany({});
+    await Tutor.create(tutorSeeds);
     await User.create(userSeeds);
 
     for (let i = 0; i < thoughtSeeds.length; i++) {

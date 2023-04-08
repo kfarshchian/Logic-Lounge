@@ -63,13 +63,3 @@ export const ADD_COMMENT = gql`
   }
 `;
 
-export const MATCH_TUTOR = gql`
-  query getTutors {
-    tutors {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-    }
-  }
-`;

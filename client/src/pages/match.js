@@ -12,33 +12,26 @@ import {
   OutlinedInput,
   ListItemText,
  } from '@mui/material';
-//  import { MATCH_TUTOR } from '../utils//mutations';
-
+ import { MATCH_TUTOR } from '../utils/queries.js';
+ import { useQuery } from "@apollo/client";
 
 const Match = () => {
   
-  const [skill, setSkill] = useState([]);
-  const skillChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSkill(typeof value === 'string' ? value.split(',') : value);
-  };
+  const { data } = useQuery(MATCH_TUTOR);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(event);
-
-    // try {
-    //   const { event } = await MATCH_TUTOR({
-    //     variables: { ...skills },
-    //   });
-
-    // } catch (e) {
-    //   console.error(e);
-    // }
+    // console.log(skill);
+    console.log(data);
+    // const result = data.tutors.filter(item => item.skills.map().includes(skill))
+    const result = skill.map(x => data.tutors.filter(y => y.skills.includes(x))).filter(z => z.length > 0)
+    // .filter(item => !skill.includes(item));
+    // console.log(result);
+    const matchingTutor = [...new Map(result.map(v => [v.tutorName, v])).values()]
+    console.log(matchingTutor);
+    
   };
-
+  
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -49,7 +42,16 @@ const Match = () => {
       },
     },
   };
+  
+  const [skill, setSkill] = useState([]);
+  const skillChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSkill(typeof value === 'string' ? value.split(',') : value);
+  };
 
+  
   const skills = [
       "JavaScript",
       "Git",
@@ -73,10 +75,10 @@ const Match = () => {
       "Express.js",
       "Handlebars.js",
       "NoSQL",
-  ];
-
-  return (
-    <div className="example">
+    ];
+    
+    return (
+      <div className="example">
       <div className="controls">
        {/* <form onSubmit={this.handleSubmit}> */}
        <Box
@@ -95,7 +97,7 @@ const Match = () => {
                 textAlign: "center",
               }}>Choose Your Flavor</Typography>
               <FormControl
-                onSubmit={handleFormSubmit}
+              onSubmit={handleFormSubmit}
               sx={{ 
                 border: 1,
                 padding: 6,
@@ -105,14 +107,15 @@ const Match = () => {
                 margin: 1,
               }}
               >
+                <form>
             <InputLabel
             sx={{ 
-                color: '#4F2683',
-                borderBlockColor: '#4F2683',
-                padding: 6,
-                borderRadius: 11,
-                margin: 1,
-              }}>Skills</InputLabel>
+              color: '#4F2683',
+              borderBlockColor: '#4F2683',
+              padding: 6,
+              borderRadius: 11,
+              margin: 1,
+            }}>Skills</InputLabel>
                   <Select
                     sx={{ minWidth: '15rem', maxWidth: '20rem', marginTop: 1, marginBottom: 1, color: '#4F2683', }}
                     multiple
@@ -124,21 +127,23 @@ const Match = () => {
                     MenuProps={MenuProps}
                     >
                     {skills.map((newSkill, idx) => (
-                      <MenuItem key={newSkill.id} value={newSkill}>
+                      <MenuItem key={idx} value={newSkill}>
                         <Checkbox checked={skill.indexOf(newSkill) > -1} />
                         <ListItemText primary={newSkill} />
                       </MenuItem>
                     ))}
                     </Select>
-        {/* <Input type="submit" value="Match Tutor" /> */}
+        
         <Button
                   color='secondary'
                   sx={{ cursor: 'pointer', color: '#4F2683' }}
                   type='submit'
+                  value='submit'
                   variant='outlined'
                   >
                   Match Tutor
                 </Button>
+                </form>
        </FormControl> 
        </Box>
       </div>

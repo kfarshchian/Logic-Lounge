@@ -21,9 +21,9 @@ const typeDefs = gql`
   type Tutor {
     _id: ID
     tutorName: String
-    img: String
+    image: String
     bio: String
-    skills: String
+    skills: [String]
   }
 
   type Skill {
@@ -56,21 +56,21 @@ const typeDefs = gql`
   type Mutation {
     addTutor(
       tutorName: String!
-      img: String
+      image: String
       bio: String
-      skills: String!
+      skills: [String]!
     ): Tutor
     removeTutor(tutorId: ID!): Tutor
     updateTutor(
       tutorId: ID!
       tutorName: String
-      img: String
+      image: String
       bio: String
       skills: String
     ): Tutor
     addUser(username: String!, email: String!, password: String!): Auth
     # This is creating anew skill for database
-    addNewSkill(skillName: String!): Skill
+    addNewSkill(skillName: [String]!): Skill
     # This allows us to assign a skill from database to user
     addSkillToUser(userId: ID!, skillId: ID!): User
     # This will remove a skill from a user

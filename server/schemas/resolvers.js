@@ -26,19 +26,19 @@ const resolvers = {
   },
 
   Mutation: {
-    addTutor: async (parent, { tutorName, skills }) => {
-      const tutor = await Tutor.create({ tutorName, skills });
+    addTutor: async (parent, { tutorName, skills, image, bio }) => {
+      const tutor = await Tutor.create({ tutorName, skills, image, bio });
       return { tutor };
     },
     removeTutor: async (parent, { tutorId }) => {
       return Tutor.findOneAndDelete({ _id: tutorId });
     },
-    updateTutor: async (parent, { tutorId, tutorName, bio, img, skills }) => {
+    updateTutor: async (parent, { tutorId, tutorName, bio, image, skills }) => {
       return Tutor.findOneAndUpdate({
         _id: tutorId,
         tutorName,
         bio,
-        img,
+        image,
         skills,
       });
     },
