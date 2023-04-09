@@ -22,7 +22,9 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
+    skills: [],
   });
+
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
@@ -35,27 +37,25 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
-
+    
     try {
       const { data } = await addUser({
         variables: { ...formState },
       });
-
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
   };
-
   // This allows us to list each in out selection
-  const [skill, setSkill] = useState([]);
-  const skillChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSkill(typeof value === 'string' ? value.split(',') : value);
-  };
+  // const [skill, setSkill] = useState([]);
+
+  // const skillChange = (event) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setSkill(typeof value === 'string' ? value.split(',') : value);
+  // };
 
   // This controls how the skills look when the popup menu renders
   const ITEM_HEIGHT = 48;
@@ -149,21 +149,23 @@ const Signup = () => {
                     sx={{ minWidth: '15rem', maxWidth: '20rem' }}
                     multiple
                     id='selection'
-                    value={skill}
-                    onChange={skillChange}
+                    name='skills'
+                    value={formState.skills}
+                    onChange={handleChange}
                     input={<OutlinedInput label='Skill' />}
                     renderValue={(selected) => selected.join(',')}
                     MenuProps={MenuProps}
                   >
                     {skills.map((newSkill) => (
                       <MenuItem key={newSkill} value={newSkill}>
-                        <Checkbox checked={skill.indexOf(newSkill) > -1} />
+                        <Checkbox
+                          checked={formState.skills.indexOf(newSkill) > -1}
+                        />
                         <ListItemText primary={newSkill} />
                       </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
-                {/* NOTE: wtf is formik validation */}
                 <Button
                   color='secondary'
                   sx={{ cursor: 'pointer', color: '#4F2683' }}
