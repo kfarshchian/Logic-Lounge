@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 // import { Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_SINGLE_USER, QUERY_ME } from "../utils/queries";
+import { QUERY_SINGLE_USER } from "../utils/queries";
 
 // import Auth from "../utils/auth";
 
