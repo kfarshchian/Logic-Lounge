@@ -30,10 +30,8 @@ const Match = () => {
     const result = skill.map(x => data.tutors.filter(y => y.skills.includes(x))).filter(z => z.length > 0)
     // filter results so duplicate tutors are taken out.
     const matchingTutor = [...new Map(result.map(v => [v.tutorName, v])).values()]
-    console.log(matchingTutor);
     // pull origin url
     const currentURL = window.location.origin;
-    // console.log(currentURL);
     // url fix for images from front end
     const imageFix = a => [`${currentURL}/images/`] + a;
     //filters the array and adds the url
