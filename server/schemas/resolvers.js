@@ -13,10 +13,10 @@ const resolvers = {
       return Chatroom.findOne({chatroomName: chatroomName});
     },
     users: async () => {
-      return User.find().populate('skills').lean();
+      return User.find().populate('skills');
     },
-    user: async (parent, { username }) => {
-      return User.findOne({ username });
+    user: async (parent, { _id }) => {
+      return User.findOne( {_id });
     },
     skills: async () => {
       return Skill.find();
@@ -29,11 +29,22 @@ const resolvers = {
       return Thought.findOne({ _id: thoughtId });
     },
     tutors: async () => {
+      // const url = new URL(context.headers.referer).origin;
+      // const tutor = Tutor.find();
+
+      // for (let i = 0; i < tutor.length; i++) {
+      //     images: [`${url}/images/${image}`]
+      //   };
+        
       return Tutor.find();
     },
   },
 
   Mutation: {
+    addTutor: async (parent, { tutorName, skills, image, bio }) => {
+      const tutor = await Tutor.create({ tutorName, skills, image, bio });
+      return { tutor };
+    },
     //Adds a message to a chatroom
     addMessage: async (parent, {chatroomName, messageText, userId},context) => {
       const user = await User.findById(userId);
@@ -45,44 +56,52 @@ const resolvers = {
       chatroomInstance.save();
       return chatroomInstance.toJSON();
     },
-    addTutor: async (parent, { tutorName, skills }) => {
-      const tutor = await Tutor.create({ tutorName, skills });
-      return { tutor };
+       //Adds a message to a chatroom
+    addMessage: async (parent, {chatroomName, messageText, userId},context) => {
+      const user = await User.findById(userId);
+      const chatroomInstance = await Chatroom.findOne({chatroomName: chatroomName})
+      //Creates a new message document from the messages subschema
+      const newMessage = chatroomInstance.messages.create({messageText: messageText, messageAuthor: user.username});
+      chatroomInstance.messages.push(newMessage)
+      //save updated chatroom instance
+      chatroomInstance.save();
+      return chatroomInstance.toJSON();
     },
     removeTutor: async (parent, { tutorId }) => {
       return Tutor.findOneAndDelete({ _id: tutorId });
     },
-    updateTutor: async (parent, { tutorId, tutorName, bio, img, skills }) => {
+    updateTutor: async (parent, { tutorId, tutorName, bio, image, skills }) => {
       return Tutor.findOneAndUpdate({
         _id: tutorId,
         tutorName,
         bio,
-        img,
+        image,
         skills,
       });
     },
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, { username, email, password, skills }) => {
+      const user = await User.create({ username, email, password, skills });
       const token = signToken(user);
       return { token, user };
     },
-    // This creates a new skill in database DOESNT ASSIGN TO USER
+    // This creates a new skill in database DOESN'T ASSIGN TO USER
     addNewSkill: async (parent, { skillName }) => {
       return Skill.create({ skillName: skillName });
     },
     // Allows you to add a skill from database to a user
-    addSkillToUser: async (parent, { userId, skillId }) => {
-      const skill = await Skill.findById(skillId);
+    addSkillToUser: async (parent, { userId, skillName }) => {
       return User.findOneAndUpdate(
         { _id: userId },
         {
-          $addToSet: { skills: { _id: skillId, skillName: skill.skillName } },
+          $addToSet: {
+            skills: { skillName: skillName },
+          },
         },
         {
           new: true,
           // runValidators: true,
         }
-      ).lean();
+      );
     },
     removeSkillFromUser: async (parent, { skillId, userId }) => {
       return User.findOneAndUpdate(
