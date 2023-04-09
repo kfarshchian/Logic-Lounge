@@ -64,7 +64,8 @@ query Query {
     _id
     tutorName
     skills
-    
+    image
+    bio
   }
 }
 `;

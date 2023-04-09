@@ -29,6 +29,13 @@ const resolvers = {
       return Thought.findOne({ _id: thoughtId });
     },
     tutors: async () => {
+      // const url = new URL(context.headers.referer).origin;
+      // const tutor = Tutor.find();
+
+      // for (let i = 0; i < tutor.length; i++) {
+      //     images: [`${url}/images/${image}`]
+      //   };
+        
       return Tutor.find();
     },
   },
