@@ -13,7 +13,7 @@ const resolvers = {
       return Chatroom.findOne({chatroomName: chatroomName});
     },
     users: async () => {
-      return User.find().populate('skills').lean();
+      return User.find().populate('skills');
     },
     user: async (parent, { _id }) => {
       return User.findOne( {_id });
@@ -79,28 +79,29 @@ const resolvers = {
         skills,
       });
     },
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, { username, email, password, skills }) => {
+      const user = await User.create({ username, email, password, skills });
       const token = signToken(user);
       return { token, user };
     },
-    // This creates a new skill in database DOESNT ASSIGN TO USER
+    // This creates a new skill in database DOESN'T ASSIGN TO USER
     addNewSkill: async (parent, { skillName }) => {
       return Skill.create({ skillName: skillName });
     },
     // Allows you to add a skill from database to a user
-    addSkillToUser: async (parent, { userId, skillId }) => {
-      const skill = await Skill.findById(skillId);
+    addSkillToUser: async (parent, { userId, skillName }) => {
       return User.findOneAndUpdate(
         { _id: userId },
         {
-          $addToSet: { skills: { _id: skillId, skillName: skill.skillName } },
+          $addToSet: {
+            skills: { skillName: skillName },
+          },
         },
         {
           new: true,
           // runValidators: true,
         }
-      ).lean();
+      );
     },
     removeSkillFromUser: async (parent, { skillId, userId }) => {
       return User.findOneAndUpdate(
