@@ -18,18 +18,28 @@ import {
 const Match = () => {
   
   const { data } = useQuery(MATCH_TUTOR);
+      // for (let i = 0; i < tutor.length; i++) {
+      //     images: [`${url}/images/${image}`]
+      //   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     // console.log(skill);
-    console.log(data);
-    // const result = data.tutors.filter(item => item.skills.map().includes(skill))
+    // console.log(data);
+    // Get the query and filter query to find tutor with same skills.
     const result = skill.map(x => data.tutors.filter(y => y.skills.includes(x))).filter(z => z.length > 0)
-    // .filter(item => !skill.includes(item));
-    // console.log(result);
+    // filter results so duplicate tutors are taken out.
     const matchingTutor = [...new Map(result.map(v => [v.tutorName, v])).values()]
     console.log(matchingTutor);
-    
+    // pull origin url
+    const currentURL = window.location.origin;
+    // console.log(currentURL);
+    // url fix for images from front end
+    const imageFix = a => [`${currentURL}/images/`] + a;
+    //filters the array and adds the url
+    const addPhoto = matchingTutor.map(x => ({ ...x, image: imageFix(x[0].image) }));
+   
+    console.log(addPhoto);
   };
   
   const ITEM_HEIGHT = 48;
