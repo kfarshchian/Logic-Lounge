@@ -5,8 +5,8 @@ import "./navbar.scss"
 import { Typography } from '@mui/material';
 import PageLink from '../PageLink/PageLink';
 
-const pageNames = ['Profile','Find a Match','Chatrooms']
-const pageLinks = ['/profile','/match','/chatrooms']
+const pageNames = ['Find a Match','Chatrooms']
+const pageLinks = ['/match','/chatrooms']
 
 const Header = () => {
   const logout = (event) => {
@@ -37,12 +37,18 @@ const Header = () => {
           <PageLink page={'Home'} pageLink={'/'}/>
           {
             Auth.loggedIn() && (
-              // This maps through the page names array and creates a page link Component matching that page
-              pageNames.map((page,index) => (
-                <PageLink key={page} page={page} pageLink={pageLinks[index]}/>
-              ))
+              <>
+                {/* This maps through the page names array and creates a page link Component matching that page */}
+                {
+                  pageNames.map((page,index) => (
+                    <PageLink key={page} page={page} pageLink={pageLinks[index]}/>
+                  ))
+                }
+                <PageLink page={'Profile'} pageLink={`/users/${Auth.getProfile().data._id}`}/>
+              </>
             )
           }
+          
         </div>
         {/* This is the user link sections */}
         <div className='user-links'>
