@@ -13,13 +13,27 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
+  mutation addUser(
+    $username: String!
+    $email: String!
+    $password: String!
+    $skills: [String]!
+  ) {
+    addUser(
+      username: $username
+      email: $email
+      password: $password
+      skills: $skills
+    ) {
       user {
         _id
         username
+        email
+        skills {
+          skillName
+        }
       }
+      token
     }
   }
 `;
@@ -63,3 +77,13 @@ export const ADD_COMMENT = gql`
   }
 `;
 
+export const MATCH_TUTOR = gql`
+  query getTutors {
+    tutors {
+      _id
+      thoughtText
+      thoughtAuthor
+      createdAt
+    }
+  }
+`;
