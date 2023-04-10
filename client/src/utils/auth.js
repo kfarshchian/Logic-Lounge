@@ -29,12 +29,13 @@ class AuthService {
 
   login(idToken) {
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/profile');
+    window.location.assign(`/users/${this.getProfile().data._id}`);
   }
 
   logout() {
     localStorage.removeItem('id_token');
-    window.location.reload();
+    // token = decode(this.getToken())
+    window.location.assign('/');
   }
 }
 const auth = new AuthService();
