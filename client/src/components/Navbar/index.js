@@ -44,6 +44,7 @@ const Header = () => {
                     <PageLink key={page} page={page} pageLink={pageLinks[index]}/>
                   ))
                 }
+                {/* Link to signed in user using the id from the JWT through Auth */}
                 <PageLink page={'Profile'} pageLink={`/users/${Auth.getProfile().data._id}`}/>
               </>
             )

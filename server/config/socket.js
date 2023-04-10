@@ -14,9 +14,9 @@ const createSocketServer = (httpServer) => {
       // console.log(Chatroom.find({}).lean());
       try{
         const chatrooms = await Chatroom.find({}).lean();
-        socket.emit('QUERY_CHATROOMS', chatrooms);
+        socket.emit('UPDATED_CHATROOMS', JSON.stringify(chatrooms));
       }catch(err){
-        socket.emit('QUERY_CHATROOMS', {err: err});
+        socket.emit('UPDATED_CHATROOMS', {err: err});
       }
     });
 
