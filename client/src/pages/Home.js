@@ -7,13 +7,9 @@ import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Logo from '../../src/logos/Logic Lounge - Tan.png';
 import StudentOutlined from '../../src/logos/studentOutlined.png';
-import InstructorFilmstrip from '../../src/logos/InstructorFilmstripCrop.png';
+import InstructorFilmstrip from '../../src/logos/InstructorFilmstrip.png';
 import FeaturedInstructor from '../../src/logos/FeaturedInstructor.png';
 import { Link } from 'react-router-dom';
-
-// import Card from "@mui/material/Card";
-// import CardContent from "@mui/material/CardContent";
-// import Auth from '../../utils/auth';
 
 const BlockOneBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -59,6 +55,7 @@ function Home() {
     button: {
       margin: '8px',
       backgroundColor: '#ddcdc6 ',
+      color: 'black',
     },
   };
 
@@ -71,9 +68,13 @@ function Home() {
             <BlockOneBox>
               <img src={Logo} width="100rem" alt="Logic Lounge Logo" />
               <Typography
+                variant="h3"
                 sx={{
-                  color: '#FFFFFF',
-                  variant: 'h8',
+                  color: '#ddcdc6',
+
+                  textAlign: 'left',
+                  fontFamily: 'EB Garamond',
+                  fontWeight: '500',
                 }}>
                 Logic Lounge
               </Typography>
@@ -87,11 +88,14 @@ function Home() {
           <Stack direction="column" justifyContent="center">
             <BlockTitleBox>
               <Typography
+                variant="h5"
+                margin="15px"
                 sx={{
-                  color: '#FFFFFF',
-                  variant: 'h4',
+                  color: '#000000',
+
                   textAlign: 'left',
-                  fontFamily: 'Crimson Text',
+                  fontFamily: 'EB Garamond',
+                  fontWeight: '500',
                 }}>
                 Pair your learning needs with one of our tutors...
               </Typography>
@@ -107,10 +111,27 @@ function Home() {
                   height="200rem"
                   alt="Student Outlined"
                 />
-                <Typography variant="h6" gutterBottom>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    color: '#000000',
+
+                    textAlign: 'left',
+                    fontFamily: 'EB Garamond',
+                    fontweight: 'bold',
+                  }}>
                   Tom
                 </Typography>
-                <Typography variant="h8" gutterBottom>
+                <Typography
+                  variant="h8"
+                  sx={{
+                    color: '#000000',
+
+                    textAlign: 'left',
+                    fontFamily: 'EB Garamond',
+                    fontweight: 'bold',
+                    padding: '10px',
+                  }}>
                   Wants to learn more about AWS Lambda and S3
                 </Typography>
               </BlockTwoBox>
@@ -119,10 +140,27 @@ function Home() {
           <BlockTwoBox>
             <Stack direction="column" justifyContent="center">
               <BlockTwoBox>
-                <Typography variant="h6" gutterBottom>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    color: '#000000',
+
+                    textAlign: 'left',
+                    fontFamily: 'EB Garamond',
+                    fontweight: 'bold',
+                  }}>
                   Michelle
                 </Typography>
-                <Typography variant="h8" gutterBottom>
+                <Typography
+                  variant="h8"
+                  sx={{
+                    color: '#000000',
+
+                    textAlign: 'left',
+                    fontFamily: 'EB Garamond',
+                    fontweight: '600',
+                    padding: '10px',
+                  }}>
                   Industry expert and AWS Certified Professional
                 </Typography>
                 <img
@@ -134,7 +172,10 @@ function Home() {
             </Stack>
           </BlockTwoBox>
           <BlockTwoBox>
-            <Stack direction="column" justifyContent="center">
+            <Stack
+              direction="row"
+              justifyContent="center"
+              justifyItems="center">
               <BlockTwoBox>
                 <img
                   src={InstructorFilmstrip}
@@ -155,7 +196,14 @@ function Home() {
         <Grid item xs={12} sm={6} md={4}>
           <Stack direction="column" justifyContent="center">
             <BlockOneBox>
-              <Typography variant="h4" gutterBottom>
+              <Typography
+                variant="h4"
+                sx={{
+                  color: '#ffffff',
+                  textAlign: 'left',
+                  fontFamily: 'EB Garamond',
+                  fontweight: 'bold',
+                }}>
                 Just sign-up, search and match!
               </Typography>
               <Link to="/signup">
@@ -163,8 +211,11 @@ function Home() {
                   color="primary"
                   sx={{
                     cursor: 'pointer',
-                    color: '#FFFFFF',
+
                     backgroundColor: '#ddcdc6',
+                    fontFamily: 'EB Garamond',
+                    fontweight: '800',
+                    color: '#000000',
                     margin: '20px',
                   }}
                   type="submit">
@@ -173,8 +224,11 @@ function Home() {
               </Link>
               <Typography
                 sx={{
-                  color: '#FFFFFF',
+                  color: '#ffffff',
                   variant: 'h8',
+                  textAlign: 'left',
+                  fontFamily: 'EB Garamond',
+                  fontweight: 'bold',
                 }}>
                 Copyright 2023, Logic Lounge, LLC.
               </Typography>
