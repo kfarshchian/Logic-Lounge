@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import Match from './pages/match';
 import Chatrooms from './pages/Chatrooms/Chatrooms';
+import {io} from 'socket.io-client'
 
 
 // Construct our main GraphQL API endpoint
@@ -43,7 +44,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
+// create connection to the socket server that WON'T try to connect more than once
+const socket = io();
+
+
+
 function App() {
+
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -77,7 +85,7 @@ function App() {
               />
               <Route
                 path='/chatrooms'
-                element={<Chatrooms />}
+                element={<Chatrooms socket={socket}/>}
               />
               </Routes>
             </div>
