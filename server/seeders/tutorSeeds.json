@@ -1,7 +1,14 @@
+
 [
     {
       "tutorName": "Kameron Farshchian",
-      "image": "LogicLogo.png",
+      "image": "https://i.imgur.com/9DLR4dy.jpg",
+      "bio": "Try this upload",
+      "skills": ["JavaScript", "NoSQL"]
+    }, 
+    {
+      "tutorName": "trev",
+      "image": "https://i.imgur.com/lFrIiaL.jpg",
       "bio": "Try this upload",
       "skills": ["JavaScript", "NoSQL"]
     }

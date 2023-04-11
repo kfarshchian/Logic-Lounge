@@ -43,7 +43,7 @@ const resolvers = {
   Mutation: {
     addTutor: async (parent, { tutorName, skills, image, bio }) => {
       const tutor = await Tutor.create({ tutorName, skills, image, bio });
-      return { tutor };
+      return  tutor;
     },
     //Adds a message to a chatroom
     addMessage: async (parent, {chatroomName, messageText, userId},context) => {
