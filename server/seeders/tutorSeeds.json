@@ -1,15 +1,66 @@
 
 [
     {
-      "tutorName": "Kameron Farshchian",
-      "image": "https://i.imgur.com/9DLR4dy.jpg",
+      "tutorName": "Quintin Smith",
+      "image": "https://i.imgur.com/FGVSbC7.png",
       "bio": "Try this upload",
-      "skills": ["JavaScript", "NoSQL"]
+      "skills": ["JavaScript", "Git", "Golang", "Ruby on Rails", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
     }, 
     {
-      "tutorName": "trev",
-      "image": "https://i.imgur.com/lFrIiaL.jpg",
+      "tutorName": "Trever Oveson",
+      "image": "https://i.imgur.com/0EjVMfu.png",
       "bio": "Try this upload",
-      "skills": ["JavaScript", "NoSQL"]
+      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
+    }, 
+    {
+      "tutorName": "Cory Calaway",
+      "image": "https://i.imgur.com/xAMDrL3.png",
+      "bio": "Try this upload",
+      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
+    }, 
+    {
+      "tutorName": "Jacek Hacking",
+      "image": "https://i.imgur.com/4kvr6zi.png",
+      "bio": "Try this upload",
+      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
+    },
+    {
+      "tutorName": "Kameron Farshchian",
+      "image": "https://i.imgur.com/4mPE40S.png",
+      "bio": "Try this upload",
+      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
+    }, 
+    {
+      "tutorName": "Gustavo Carrillo",
+      "image": "https://i.imgur.com/EcAQQcU.png",
+      "bio": "Try this upload",
+      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
+    }, 
+    {
+      "tutorName": "Cornelius Davis",
+      "image": "https://i.imgur.com/fbz9UMp.png",
+      "bio": "Try this upload",
+      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
+    }, 
+    {
+      "tutorName": "Anthony Angelos",
+      "image": "https://i.imgur.com/GHRiv1f.png",
+      "bio": "Try this upload",
+      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
+    }, 
+    {
+      "tutorName": "Jeremiah Chesley",
+      "image": "https://i.imgur.com/RCdDRrk.png",
+      "bio": "Try this upload",
+      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
     }
 ]

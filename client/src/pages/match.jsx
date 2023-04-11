@@ -15,7 +15,8 @@ import {
  } from '@mui/material';
  import { MATCH_TUTOR } from '../utils/queries.js';
  import { useQuery } from "@apollo/client";
-import TutorCard from '../components/TutorCard/TutorCard';
+import TutorCard from '../components/TutorCard/TutorCard.js';
+
 
 
 const Match = () => {
@@ -169,9 +170,11 @@ const Match = () => {
        </FormControl> 
        </Box>
        {tutorInfo === undefined && (
-        <div>You haven't added a tutor.</div>
+        <div>
+          {/* You haven't added a tutor. */}
+        </div>
        )}
-       <Stack direction={'row'}>
+       <Stack  >
        <TutorCard tutorInfo = {tutorInfo} />
        </Stack>
        <div id="printTutor" ></div>
