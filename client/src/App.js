@@ -48,8 +48,6 @@ const client = new ApolloClient({
 // create connection to the socket server that WON'T try to connect more than once
 const socket = io();
 
-
-
 function App() {
 
   return (
