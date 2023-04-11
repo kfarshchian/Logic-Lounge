@@ -4,13 +4,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
-import {
-  Button,
-  TextField,
-  FormControl,
-  Typography,
-  Box
-} from '@mui/material';
+import { Button, TextField, FormControl, Typography, Box } from '@mui/material';
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ username: '', password: '' });
@@ -29,7 +23,6 @@ const Login = (props) => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState },
@@ -48,7 +41,7 @@ const Login = (props) => {
   };
 
   return (
-      <>
+    <>
       <Box
         sx={{
           display: 'flex',
