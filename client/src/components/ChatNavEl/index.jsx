@@ -1,7 +1,9 @@
 import React from 'react'
 
+/**
+ * React functional component for a Chatroom Navivation Element
+ */
 function ChatNavEl({chatroom, selectedChatroom, selectChatroom}) {
-
   return (
     <div 
       onClick={selectChatroom} 
