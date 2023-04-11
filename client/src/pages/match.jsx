@@ -11,10 +11,12 @@ import {
   MenuItem,
   OutlinedInput,
   ListItemText,
+  Stack,
  } from '@mui/material';
  import { MATCH_TUTOR } from '../utils/queries.js';
  import { useQuery } from "@apollo/client";
-import TutorCard from '../components/TutorCard/TutorCard';
+import TutorCard from '../components/TutorCard/TutorCard.js';
+
 
 
 const Match = () => {
@@ -39,14 +41,15 @@ const Match = () => {
     // filter results so duplicate tutors are taken out.
     const matchingTutor = [...new Map(result.map(v => [v.tutorName, v])).values()]
     // pull origin url
-    const currentURL = window.location.origin;
+    // const currentURL = window.location.origin;
     // url fix for images from front end
-    const imageFix = a => `${currentURL}/images/${a}`;
-    //filters the array and adds the url
-    const addPhoto = matchingTutor.map(x => ({ ...x, image: imageFix(x[0].image) }));
-   
-    setTutorInfo(addPhoto)
+    // const imageFix = a => `${currentURL}/images/${a}`;
+    // //filters the array and adds the url
+    // const addPhoto = matchingTutor.map(x => ({ ...x, img: imageFix(x[0].image) }));
+   const tutorMap = matchingTutor[0]
 
+    setTutorInfo(tutorMap)
+    // console.log(matchingTutor);
     // console.log(addPhoto);
     
   
@@ -167,10 +170,13 @@ const Match = () => {
        </FormControl> 
        </Box>
        {tutorInfo === undefined && (
-        <div>You haven't added a tutor.</div>
+        <div>
+          {/* You haven't added a tutor. */}
+        </div>
        )}
-       
+       <Stack  >
        <TutorCard tutorInfo = {tutorInfo} />
+       </Stack>
        <div id="printTutor" ></div>
       </div>
     </div>

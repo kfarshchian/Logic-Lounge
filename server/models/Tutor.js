@@ -8,7 +8,7 @@ const tutorSchema = new Schema({
     trim: true,
   },
   image: {
-    Type: String
+    type: String
   },
   bio:{
     type: String,
