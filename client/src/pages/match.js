@@ -14,16 +14,24 @@ import {
  } from '@mui/material';
  import { MATCH_TUTOR } from '../utils/queries.js';
  import { useQuery } from "@apollo/client";
+import TutorCard from '../components/TutorCard/TutorCard';
+
 
 const Match = () => {
   
+  const [tutorInfo, setTutorInfo] = useState();
+
   const { data } = useQuery(MATCH_TUTOR);
       // for (let i = 0; i < tutor.length; i++) {
       //     images: [`${url}/images/${image}`]
-      //   };
-
+      //   };      
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    //Get box for skill picking and display none;
+    const skillPicker = document.getElementById("box");
+    if (skillPicker) {
+      skillPicker.style.display = "none"
+    }
     // console.log(skill);
     // console.log(data);
     // Get the query and filter query to find tutor with same skills.
@@ -33,11 +41,15 @@ const Match = () => {
     // pull origin url
     const currentURL = window.location.origin;
     // url fix for images from front end
-    const imageFix = a => [`${currentURL}/images/`] + a;
+    const imageFix = a => `${currentURL}/images/${a}`;
     //filters the array and adds the url
     const addPhoto = matchingTutor.map(x => ({ ...x, image: imageFix(x[0].image) }));
    
-    console.log(addPhoto);
+    setTutorInfo(addPhoto)
+
+    // console.log(addPhoto);
+    
+  
   };
   
   const ITEM_HEIGHT = 48;
@@ -154,6 +166,12 @@ const Match = () => {
                 </form>
        </FormControl> 
        </Box>
+       {tutorInfo === undefined && (
+        <div>You haven't added a tutor.</div>
+       )}
+       
+       <TutorCard tutorInfo = {tutorInfo} />
+       <div id="printTutor" ></div>
       </div>
     </div>
   )

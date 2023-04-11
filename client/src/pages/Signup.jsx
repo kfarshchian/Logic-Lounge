@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
+import { QUERY_SKILLS } from '../utils/queries';
 import {
   Button,
   TextField,
@@ -25,8 +26,14 @@ const Signup = () => {
     skills: [],
   });
 
+  // Add a user to database
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
+  // Query skills from database
+  const { error: skillError, data: skillData } = useQuery(QUERY_SKILLS);
+
+  console.log(skillData, skillError);
+  //
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -37,7 +44,7 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    
+
     try {
       const { data } = await addUser({
         variables: { ...formState },
@@ -69,19 +76,24 @@ const Signup = () => {
     },
   };
 
-  const skills = [
-    'JavaScript',
-    'HTML',
-    'CSS',
-    'React',
-    'Linux',
-    'LinkedIn',
-    'Python',
-    'MySQL',
-    'MongoDB',
-    'GoLang',
-    'Algorithms & Data Structures',
-  ];
+  // const skills = [
+  //   'JavaScript',
+  //   'Git',
+  //   'Golang',
+  //   'Ruby on Rails',
+  //   'Github',
+  //   'Node.js',
+  //   'MySQL',
+  //   'MongoDB',
+  //   'Express.js',
+  //   'NoSQL',
+  //   'HTML',
+  //   'CSS',
+  //   'React',
+  //   'LinkedIn',
+  //   'Python',
+  //   'Algorithms & Data Structures',
+  // ];
 
   return (
     <>
@@ -156,14 +168,19 @@ const Signup = () => {
                     renderValue={(selected) => selected.join(',')}
                     MenuProps={MenuProps}
                   >
-                    {skills.map((newSkill) => (
-                      <MenuItem key={newSkill} value={newSkill}>
-                        <Checkbox
-                          checked={formState.skills.indexOf(newSkill) > -1}
-                        />
-                        <ListItemText primary={newSkill} />
-                      </MenuItem>
-                    ))}
+                    {/* This will render skills dynamically from database */}
+                    {skillData
+                      ? skillData.skills.map((skill) => (
+                          <MenuItem key={skill.skillName} value={skill.skillName}>
+                            <Checkbox
+                              checked={
+                                formState.skills.indexOf(skill.skillName) > -1
+                              }
+                            />
+                            <ListItemText primary={skill.skillName} />
+                          </MenuItem>
+                        ))
+                      : "No skills available a this time..."}
                   </Select>
                 </FormControl>
                 <Button
