@@ -9,14 +9,14 @@ const resolvers = {
       return Chatroom.find();
     },
     //Resolver for finding single chatroom by name
-    chatroom: async (parent,{chatroomName},context) => {
-      return Chatroom.findOne({chatroomName: chatroomName});
+    chatroom: async (parent, { chatroomName }, context) => {
+      return Chatroom.findOne({ chatroomName: chatroomName });
     },
     users: async () => {
       return User.find().populate('skills');
     },
     user: async (parent, { _id }) => {
-      return User.findOne( {_id });
+      return User.findOne({ _id });
     },
     skills: async () => {
       return Skill.find();
@@ -35,7 +35,7 @@ const resolvers = {
       // for (let i = 0; i < tutor.length; i++) {
       //     images: [`${url}/images/${image}`]
       //   };
-        
+
       return Tutor.find();
     },
   },
@@ -46,23 +46,41 @@ const resolvers = {
       return { tutor };
     },
     //Adds a message to a chatroom
-    addMessage: async (parent, {chatroomName, messageText, userId},context) => {
+    addMessage: async (
+      parent,
+      { chatroomName, messageText, userId },
+      context
+    ) => {
       const user = await User.findById(userId);
-      const chatroomInstance = await Chatroom.findOne({chatroomName: chatroomName})
+      const chatroomInstance = await Chatroom.findOne({
+        chatroomName: chatroomName,
+      });
       //Creates a new message document from the messages subschema
-      const newMessage = chatroomInstance.messages.create({messageText: messageText, messageAuthor: user.username});
-      chatroomInstance.messages.push(newMessage)
+      const newMessage = chatroomInstance.messages.create({
+        messageText: messageText,
+        messageAuthor: user.username,
+      });
+      chatroomInstance.messages.push(newMessage);
       //save updated chatroom instance
       chatroomInstance.save();
       return chatroomInstance.toJSON();
     },
-       //Adds a message to a chatroom
-    addMessage: async (parent, {chatroomName, messageText, userId},context) => {
+    //Adds a message to a chatroom
+    addMessage: async (
+      parent,
+      { chatroomName, messageText, userId },
+      context
+    ) => {
       const user = await User.findById(userId);
-      const chatroomInstance = await Chatroom.findOne({chatroomName: chatroomName})
+      const chatroomInstance = await Chatroom.findOne({
+        chatroomName: chatroomName,
+      });
       //Creates a new message document from the messages subschema
-      const newMessage = chatroomInstance.messages.create({messageText: messageText, messageAuthor: user.username});
-      chatroomInstance.messages.push(newMessage)
+      const newMessage = chatroomInstance.messages.create({
+        messageText: messageText,
+        messageAuthor: user.username,
+      });
+      chatroomInstance.messages.push(newMessage);
       //save updated chatroom instance
       chatroomInstance.save();
       return chatroomInstance.toJSON();
@@ -80,7 +98,9 @@ const resolvers = {
       });
     },
     addUser: async (parent, { username, email, password, skills }) => {
-      const user = await User.create({ username, email, password, skills });
+      const user = (
+        await User.create({ username, email, password, skills })
+      );
       const token = signToken(user);
       return { token, user };
     },
@@ -89,26 +109,35 @@ const resolvers = {
       return Skill.create({ skillName: skillName });
     },
     // Allows you to add a skill from database to a user
-    addSkillToUser: async (parent, { userId, skillName }) => {
-      return User.findOneAndUpdate(
+    addSkillToUser: async (parent, { userId, skillId, skillNames }) => {
+      const skills = await Skill.find({ name: { $in: skillNames } });
+
+      const user = await User.findOneAndUpdate(
         { _id: userId },
         {
           $addToSet: {
-            skills: { skillName: skillName },
+            skills: skills.map((skill) => {
+              skill._id;
+              skill.skillName;
+            }),
           },
         },
         {
           new: true,
-          // runValidators: true,
         }
       );
+      return { ...user };
     },
+    addImageToUser: async (parent, { userId, image }) => {
+      return User.findByIdAndUpdate(userId, { image: image }, { new: true });
+    },
+
     removeSkillFromUser: async (parent, { skillId, userId }) => {
       return User.findOneAndUpdate(
         { _id: userId },
         { $pull: { skills: { _id: skillId } } },
         { new: true }
-      ).lean();
+      );
     },
     removeSkill: async (parent, { skillId }) => {
       return Skill.findByIdAndDelete(skillId).lean();
@@ -162,7 +191,6 @@ const resolvers = {
         { new: true }
       );
     },
-
   },
 };
 

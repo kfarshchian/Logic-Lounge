@@ -13,7 +13,7 @@ const typeDefs = gql`
     createdAt: String
     messageAuthor: String
   }
-  
+
   type User {
     _id: ID
     username: String
@@ -21,6 +21,7 @@ const typeDefs = gql`
     password: String
     skills: [Skill]!
     thoughts: [Thought]!
+    image: String
   }
 
   type Thought {
@@ -42,6 +43,8 @@ const typeDefs = gql`
   type Skill {
     _id: ID
     skillName: String
+    tutors: [String]
+    users: [String]
   }
 
   type Comment {
@@ -95,10 +98,12 @@ const typeDefs = gql`
       password: String!
       skills: [String]!
     ): Auth
-    # This is creating anew skill for database
-    addNewSkill(skillName: [String]!): Skill
+    # This is creating a new skill for the database
+    addNewSkill(skillName: String!): Skill
     # This allows us to assign a skill from database to user
-    addSkillToUser(userId: ID!, skillName: [String]!): User
+    addSkillToUser(userId: ID!, skillId: [ID]!): User
+    # This will add an image to a user
+    addImageToUser(userId: ID!, image: String!): User
     # This will remove a skill from a user
     removeSkillFromUser(userId: ID!, skillId: ID!): User
     # This will permanently delete a skill from database (ONLY USE IN TESTING)
