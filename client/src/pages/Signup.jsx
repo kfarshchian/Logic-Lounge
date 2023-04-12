@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
+import { QUERY_SKILLS } from '../utils/queries';
 import {
   Button,
   TextField,
@@ -22,9 +23,17 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
+    skills: [],
   });
+
+  // Add a user to database
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
+  // Query skills from database
+  const { error: skillError, data: skillData } = useQuery(QUERY_SKILLS);
+
+  console.log(skillData, skillError);
+  //
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -35,27 +44,25 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
 
     try {
       const { data } = await addUser({
         variables: { ...formState },
       });
-
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
   };
-
   // This allows us to list each in out selection
-  const [skill, setSkill] = useState([]);
-  const skillChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSkill(typeof value === 'string' ? value.split(',') : value);
-  };
+  // const [skill, setSkill] = useState([]);
+
+  // const skillChange = (event) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setSkill(typeof value === 'string' ? value.split(',') : value);
+  // };
 
   // This controls how the skills look when the popup menu renders
   const ITEM_HEIGHT = 48;
@@ -69,19 +76,24 @@ const Signup = () => {
     },
   };
 
-  const skills = [
-    'JavaScript',
-    'HTML',
-    'CSS',
-    'React',
-    'Linux',
-    'LinkedIn',
-    'Python',
-    'MySQL',
-    'MongoDB',
-    'GoLang',
-    'Algorithms & Data Structures',
-  ];
+  // const skills = [
+  //   'JavaScript',
+  //   'Git',
+  //   'Golang',
+  //   'Ruby on Rails',
+  //   'Github',
+  //   'Node.js',
+  //   'MySQL',
+  //   'MongoDB',
+  //   'Express.js',
+  //   'NoSQL',
+  //   'HTML',
+  //   'CSS',
+  //   'React',
+  //   'LinkedIn',
+  //   'Python',
+  //   'Algorithms & Data Structures',
+  // ];
 
   return (
     <>
@@ -149,21 +161,28 @@ const Signup = () => {
                     sx={{ minWidth: '15rem', maxWidth: '20rem' }}
                     multiple
                     id='selection'
-                    value={skill}
-                    onChange={skillChange}
+                    name='skills'
+                    value={formState.skills}
+                    onChange={handleChange}
                     input={<OutlinedInput label='Skill' />}
                     renderValue={(selected) => selected.join(',')}
                     MenuProps={MenuProps}
                   >
-                    {skills.map((newSkill) => (
-                      <MenuItem key={newSkill} value={newSkill}>
-                        <Checkbox checked={skill.indexOf(newSkill) > -1} />
-                        <ListItemText primary={newSkill} />
-                      </MenuItem>
-                    ))}
+                    {/* This will render skills dynamically from database */}
+                    {skillData
+                      ? skillData.skills.map((skill) => (
+                          <MenuItem key={skill.skillName} value={skill.skillName}>
+                            <Checkbox
+                              checked={
+                                formState.skills.indexOf(skill.skillName) > -1
+                              }
+                            />
+                            <ListItemText primary={skill.skillName} />
+                          </MenuItem>
+                        ))
+                      : "No skills available a this time..."}
                   </Select>
                 </FormControl>
-                {/* NOTE: wtf is formik validation */}
                 <Button
                   color='secondary'
                   sx={{ cursor: 'pointer', color: '#4F2683' }}

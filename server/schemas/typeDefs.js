@@ -34,9 +34,9 @@ const typeDefs = gql`
   type Tutor {
     _id: ID
     tutorName: String
-    img: String
+    image: String
     bio: String
-    skills: String
+    skills: [String]
   }
 
   type Skill {
@@ -77,25 +77,33 @@ const typeDefs = gql`
     ): Chatroom
     addTutor(
       tutorName: String!
-      img: String
+      image: String
       bio: String
-      skills: String!
+      skills: [String]!
     ): Tutor
     removeTutor(tutorId: ID!): Tutor
     updateTutor(
       tutorId: ID!
       tutorName: String
-      img: String
+      image: String
       bio: String
       skills: String
     ): Tutor
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      skills: [String]!
+    ): Auth
     # This is creating anew skill for database
+
     updateUser(skills: String!, img: String!): User
     # This allows user to update their profile
     addNewSkill(skillName: String!): Skill
+
+    addNewSkill(skillName: [String]!): Skill
     # This allows us to assign a skill from database to user
-    addSkillToUser(userId: ID!, skillId: ID!): User
+    addSkillToUser(userId: ID!, skillName: [String]!): User
     # This will remove a skill from a user
     removeSkillFromUser(userId: ID!, skillId: ID!): User
     # This will permanently delete a skill from database (ONLY USE IN TESTING)

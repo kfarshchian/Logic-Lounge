@@ -6,13 +6,16 @@ export const QUERY_USER = gql`
       _id
       username
       email
-     
+      skills {
+        _id
+        skillName
+      }
     }
   }
 `;
 
 export const QUERY_SINGLE_USER = gql`
- query singleProfile($_id: String!) {
+  query singleProfile($_id: String!) {
     user(_id: $_id) {
       _id
       username
@@ -58,3 +61,23 @@ export const QUERY_SINGLE_THOUGHT = gql`
   }
 `;
 
+export const MATCH_TUTOR = gql`
+query Query {
+  tutors {
+    _id
+    tutorName
+    skills
+    image
+    bio
+  }
+}
+`;
+
+export const QUERY_SKILLS = gql`
+  query getSkills {
+    skills {
+      _id
+      skillName
+    }
+  }
+`;

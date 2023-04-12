@@ -21,7 +21,8 @@ import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { QUERY_SINGLE_USER } from "../utils/queries";
-import { UPDATE_USER } from "../utils/mutations";
+import { UPDATE_USER } from "../utils/mutations"
+import { QUERY_SINGLE_USER } from "../utils/queries"
 
 // import Auth from "../utils/auth";
 
