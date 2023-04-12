@@ -8,11 +8,17 @@ import {
 } from "@mui/material";
 import './style.scss';
 
+
 const TutorCard = (props) => {
   const { tutorInfo } = props;
-  console.log(tutorInfo);
 
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log('The link was clicked.');
   
+
+  }
 
   return (
 
@@ -48,11 +54,12 @@ const TutorCard = (props) => {
               width: "15vp",
               height: "15rem",
               justifyContent: "center",
+              objectFit: "scale-down"
             }}
             image={product.image}
             alt={`${product.tutorName}`}
           />
-          <CardContent>
+          <CardContent >
             <div class='aboutMe'>
               <h3>About me:</h3>
               <p>{product.bio}</p>
@@ -65,6 +72,7 @@ const TutorCard = (props) => {
             </ul>
           </CardContent>
           <Button
+          onClick={handleClick}
           color='secondary'
           sx={{ cursor: 'pointer', color: '#4F2683' }}
           type=''
