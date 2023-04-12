@@ -13,6 +13,7 @@ import {
   OutlinedInput,
   ListItemText,
   Stack,
+  Container
 } from "@mui/material";
 import { MATCH_TUTOR } from "../utils/queries.js";
 import { useQuery } from "@apollo/client";
@@ -87,6 +88,7 @@ const Match = () => {
   ];
 
   return (
+    
     <div className="example">
       <div className="controls">
         {/* <form onSubmit={this.handleSubmit}> */}
@@ -158,7 +160,7 @@ const Match = () => {
 
               <Button
                 color="secondary"
-                sx={{ cursor: "pointer", color: "#4F2683" }}
+                sx={{ cursor: "pointer", color: "#4F2683", display: 'block', width: "15rem"}}
                 type="submit"
                 value="submit"
                 variant="outlined"
@@ -168,12 +170,14 @@ const Match = () => {
             </form>
           </FormControl>
         </Box>
+        <Container sx={{alignItems: "center",}}>
         {tutorInfo === undefined && (
           <div>You haven't added a tutor.</div>
         )}
-        <Stack>
+        <Stack  >
           <TutorCard tutorInfo={tutorInfo} />
         </Stack>
+        </Container >
         <div id="printTutor"></div>
       </div>
     </div>
