@@ -79,6 +79,17 @@ const resolvers = {
         skills,
       });
     },
+
+    updateUser: async (parent, { userId, username, img, skills }) => {
+      return User.findOneAndUpdate({
+        _id: userId,
+        img,
+        username,
+        skills,
+      });
+    },
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
     addUser: async (parent, { username, email, password, skills }) => {
       const user = await User.create({ username, email, password, skills });
       const token = signToken(user);
