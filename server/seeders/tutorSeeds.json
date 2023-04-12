@@ -43,13 +43,6 @@
       "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
     }, 
     {
-      "tutorName": "Cornelius Davis",
-      "image": "https://i.imgur.com/fbz9UMp.png",
-      "bio": "Try this upload",
-      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
-      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
-    }, 
-    {
       "tutorName": "Anthony Angelos",
       "image": "https://i.imgur.com/GHRiv1f.png",
       "bio": "Try this upload",
@@ -59,6 +52,13 @@
     {
       "tutorName": "Jeremiah Chesley",
       "image": "https://i.imgur.com/RCdDRrk.png",
+      "bio": "Try this upload",
+      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
+    }, 
+    {
+      "tutorName": "Cornelius Davis",
+      "image": "https://i.imgur.com/fbz9UMp.png",
       "bio": "Try this upload",
       "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
       "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
