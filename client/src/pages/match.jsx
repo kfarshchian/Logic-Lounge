@@ -169,7 +169,7 @@ const Match = () => {
           </FormControl>
         </Box>
         {tutorInfo === undefined && (
-          <div>{/* You haven't added a tutor. */}</div>
+          <div>You haven't added a tutor.</div>
         )}
         <Stack>
           <TutorCard tutorInfo={tutorInfo} />

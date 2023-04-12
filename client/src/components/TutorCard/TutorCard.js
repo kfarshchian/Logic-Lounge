@@ -15,7 +15,8 @@ const TutorCard = (props) => {
   
 
   return (
-    <div class="scrolling-wrapper">
+
+      <div class="scrolling-wrapper">
       {tutorInfo?.map((product, index) => (
         <Card
         
@@ -52,8 +53,10 @@ const TutorCard = (props) => {
             alt={`${product.tutorName}`}
           />
           <CardContent>
+            <div class='aboutMe'>
               <h3>About me:</h3>
-              {product.bio}
+              <p>{product.bio}</p>
+              </div>
             <h3>skills:</h3>
             <ul>
               {product.skills.map((skill, index) => (
@@ -70,7 +73,8 @@ const TutorCard = (props) => {
           >Buy A Coffee</Button>
         </Card>
       ))}
-    </div>
+      </div>
+
   );
 };
 
