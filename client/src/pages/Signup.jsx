@@ -30,10 +30,9 @@ const Signup = () => {
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
   // Query skills from database
-  const { error: skillError, data: skillData } = useQuery(QUERY_SKILLS);
+  const { data: skillData } = useQuery(QUERY_SKILLS);
 
-  console.log(skillData, skillError);
-  //
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -44,7 +43,6 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const { data } = await addUser({
         variables: { ...formState },
@@ -54,15 +52,6 @@ const Signup = () => {
       console.error(e);
     }
   };
-  // This allows us to list each in out selection
-  // const [skill, setSkill] = useState([]);
-
-  // const skillChange = (event) => {
-  //   const {
-  //     target: { value },
-  //   } = event;
-  //   setSkill(typeof value === 'string' ? value.split(',') : value);
-  // };
 
   // This controls how the skills look when the popup menu renders
   const ITEM_HEIGHT = 48;
@@ -75,25 +64,6 @@ const Signup = () => {
       },
     },
   };
-
-  // const skills = [
-  //   'JavaScript',
-  //   'Git',
-  //   'Golang',
-  //   'Ruby on Rails',
-  //   'Github',
-  //   'Node.js',
-  //   'MySQL',
-  //   'MongoDB',
-  //   'Express.js',
-  //   'NoSQL',
-  //   'HTML',
-  //   'CSS',
-  //   'React',
-  //   'LinkedIn',
-  //   'Python',
-  //   'Algorithms & Data Structures',
-  // ];
 
   return (
     <>
@@ -171,7 +141,7 @@ const Signup = () => {
                     {/* This will render skills dynamically from database */}
                     {skillData
                       ? skillData.skills.map((skill) => (
-                          <MenuItem key={skill.skillName} value={skill.skillName}>
+                          <MenuItem key={skill._id} value={skill.skillName}>
                             <Checkbox
                               checked={
                                 formState.skills.indexOf(skill.skillName) > -1
@@ -180,7 +150,7 @@ const Signup = () => {
                             <ListItemText primary={skill.skillName} />
                           </MenuItem>
                         ))
-                      : "No skills available a this time..."}
+                      : 'No skills available at this time...'}
                   </Select>
                 </FormControl>
                 <Button
