@@ -91,6 +91,8 @@ const typeDefs = gql`
     ): Tutor
     addUser(username: String!, email: String!, password: String!): Auth
     # This is creating anew skill for database
+    updateUser(skills: String!, img: String!): User
+    # This allows user to update their profile
     addNewSkill(skillName: String!): Skill
     # This allows us to assign a skill from database to user
     addSkillToUser(userId: ID!, skillId: ID!): User

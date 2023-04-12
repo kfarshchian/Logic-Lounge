@@ -2,19 +2,28 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import {
+  FormControl,
+  OutlinedInput,
+  Checkbox,
+  InputLabel,
+  Select,
+  ListItemText,
+  MenuItem,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
-// import { useState, useEffect } from 'react';
-// import { Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_SINGLE_USER, QUERY_ME } from "../utils/queries";
+import { useMutation } from "@apollo/client";
+import { useState } from "react";
+import { QUERY_SINGLE_USER } from "../utils/queries";
+import { UPDATE_USER } from "../utils/mutations";
 
 // import Auth from "../utils/auth";
-
-// const [matches, setMatches] = useState([]);
 
 const ProfileBox = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -29,32 +38,88 @@ const MatchBox = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "center",
   height: "200px",
+  width: "50%",
   borderRadius: "20px",
   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
   margin: theme.spacing(1),
   backgroundColor: "#4F2683 ",
+  border: "5px solid white",
 }));
 
 const MatchImage = styled(Avatar)(({ theme }) => ({
-  width: "96px",
-  height: "96px",
+  width: "80px",
+  height: "80px",
   margin: theme.spacing(2),
 }));
 
 function Profile() {
-  const {userId} = useParams();
-  console.log(userId);
-  const { loading, error, data } = useQuery( QUERY_SINGLE_USER, {
+  const { userId } = useParams();
+  // console.log(userId);
+  const { loading, error, data } = useQuery(QUERY_SINGLE_USER, {
     variables: { _id: userId },
   }); // fetch the user data using GraphQL query and user ID
 
-  console.log(data, loading, error);
+  // console.log(data, loading, error);
+
+  const [profilePicture, setProfilePicture] = useState({
+    img: "",
+  });
+
+  const [editing, setEditing] = useState(false);
+  const [updateUser] = useMutation(UPDATE_USER);
+
+  const handleEdit = () => {
+    setEditing(true);
+  };
+
+  const handleSave = async(event) => {
+    // save profile changes to database or API
+    console.log(event)
+    event.preventDefault();
+    try {
+      const { data } = await updateUser({
+        variables: {...skill}
+      });
+      console.log(data, 'err')
+    } catch (err) {console.error(err)}
+
+    setEditing(false);
+  };
+
+  const [skill, setSkill] = useState([]);
+  const skillChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSkill(typeof value === "string" ? value.split(",") : value);
+  };
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  const skills = [
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "React",
+    "Linux",
+    "LinkedIn",
+    "Python",
+    "MySQL",
+    "MongoDB",
+    "GoLang",
+    "Algorithms & Data Structures",
+  ];
 
   const user = data?.user || data?.user || {};
-
-//   if (Auth.loggedIn() && Auth.getProfile().data._id === userId) {
-//     return <Navigate to="/me" />;
-//   }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -67,6 +132,7 @@ function Profile() {
 
   const styles = {
     root: {
+      backgroundColor: "#DDCDC6",
       flexGrow: 1,
       paddingTop: "18px",
       paddingBottom: "18px",
@@ -75,6 +141,7 @@ function Profile() {
       width: "144px",
       height: "144px",
       margin: "16px",
+      border: "5px solid white",
     },
     name: {
       fontWeight: "bold",
@@ -97,20 +164,63 @@ function Profile() {
       <Grid container spacing={10} justifyContent="flex=end">
         <Grid item xs={10} sm={4} md={3}>
           <ProfileBox>
+            {/* Need to render profile img */}
             <Avatar style={styles.avatar} />
             <Typography variant="h6" style={styles.name}>
               {user.username}
-              {/* {user ? `${user.username}`:''} */}
             </Typography>
             <Typography variant="body1" style={styles.bio}>
-              {/* {skills} */}
+              {user.skills}
             </Typography>
-            <Typography variant="body1" style={styles.interest}>
+            {/* <Typography variant="body1" style={styles.interest}>
               Interest
-            </Typography>
-            <Button variant="contained" color="primary" style={styles.button}>
-              Edit Profile
-            </Button>
+            </Typography> */}
+            {!editing ? (
+              <Button
+                variant="contained"
+                color="primary"
+                style={styles.button}
+                onClick={handleEdit}
+              >
+                Edit Profile
+              </Button>
+            ) : (
+              <>
+                <TextField
+                  type="file"
+                  onChange={(event) => setProfilePicture(event.target.value)}
+                  label=""
+                  value={profilePicture.img}
+                />
+                {/* <TextField
+                  label="Skills"
+                  value={skills}
+                  onChange={(event) => setSkills(event.target.value)}
+                /> */}
+
+                <FormControl margin="normal">
+                  <InputLabel>Skills</InputLabel>
+                  <Select
+                    sx={{ minWidth: "15rem", maxWidth: "20rem" }}
+                    multiple
+                    id="selection"
+                    value={skill}
+                    onChange={skillChange}
+                    input={<OutlinedInput label="Skill" />}
+                    renderValue={(selected) => selected.join(",")}
+                    MenuProps={MenuProps}
+                  >
+                    {skills.map((newSkill) => (
+                      <MenuItem key={newSkill} value={newSkill}>
+                        <Checkbox checked={skill.indexOf(newSkill) > -1} />
+                        <ListItemText primary={newSkill} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <Button onClick={handleSave}>Save Profile</Button>
+              </>
+            )}
           </ProfileBox>
         </Grid>
         {/* {matches.length > 0 && ( */}
@@ -127,7 +237,7 @@ function Profile() {
               </Typography>
               <Typography variant="body1">Match Bio</Typography>
             </MatchBox>
-            <MatchBox>
+            {/* <MatchBox>
               <MatchImage />
               <Typography variant="h6" gutterBottom>
                 Match Name
@@ -140,7 +250,7 @@ function Profile() {
                 Match Name
               </Typography>
               <Typography variant="body1">Match Bio</Typography>
-            </MatchBox>
+            </MatchBox> */}
             {/* ))} */}
           </Stack>
         </Grid>
