@@ -13,9 +13,9 @@ const TutorCard = (props) => {
   const { tutorInfo } = props;
 
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    console.log('The link was clicked.');
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log(event.target.value);
   
 
   }
@@ -27,6 +27,7 @@ const TutorCard = (props) => {
         <Card
         
         class="card"
+          
           key={index}
           sx={{
             width: "30rem",
@@ -76,7 +77,7 @@ const TutorCard = (props) => {
           color='secondary'
           sx={{ cursor: 'pointer', color: '#4F2683' }}
           type=''
-          value=''
+          value={product._id}
           variant='outlined'
           >Buy A Coffee</Button>
         </Card>

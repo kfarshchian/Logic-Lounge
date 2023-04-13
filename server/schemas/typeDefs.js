@@ -64,6 +64,7 @@ const typeDefs = gql`
     thoughts(username: String): [Thought]
     thought(thoughtId: ID!): Thought
     tutors: [Tutor]
+    tutor(_id: String!): Tutor
     chatrooms: [Chatroom]
     chatroom(chatroomName: String!): Chatroom
   }
