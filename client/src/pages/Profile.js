@@ -21,8 +21,8 @@ import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { QUERY_SINGLE_USER } from "../utils/queries";
-import { UPDATE_USER } from "../utils/mutations"
-import { QUERY_SINGLE_USER } from "../utils/queries"
+import { UPDATE_USER } from "../utils/mutations";
+// import { MATCH_TUTOR } from "../utils/queries.js";
 
 // import Auth from "../utils/auth";
 
@@ -73,16 +73,19 @@ function Profile() {
     setEditing(true);
   };
 
-  const handleSave = async(event) => {
+  const handleSave = async (event) => {
     // save profile changes to database or API
-    console.log(event)
+    console.log(data.user.user._id);
+    const userId = data.user._id
+    console.log(skill);
     event.preventDefault();
     try {
-      const { data } = await updateUser({
-        variables: {...skill}
-      });
-      console.log(data, 'err')
-    } catch (err) {console.error(err)}
+    const {data} = await updateUser({
+        variables: {userId, skill},  
+    });
+    } catch (err) {
+      console.error(err);
+    }
 
     setEditing(false);
   };
@@ -94,6 +97,26 @@ function Profile() {
     } = event;
     setSkill(typeof value === "string" ? value.split(",") : value);
   };
+
+  // const [tutorInfo, setTutorInfo] = useState();
+  // //query all tutors
+  // const { data } = useQuery(MATCH_TUTOR);
+  // //Submit function for checkbox
+  // const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+  //   // Get the query and filter query to find tutor with same skills.
+  //   const result = skill
+  //     .map((x) => data.tutors.filter((y) => y.skills.includes(x)))
+  //     .filter((z) => z.length > 0);
+  //   // filter results so duplicate tutors are taken out.
+  //   const matchingTutor = [
+  //     ...new Map(result.map((v) => [v.tutorName, v])).values(),
+  //   ];
+  //   //drop down one into matching tutor
+  //   const tutorMap = matchingTutor[0];
+  //   //send tutor info to tutor card component
+  //   setTutorInfo(tutorMap);
+  // };
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -166,12 +189,13 @@ function Profile() {
         <Grid item xs={10} sm={4} md={3}>
           <ProfileBox>
             {/* Need to render profile img */}
-            <Avatar style={styles.avatar} />
+            <Avatar style={styles.avatar} img={user.img} />
             <Typography variant="h6" style={styles.name}>
               {user.username}
             </Typography>
             <Typography variant="body1" style={styles.bio}>
-              {user.skills}
+              {/* {user.skills} */}
+              {/* map over skills */}
             </Typography>
             {/* <Typography variant="body1" style={styles.interest}>
               Interest
@@ -193,11 +217,6 @@ function Profile() {
                   label=""
                   value={profilePicture.img}
                 />
-                {/* <TextField
-                  label="Skills"
-                  value={skills}
-                  onChange={(event) => setSkills(event.target.value)}
-                /> */}
 
                 <FormControl margin="normal">
                   <InputLabel>Skills</InputLabel>

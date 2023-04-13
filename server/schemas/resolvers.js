@@ -1,6 +1,6 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought, Tutor, Skill, Chatroom } = require('../models');
-const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
+const { User, Thought, Tutor, Skill, Chatroom } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -9,14 +9,14 @@ const resolvers = {
       return Chatroom.find();
     },
     //Resolver for finding single chatroom by name
-    chatroom: async (parent,{chatroomName},context) => {
-      return Chatroom.findOne({chatroomName: chatroomName});
+    chatroom: async (parent, { chatroomName }, context) => {
+      return Chatroom.findOne({ chatroomName: chatroomName });
     },
     users: async () => {
-      return User.find().populate('skills');
+      return User.find().populate("skills");
     },
     user: async (parent, { _id }) => {
-      return User.findOne( {_id });
+      return User.findOne({ _id });
     },
     skills: async () => {
       return Skill.find();
@@ -35,7 +35,7 @@ const resolvers = {
       // for (let i = 0; i < tutor.length; i++) {
       //     images: [`${url}/images/${image}`]
       //   };
-        
+
       return Tutor.find();
     },
   },
@@ -43,26 +43,44 @@ const resolvers = {
   Mutation: {
     addTutor: async (parent, { tutorName, skills, image, bio }) => {
       const tutor = await Tutor.create({ tutorName, skills, image, bio });
-      return  tutor;
+      return tutor;
     },
     //Adds a message to a chatroom
-    addMessage: async (parent, {chatroomName, messageText, userId},context) => {
+    addMessage: async (
+      parent,
+      { chatroomName, messageText, userId },
+      context
+    ) => {
       const user = await User.findById(userId);
-      const chatroomInstance = await Chatroom.findOne({chatroomName: chatroomName})
+      const chatroomInstance = await Chatroom.findOne({
+        chatroomName: chatroomName,
+      });
       //Creates a new message document from the messages subschema
-      const newMessage = chatroomInstance.messages.create({messageText: messageText, messageAuthor: user.username});
-      chatroomInstance.messages.push(newMessage)
+      const newMessage = chatroomInstance.messages.create({
+        messageText: messageText,
+        messageAuthor: user.username,
+      });
+      chatroomInstance.messages.push(newMessage);
       //save updated chatroom instance
       chatroomInstance.save();
       return chatroomInstance.toJSON();
     },
-       //Adds a message to a chatroom
-    addMessage: async (parent, {chatroomName, messageText, userId},context) => {
+    //Adds a message to a chatroom
+    addMessage: async (
+      parent,
+      { chatroomName, messageText, userId },
+      context
+    ) => {
       const user = await User.findById(userId);
-      const chatroomInstance = await Chatroom.findOne({chatroomName: chatroomName})
+      const chatroomInstance = await Chatroom.findOne({
+        chatroomName: chatroomName,
+      });
       //Creates a new message document from the messages subschema
-      const newMessage = chatroomInstance.messages.create({messageText: messageText, messageAuthor: user.username});
-      chatroomInstance.messages.push(newMessage)
+      const newMessage = chatroomInstance.messages.create({
+        messageText: messageText,
+        messageAuthor: user.username,
+      });
+      chatroomInstance.messages.push(newMessage);
       //save updated chatroom instance
       chatroomInstance.save();
       return chatroomInstance.toJSON();
@@ -80,16 +98,17 @@ const resolvers = {
       });
     },
 
-    updateUser: async (parent, { userId, username, img, skills }) => {
-      return User.findOneAndUpdate({
-        _id: userId,
-        img,
-        username,
-        skills,
-      });
+    updateUser: async (parent, { userId, img, skills }) => {
+      return User.findOneAndUpdate(
+        { _id: userId },
+        {
+          $addToSet: {
+            skills: skills,
+          },
+        }
+      );
     },
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+
     addUser: async (parent, { username, email, password, skills }) => {
       const user = await User.create({ username, email, password, skills });
       const token = signToken(user);
@@ -128,13 +147,13 @@ const resolvers = {
       const user = await User.findOne({ username });
 
       if (!user) {
-        throw new AuthenticationError('No user found with this username');
+        throw new AuthenticationError("No user found with this username");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError("Incorrect credentials");
       }
 
       const token = signToken(user);
@@ -173,7 +192,6 @@ const resolvers = {
         { new: true }
       );
     },
-
   },
 };
 

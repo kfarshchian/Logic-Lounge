@@ -20,6 +20,10 @@ export const QUERY_SINGLE_USER = gql`
       _id
       username
       email
+      skills {
+        _id
+        skillName
+      }
     }
   }
 `;

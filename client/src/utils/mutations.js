@@ -39,17 +39,14 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($username: String!, $skills: String!, $img: String!) {
-    addUser(username: $username, skills: $skills, img: $img) {
-      token
-      user {
-        _id
-        username
-        Skills
-        img
-      }
+ mutation Mutation($skills: [String], $img: String, $userId: ID!) {
+  updateUser(skills: $skills, img: $img, userId: $userId) {
+    _id
+    skills {
+      skillName
     }
   }
+}
 `;
 
 export const ADD_THOUGHT = gql`

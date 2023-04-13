@@ -97,11 +97,10 @@ const typeDefs = gql`
     ): Auth
     # This is creating anew skill for database
 
-    updateUser(skills: String!, img: String!): User
+    updateUser(userId: ID!, skills: [String], img: String): User
     # This allows user to update their profile
     addNewSkill(skillName: String!): Skill
 
-    addNewSkill(skillName: [String]!): Skill
     # This allows us to assign a skill from database to user
     addSkillToUser(userId: ID!, skillName: [String]!): User
     # This will remove a skill from a user
