@@ -21,16 +21,14 @@ const userSchema = new Schema({
   },
   skills: [
     {
-      type: Schema.Types.Array,
+      type: String,
       ref: 'Skill',
     },
   ],
-  tutor: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Tutor',
-    },
-  ],
+  image: {
+    type: String,
+    unique: true
+  }
 });
 
 userSchema.pre('save', async function (next) {
