@@ -43,7 +43,7 @@ const resolvers = {
   Mutation: {
     addTutor: async (parent, { tutorName, skills, image, bio }) => {
       const tutor = await Tutor.create({ tutorName, skills, image, bio });
-      return { tutor };
+      return  tutor;
     },
     //Adds a message to a chatroom
     addMessage: async (
@@ -97,6 +97,17 @@ const resolvers = {
         skills,
       });
     },
+
+    updateUser: async (parent, { userId, username, img, skills }) => {
+      return User.findOneAndUpdate({
+        _id: userId,
+        img,
+        username,
+        skills,
+      });
+    },
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
     addUser: async (parent, { username, email, password, skills }) => {
       const user = (
         await User.create({ username, email, password, skills })

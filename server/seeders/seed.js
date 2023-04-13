@@ -16,7 +16,7 @@ db.once('open', async () => {
 
     await Chatroom.collection.drop();
 
-    // const chatrooms = await Chatroom.insertMany(chatroomSeeds);
+    const chatrooms = await Chatroom.insertMany(chatroomSeeds);
 
     for (let i = 0; i < thoughtSeeds.length; i++) {
       const { _id, thoughtAuthor } = await Thought.create(thoughtSeeds[i]);
@@ -30,19 +30,19 @@ db.once('open', async () => {
       );
     }
 
-    for (let i = 0; i < chatroomSeeds.length; i++){
-      const chatroomInstance = await Chatroom.create(chatroomSeeds[i]);
-      // console.log(chatroomInstance);
-      for(let i = 0; i < (Math.floor(Math.random()*35)+15);i++) {
-        const username = users[Math.floor(Math.random()*users.length)].username;
-        const messageText = generateMessage(Math.floor(Math.random()*15)+15);
-        const newMessage = chatroomInstance.messages.create({messageText: messageText, messageAuthor: username});
-        // console.log(newMessage);
-        chatroomInstance.messages.push(newMessage);
-      }
-      await chatroomInstance.save();
-      console.log(chatroomInstance);
-    }
+    // for (let i = 0; i < chatroomSeeds.length; i++){
+    //   const chatroomInstance = await Chatroom.create(chatroomSeeds[i]);
+    //   // console.log(chatroomInstance);
+    //   for(let i = 0; i < (Math.floor(Math.random()*35)+15);i++) {
+    //     const username = users[Math.floor(Math.random()*users.length)].username;
+    //     const messageText = generateMessage(Math.floor(Math.random()*15)+15);
+    //     const newMessage = chatroomInstance.messages.create({messageText: messageText, messageAuthor: username});
+    //     // console.log(newMessage);
+    //     chatroomInstance.messages.push(newMessage);
+    //   }
+    //   await chatroomInstance.save();
+    //   // console.log(chatroomInstance);
+    // }
 
     console.log('Chatrooms seeded!')
 

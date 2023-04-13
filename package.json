@@ -21,7 +21,12 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.15",
-    "react-select": "^5.7.2"
+    "html-react-parser": "^3.0.15",
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.10.0",
+    "react-select": "^5.7.2",
+    "stripe": "^12.0.0"
   }
 }
