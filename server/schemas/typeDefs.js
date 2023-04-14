@@ -13,23 +13,16 @@ const typeDefs = gql`
     createdAt: String
     messageAuthor: String
   }
-  
+
   type User {
     _id: ID
     username: String
     email: String
     password: String
-    skills: [Skill]!
-    thoughts: [Thought]!
+    skills: [Skill]
+    image: String
   }
 
-  type Thought {
-    _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
-  }
 
   type Tutor {
     _id: ID
@@ -42,13 +35,8 @@ const typeDefs = gql`
   type Skill {
     _id: ID
     skillName: String
-  }
-
-  type Comment {
-    _id: ID
-    commentText: String
-    commentAuthor: String
-    createdAt: String
+    tutors: [String]
+    users: [String]
   }
 
   type Auth {
@@ -61,8 +49,6 @@ const typeDefs = gql`
     user(_id: String!): User
     skills: [Skill]
     skill(skillName: String!): Skill
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
     tutors: [Tutor]
     tutor(_id: String!): Tutor
     chatrooms: [Chatroom]
@@ -96,24 +82,27 @@ const typeDefs = gql`
       password: String!
       skills: [String]!
     ): Auth
+
+    # # This is creating a new skill for the database
+    # addNewSkill(skillName: String!): Skill
+
     # This is creating anew skill for database
-    addNewSkill(skillName: [String]!): Skill
+
+    updateUser(skills: String!, img: String!): User
+    # This allows user to update their profile
+    addNewSkill(skillName: String!): Skill
+
     # This allows us to assign a skill from database to user
-    addSkillToUser(userId: ID!, skillName: [String]!): User
+    addSkillToUser(userId: ID!, skillId: [ID]!): User
+    # This will add an image to a user
+    addImageToUser(userId: ID!, image: String!): User
     # This will remove a skill from a user
     removeSkillFromUser(userId: ID!, skillId: ID!): User
     # This will permanently delete a skill from database (ONLY USE IN TESTING)
     removeSkill(skillId: ID!): Skill
-
+    # This will allow a user to login
     login(username: String!, password: String!): Auth
-    addThought(thoughtText: String!, thoughtAuthor: String!): Thought
-    addComment(
-      thoughtId: ID!
-      commentText: String!
-      commentAuthor: String!
-    ): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+
   }
 `;
 
