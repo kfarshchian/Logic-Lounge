@@ -175,7 +175,8 @@ const Match = () => {
           <div>You haven't selected a skill yet.</div>
         )}
         <Stack  >
-          <TutorCard tutorInfo={tutorInfo} />
+          {/* if tutorInfo is undefined sets as empty array */}
+          <TutorCard tutorInfo={tutorInfo ?? []} checkout={false} />
         </Stack>
         </Container >
         <div id="printTutor"></div>

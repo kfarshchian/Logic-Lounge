@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from 'react';
 import {
   Card,
   CardHeader,
@@ -7,27 +8,36 @@ import {
   Button
 } from "@mui/material";
 import './style.scss';
-
+import { useNavigate } from "react-router-dom";
 
 const TutorCard = (props) => {
-  const { tutorInfo } = props;
-
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    console.log(event.target.value);
+  const { tutorInfo, checkout } = props;
   
 
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `/checkout`; 
+    navigate(path);
+  }
+console.log(tutorInfo);
+  const handleClick = (event) => {
+    event.preventDefault();
+    const pickedTutor = event.target.value;
+    console.log(pickedTutor);
+    
+    localStorage.setItem("pickedTutor", pickedTutor)
+
+  routeChange()
   }
 
   return (
-
-      <div class="scrolling-wrapper">
+<div class={tutorInfo.length > 1? "scrolling-wrapper": ""}>
+      {/* <div class="scrolling-wrapper"> */}
       {tutorInfo?.map((product, index) => (
         <Card
         
         class="card"
-          
+          title={product}
           key={index}
           sx={{
             width: "30rem",
@@ -72,14 +82,16 @@ const TutorCard = (props) => {
               ))}
             </ul>
           </CardContent>
+          {!checkout && (
           <Button
           onClick={handleClick}
           color='secondary'
           sx={{ cursor: 'pointer', color: '#4F2683' }}
           type=''
-          value={product._id}
+          value={JSON.stringify(product)}
           variant='outlined'
           >Buy A Coffee</Button>
+          )}
         </Card>
       ))}
       </div>
