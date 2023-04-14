@@ -19,18 +19,10 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    skills: [Skill]!
-    thoughts: [Thought]!
+    skills: [Skill]
     image: String
   }
 
-  type Thought {
-    _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
-  }
 
   type Tutor {
     _id: ID
@@ -47,13 +39,6 @@ const typeDefs = gql`
     users: [String]
   }
 
-  type Comment {
-    _id: ID
-    commentText: String
-    commentAuthor: String
-    createdAt: String
-  }
-
   type Auth {
     token: ID!
     user: User
@@ -64,8 +49,6 @@ const typeDefs = gql`
     user(_id: String!): User
     skills: [Skill]
     skill(skillName: String!): Skill
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
     tutors: [Tutor]
     chatrooms: [Chatroom]
     chatroom(chatroomName: String!): Chatroom
@@ -101,13 +84,8 @@ const typeDefs = gql`
 
     # This is creating a new skill for the database
     addNewSkill(skillName: String!): Skill
-
-    # This is creating anew skill for database
-
-    updateUser(skills: String!, img: String!): User
     # This allows user to update their profile
-    addNewSkill(skillName: String!): Skill
-
+    updateUser(skills: String!, img: String!): User
     # This allows us to assign a skill from database to user
     addSkillToUser(userId: ID!, skillId: [ID]!): User
     # This will add an image to a user
@@ -116,16 +94,9 @@ const typeDefs = gql`
     removeSkillFromUser(userId: ID!, skillId: ID!): User
     # This will permanently delete a skill from database (ONLY USE IN TESTING)
     removeSkill(skillId: ID!): Skill
-
+    # This will allow a user to login
     login(username: String!, password: String!): Auth
-    addThought(thoughtText: String!, thoughtAuthor: String!): Thought
-    addComment(
-      thoughtId: ID!
-      commentText: String!
-      commentAuthor: String!
-    ): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+
   }
 `;
 
