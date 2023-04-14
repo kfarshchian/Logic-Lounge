@@ -81,12 +81,3 @@ export const QUERY_SKILLS = gql`
     }
   }
 `;
-
-export const QUERY_IMAGE = gql `
-  query getImages {
-    user {
-      image
-    }
-  }
-
-  `
