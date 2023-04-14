@@ -99,8 +99,8 @@ const typeDefs = gql`
       skills: [String]!
     ): Auth
 
-    # This is creating a new skill for the database
-    addNewSkill(skillName: String!): Skill
+    # # This is creating a new skill for the database
+    # addNewSkill(skillName: String!): Skill
 
     # This is creating anew skill for database
 

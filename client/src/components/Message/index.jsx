@@ -3,7 +3,12 @@ import React from 'react'
 
 function Message({message}) {
   return (
-    <Box>
+    <Box
+      sx={{
+        width: '100%',
+        backgroundColor: 'red'
+      }}
+    >
       <Box>
         {message.messageAuthor}
       </Box>

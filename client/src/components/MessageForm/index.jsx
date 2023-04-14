@@ -6,8 +6,8 @@ const formStyle = {
   display: 'flex',
   flexDirection: 'column',
   border: '1px solid #4F2683',
-  width: '97vw',
-  padding: 5,
+  // width: '98.5vw',
+  // padding: 5,
 }
 
 function MessageForm({socket,selectedChat}) {
