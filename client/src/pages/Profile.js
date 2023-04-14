@@ -165,7 +165,7 @@ function Profile() {
       <Grid container spacing={10} justifyContent="flex=end">
         <Grid item xs={10} sm={4} md={3}>
           <ProfileBox>
-            <ImageUpload/>
+            {/* <ImageUpload/> */}
             {/* Need to render profile img */}
             <Avatar style={styles.avatar} />
             <Typography variant="h6" style={styles.name}>
