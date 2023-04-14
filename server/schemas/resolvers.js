@@ -97,8 +97,8 @@ const resolvers = {
         skills,
       });
     },
-
-    updateUser: async (parent, { userId, img, skills }) => {
+// need to add img again
+    updateUser: async (parent, { userId, skills }) => {
       return User.findOneAndUpdate(
         { _id: userId },
         {

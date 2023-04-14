@@ -1,4 +1,5 @@
 import React from "react";
+// import { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -22,6 +23,7 @@ import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { QUERY_SINGLE_USER } from "../utils/queries";
 import { UPDATE_USER } from "../utils/mutations";
+import { QUERY_SKILLS } from "../utils/queries";
 // import { MATCH_TUTOR } from "../utils/queries.js";
 
 // import Auth from "../utils/auth";
@@ -55,16 +57,22 @@ const MatchImage = styled(Avatar)(({ theme }) => ({
 
 function Profile() {
   const { userId } = useParams();
-  // console.log(userId);
   const { loading, error, data } = useQuery(QUERY_SINGLE_USER, {
     variables: { _id: userId },
   }); // fetch the user data using GraphQL query and user ID
-
-  // console.log(data, loading, error);
+  // const { data: skillData } = useQuery(QUERY_SKILLS);
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setFormState({ ...formState, [name]: value });
+  // };
+  // console.log(userId);
 
   const [profilePicture, setProfilePicture] = useState({
     img: "",
   });
+
+  const [formState, setFormState] = useState({ skills: [] });
+  // console.log(formState);
 
   const [editing, setEditing] = useState(false);
   const [updateUser] = useMutation(UPDATE_USER);
@@ -72,51 +80,65 @@ function Profile() {
   const handleEdit = () => {
     setEditing(true);
   };
+  // const handleSave = async (event) => {
+  //   // save profile changes to database or API
+  //   console.log(data.user._id);
+  //   // console.log(skill);
+  //   event.preventDefault();
 
-  const handleSave = async (event) => {
-    // save profile changes to database or API
-    console.log(data.user.user._id);
-    const userId = data.user._id
-    console.log(skill);
-    event.preventDefault();
-    try {
-    const {data} = await updateUser({
-        variables: {userId, skill},  
+  //   const userId = data.user._id;
+  //   try {
+  //     const { skillData } = await updateUser({
+  //       variables: { userId, skillData },
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+
+  const { data: skillData } = useQuery(QUERY_SKILLS);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
     });
-    } catch (err) {
-      console.error(err);
+    console.log(formState);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { data } = await updateUser({
+        variables: { skills: formState.skills, userId: userId },
+      });
+    } catch (e) {
+      console.error(e);
     }
 
     setEditing(false);
   };
 
-  const [skill, setSkill] = useState([]);
-  const skillChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSkill(typeof value === "string" ? value.split(",") : value);
-  };
+  // const { tutorInfo } = useParams();
+  // const [tutors, setTutors] = useState([]);
 
+  // const { tutorData } = useQuery(MATCH_TUTOR, {
+  //   variables: { _id: tutorsInfo },
+  // });
+
+  // useEffect(() => {
+
+    // fetch tutor data from database using subject as parameter
+    // set the fetched data to the tutors state variable using setTutors
+
+  // }, [tutorInfo]);
+
+  // const tutor = tutorData?.tutor || tutorData?.tutor || {};
   // const [tutorInfo, setTutorInfo] = useState();
-  // //query all tutors
-  // const { data } = useQuery(MATCH_TUTOR);
-  // //Submit function for checkbox
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-  //   // Get the query and filter query to find tutor with same skills.
-  //   const result = skill
-  //     .map((x) => data.tutors.filter((y) => y.skills.includes(x)))
-  //     .filter((z) => z.length > 0);
-  //   // filter results so duplicate tutors are taken out.
-  //   const matchingTutor = [
-  //     ...new Map(result.map((v) => [v.tutorName, v])).values(),
-  //   ];
-  //   //drop down one into matching tutor
-  //   const tutorMap = matchingTutor[0];
-  //   //send tutor info to tutor card component
-  //   setTutorInfo(tutorMap);
-  // };
+  //query all tutors
+  // const { tutors } = useQuery(MATCH_TUTOR);
+  //Submit function for checkbox
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -129,21 +151,8 @@ function Profile() {
     },
   };
 
-  const skills = [
-    "JavaScript",
-    "HTML",
-    "CSS",
-    "React",
-    "Linux",
-    "LinkedIn",
-    "Python",
-    "MySQL",
-    "MongoDB",
-    "GoLang",
-    "Algorithms & Data Structures",
-  ];
-
   const user = data?.user || data?.user || {};
+  console.log(user);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -194,12 +203,10 @@ function Profile() {
               {user.username}
             </Typography>
             <Typography variant="body1" style={styles.bio}>
-              {/* {user.skills} */}
+              No skills have been added
               {/* map over skills */}
             </Typography>
-            {/* <Typography variant="body1" style={styles.interest}>
-              Interest
-            </Typography> */}
+
             {!editing ? (
               <Button
                 variant="contained"
@@ -217,62 +224,61 @@ function Profile() {
                   label=""
                   value={profilePicture.img}
                 />
-
-                <FormControl margin="normal">
-                  <InputLabel>Skills</InputLabel>
-                  <Select
-                    sx={{ minWidth: "15rem", maxWidth: "20rem" }}
-                    multiple
-                    id="selection"
-                    value={skill}
-                    onChange={skillChange}
-                    input={<OutlinedInput label="Skill" />}
-                    renderValue={(selected) => selected.join(",")}
-                    MenuProps={MenuProps}
-                  >
-                    {skills.map((newSkill) => (
-                      <MenuItem key={newSkill} value={newSkill}>
-                        <Checkbox checked={skill.indexOf(newSkill) > -1} />
-                        <ListItemText primary={newSkill} />
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-                <Button onClick={handleSave}>Save Profile</Button>
+                <form>
+                  <FormControl margin="normal" onSubmit={handleFormSubmit}>
+                    <InputLabel>Skills</InputLabel>
+                    <Select
+                      sx={{ minWidth: "15rem", maxWidth: "20rem" }}
+                      multiple
+                      id="selection"
+                      name="skills"
+                      value={formState.skills}
+                      onChange={handleChange}
+                      input={<OutlinedInput label="Skill" />}
+                      renderValue={(selected) => selected.join(",")}
+                      MenuProps={MenuProps}
+                    >
+                      {/* This will render skills dynamically from database */}
+                      {skillData
+                        ? skillData.skills.map((skill) => (
+                            <MenuItem key={skill._id} value={skill.skillName}>
+                              <Checkbox
+                                checked={
+                                  formState.skills.indexOf(skill.skillName) > -1
+                                }
+                              />
+                              <ListItemText primary={skill.skillName} />
+                            </MenuItem>
+                          ))
+                        : "No skills available a this time..."}
+                    </Select>
+                  </FormControl>
+                  <Button type="submit">Save Profile</Button>
+                </form>
               </>
             )}
           </ProfileBox>
         </Grid>
-        {/* {matches.length > 0 && ( */}
+
         <Grid item xs={12} sm={6} md={4}>
           <Typography variant="h4" gutterBottom>
             Matches
           </Typography>
+          {/* {tutorInfo?.map((tutors) => ( */}
           <Stack direction="column" justifyContent="center">
-            {/* {matches.map(match => ( */}
             <MatchBox>
-              <MatchImage />
+              <MatchImage
+              //  image={tutor.image} alt={`${tutor.tutorName}`} 
+               />
               <Typography variant="h6" gutterBottom>
-                Match Name
+                {/* {tutor.tutorName} */}
               </Typography>
-              <Typography variant="body1">Match Bio</Typography>
+              <Typography variant="body1">
+                {/* {tutor.bio} */}
+                </Typography>
             </MatchBox>
-            {/* <MatchBox>
-              <MatchImage />
-              <Typography variant="h6" gutterBottom>
-                Match Name
-              </Typography>
-              <Typography variant="body1">Match Bio</Typography>
-            </MatchBox>
-            <MatchBox>
-              <MatchImage />
-              <Typography variant="h6" gutterBottom>
-                Match Name
-              </Typography>
-              <Typography variant="body1">Match Bio</Typography>
-            </MatchBox> */}
-            {/* ))} */}
           </Stack>
+          {/* ))} */}
         </Grid>
       </Grid>
     </div>
