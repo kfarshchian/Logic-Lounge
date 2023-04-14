@@ -48,6 +48,15 @@ export const UPDATE_USER = gql`
         Skills
         img
       }
+      }
+  }
+`
+
+export const ADD_IMAGE = gql`
+  mutation addImage($userId: ID!, $image: String!) {
+    addImageToUser(userId: $userId, image: $image) {
+      username
+      image
     }
   }
 `;
@@ -101,3 +110,9 @@ export const MATCH_TUTOR = gql`
     }
   }
 `;
+
+// export const ADD_PHOTO = gql`
+//   query addPhoto {
+    
+//   }
+// `;
