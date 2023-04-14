@@ -29,7 +29,8 @@ class AuthService {
 
   login(idToken) {
     localStorage.setItem('id_token', idToken);
-    window.location.assign(`/users/${this.getProfile().data._id}`);
+    window.location.assign(`#/users/${this.getProfile().data._id}`);
+    window.location.reload();
   }
 
   logout() {

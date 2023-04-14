@@ -25,6 +25,9 @@ import { QUERY_SINGLE_USER } from "../utils/queries";
 import { UPDATE_USER } from "../utils/mutations";
 import { QUERY_SKILLS } from "../utils/queries";
 // import { MATCH_TUTOR } from "../utils/queries.js";
+import { UPDATE_USER } from "../utils/mutations"
+// import { QUERY_SINGLE_USER } from "../utils/queries"
+
 
 // import Auth from "../utils/auth";
 
@@ -197,6 +200,7 @@ function Profile() {
       <Grid container spacing={10} justifyContent="flex=end">
         <Grid item xs={10} sm={4} md={3}>
           <ProfileBox>
+            {/* <ImageUpload/> */}
             {/* Need to render profile img */}
             <Avatar style={styles.avatar} img={user.img} />
             <Typography variant="h6" style={styles.name}>

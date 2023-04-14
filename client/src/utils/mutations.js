@@ -39,11 +39,30 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
+
  mutation Mutation($skills: [String], $img: String, $userId: ID!) {
   updateUser(skills: $skills, img: $img, userId: $userId) {
     _id
     skills {
       skillName
+  mutation updateUser($username: String!, $skills: String!, $img: String!) {
+    addUser(username: $username, skills: $skills, img: $img) {
+      token
+      user {
+        _id
+        username
+        Skills
+        img
+      }
+      }
+  }
+`
+
+export const ADD_IMAGE = gql`
+  mutation addImage($userId: ID!, $image: String!) {
+    addImageToUser(userId: $userId, image: $image) {
+      username
+      image
     }
   }
 }
@@ -98,3 +117,9 @@ export const MATCH_TUTOR = gql`
     }
   }
 `;
+
+// export const ADD_PHOTO = gql`
+//   query addPhoto {
+    
+//   }
+// `;

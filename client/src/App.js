@@ -6,11 +6,10 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import SingleThought from './pages/SingleThought';
 import Header from './components/Navbar';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
@@ -69,10 +68,6 @@ function App() {
                 path="/signup" 
                 element={<Signup />} 
               />
-              <Route 
-                path="/thoughts/:thoughtId" 
-                element={<SingleThought />} 
-              />
               <Route
                 path='/users/:userId'
                 element={<Profile />}
@@ -86,6 +81,7 @@ function App() {
                 element={<Chatrooms socket={socket}/>}
               />
               <Route
+                className="link"
                 path='/checkout'
                 element={<Checkout />}
               />

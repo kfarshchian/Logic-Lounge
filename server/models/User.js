@@ -34,6 +34,13 @@ const userSchema = new Schema({
       ref: "Tutor",
     },
   ],
+      ref: 'Skill',
+    },
+  ],
+  image: {
+    type: String,
+    // unique: true
+  }
 });
 
 userSchema.pre("save", async function (next) {
