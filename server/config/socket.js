@@ -38,7 +38,7 @@ const createSocketServer = (httpServer) => {
       chatroomInstance.messages.push(chatroomInstance.messages.create(newMessage));
       await chatroomInstance.save();
       const chatrooms = await Chatroom.find().lean();
-      socket.emit('RETURN_DATA', JSON.stringify(chatrooms))
+      io.emit('RETURN_DATA', JSON.stringify(chatrooms))
     })
 
     // Listen for disconnect events
