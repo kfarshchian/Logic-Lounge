@@ -78,7 +78,8 @@ const resolvers = {
         skills,
       });
     },
-    // This will allow you to add a user to the database
+    // addUser: async (parent, { username, email, password }) => {
+    //   const user = await User.create({ username, email, password });
     addUser: async (parent, { username, email, password, skills }) => {
       const user = await User.create({ username, email, password, skills });
       const token = signToken(user);
