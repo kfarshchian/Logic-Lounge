@@ -17,15 +17,7 @@ export default function Checkout() {
 
   const [message, setMessage] = useState("");
 
-  // const handleClick = (event) => {
-  //   event.preventDefault();
-  //   const query = new URLSearchParams(window.location.search);
-  //   console.log(query);
-  //   if (query.get("success")) {
-  //     setMessage("Order placed! You will receive an email confirmation.");
-  //   }
 
-  // }
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -70,7 +62,6 @@ export default function Checkout() {
     
     <form action="/create-checkout-session" method="POST">
       <Button 
-      // onClick={handleClick}
       type="submit"
       sx={{ cursor: "pointer", color: "#4F2683"}}
       variant="outlined"
