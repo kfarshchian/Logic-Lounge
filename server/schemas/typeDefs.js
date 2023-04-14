@@ -50,6 +50,7 @@ const typeDefs = gql`
     skills: [Skill]
     skill(skillName: String!): Skill
     tutors: [Tutor]
+    tutor(_id: String!): Tutor
     chatrooms: [Chatroom]
     chatroom(chatroomName: String!): Chatroom
   }

@@ -172,10 +172,11 @@ const Match = () => {
         </Box>
         <Container sx={{alignItems: "center",}}>
         {tutorInfo === undefined && (
-          <div>You haven't added a tutor.</div>
+          <div>You haven't selected a skill yet.</div>
         )}
         <Stack  >
-          <TutorCard tutorInfo={tutorInfo} />
+          {/* if tutorInfo is undefined sets as empty array */}
+          <TutorCard tutorInfo={tutorInfo ?? []} checkout={false} />
         </Stack>
         </Container >
         <div id="printTutor"></div>
