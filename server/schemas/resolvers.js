@@ -25,7 +25,7 @@ const resolvers = {
       return Tutor.find();
     },
     tutor: async (parent, { _id }) => {
-      return Tutor.findOne({ _id });
+      return Tutor.findOne( {_id });
     },
   },
 

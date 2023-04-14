@@ -81,6 +81,7 @@ function App() {
                 element={<Chatrooms socket={socket}/>}
               />
               <Route
+                className="link"
                 path='/checkout'
                 element={<Checkout />}
               />
