@@ -32,7 +32,6 @@ const Signup = () => {
   // Query skills from database
   const { data: skillData } = useQuery(QUERY_SKILLS);
 
-  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
