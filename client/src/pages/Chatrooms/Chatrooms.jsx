@@ -23,7 +23,7 @@ function Chatrooms({socket}) {
 
   //Socket listener for updated chatrooms; will update all of the current chatrooms when this query is recived
   socket.on('RETURN_DATA', async (data)=>{
-    console.log('Received query: QUERY_CHATROOMS')
+    // console.log('Received query: QUERY_CHATROOMS')
     setChatrooms(await JSON.parse(data));
   })
 
