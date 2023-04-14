@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 const stripe = require('stripe')('sk_test_51MvvjSH6SVkRFfSTatGzg2d2NKOeeYorl900gptT3ESf8I8lyQqhsnFFZ42VHO8DLr9eBCMVi8cvsZLFhFINUTxg00ISUVIrMX');
 app.use(express.static('public'));
 
-const YOUR_DOMAIN = 'http://localhost:3000/checkout';
+const YOUR_DOMAIN = 'https://logic-lounge-production.up.railway.app/#/checkout';
 
 app.post('/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
