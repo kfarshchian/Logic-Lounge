@@ -13,7 +13,7 @@ export const UserImage = () => {
   // Create a Cloudinary instance and set cloud name.
   const cld = new Cloudinary({
     cloud: {
-      cloudName: `dxruhnouf`,
+      cloudName: process.env.REACT_APP_CLOUD_NAME,
     },
   });
 
