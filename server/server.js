@@ -43,9 +43,9 @@ const stripe = require('stripe')('sk_test_51MvvjSH6SVkRFfSTatGzg2d2NKOeeYorl900g
 app.use(express.static('public'));
 
 // this is for live site 
-// const YOUR_DOMAIN = '';
+const YOUR_DOMAIN = 'https://logic-lounge-production.up.railway.app/#/paymentprocessed';
 // this is for local 
-const YOUR_DOMAIN = 'http://localhost:3000/#/paymentprocessed';
+// const YOUR_DOMAIN = 'http://localhost:3000/#/paymentprocessed';
 
 app.post('/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
