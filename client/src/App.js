@@ -16,7 +16,8 @@ import Profile from './pages/Profile';
 import Match from './pages/match';
 import Chatrooms from './pages/Chatrooms/Chatrooms';
 import {io} from 'socket.io-client'
-import Checkout from './components/checkout/checkout';
+import Checkout from './components/checkout/checkout.jsx';
+import PaymentProcessed from './components/PaymentProcessed/PaymentProcessed.jsx'
 
 
 // Construct our main GraphQL API endpoint
@@ -84,6 +85,10 @@ function App() {
                 className="link"
                 path='/checkout'
                 element={<Checkout />}
+              />
+              <Route
+              path='/paymentprocessed'
+              element={<PaymentProcessed />}
               />
               </Routes>
             </div>
