@@ -16,7 +16,7 @@ const resolvers = {
       return User.find();
     },
     user: async (parent, { _id }) => {
-      return User.findOne({ _id });
+      return User.findById({ _id });
     },
     skills: async () => {
       return Skill.find();
@@ -67,15 +67,12 @@ const resolvers = {
       });
     },
     updateUser: async (parent, { userId, username, img, skills }) => {
-      return User.findOneAndUpdate({
-        _id: userId,
+      return User.findByIdAndUpdate(userId, {
         img,
         username,
         skills,
-      });
+    });
     },
-    // addUser: async (parent, { username, email, password }) => {
-    //   const user = await User.create({ username, email, password });
     addUser: async (parent, { username, email, password, skills }) => {
       const user = await User.create({ username, email, password, skills });
       const token = signToken(user);

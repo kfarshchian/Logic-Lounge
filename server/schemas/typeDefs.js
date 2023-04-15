@@ -6,14 +6,12 @@ const typeDefs = gql`
     chatroomName: String
     messages: [Message]!
   }
-
   type Message {
     _id: ID
     messageText: String
     createdAt: String
     messageAuthor: String
   }
-
   type User {
     _id: ID
     username: String
@@ -22,8 +20,6 @@ const typeDefs = gql`
     skills: [Skill]
     image: String
   }
-
-
   type Tutor {
     _id: ID
     tutorName: String
@@ -31,22 +27,19 @@ const typeDefs = gql`
     bio: String
     skills: [String]
   }
-
   type Skill {
     _id: ID
     skillName: String
     tutors: [String]
     users: [String]
   }
-
   type Auth {
     token: ID!
     user: User
   }
-
   type Query {
     users: [User]
-    user(_id: String!): User
+    user(_id: ID!): User
     skills: [Skill]
     skill(skillName: String!): Skill
     tutors: [Tutor]
@@ -54,7 +47,6 @@ const typeDefs = gql`
     chatrooms: [Chatroom]
     chatroom(chatroomName: String!): Chatroom
   }
-
   type Mutation {
     #Adds a message to the given chatroom, by the specified user
     addMessage(
@@ -83,15 +75,10 @@ const typeDefs = gql`
       skills: [String]!
     ): Auth
 
-    # # This is creating a new skill for the database
-    # addNewSkill(skillName: String!): Skill
-
-    # This is creating anew skill for database
-
-    updateUser(skills: String!, img: String!): User
     # This allows user to update their profile
+    updateUser(userId: ID! ,skills: [String]!, img: String): User
+    # This is creating anew skill for database
     addNewSkill(skillName: String!): Skill
-
     # This allows us to assign a skill from database to user
     addSkillToUser(userId: ID!, skillId: [ID]!): User
     # This will add an image to a user
@@ -102,7 +89,6 @@ const typeDefs = gql`
     removeSkill(skillId: ID!): Skill
     # This will allow a user to login
     login(username: String!, password: String!): Auth
-
   }
 `;
 
