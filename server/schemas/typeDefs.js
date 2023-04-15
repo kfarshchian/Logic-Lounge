@@ -39,7 +39,7 @@ const typeDefs = gql`
   }
   type Query {
     users: [User]
-    user(_id: String!): User
+    user(_id: ID!): User
     skills: [Skill]
     skill(skillName: String!): Skill
     tutors: [Tutor]
@@ -76,7 +76,7 @@ const typeDefs = gql`
     ): Auth
 
     # This allows user to update their profile
-    updateUser(skills: String!, img: String!): User
+    updateUser(userId: ID! ,skills: [String]!, img: String): User
     # This is creating anew skill for database
     addNewSkill(skillName: String!): Skill
     # This allows us to assign a skill from database to user
