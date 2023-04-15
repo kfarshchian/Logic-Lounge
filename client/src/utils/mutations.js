@@ -39,62 +39,11 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($username: String!, $skills: String!, $img: String!) {
-    addUser(username: $username, skills: $skills, img: $img) {
-      token
-      user {
-        _id
-        username
-        Skills
-        img
-      }
-      }
-  }
-`
-
-export const ADD_IMAGE = gql`
-  mutation addImage($userId: ID!, $image: String!) {
-    addImageToUser(userId: $userId, image: $image) {
+  mutation updateUser($userId: ID!, $skills: [String]!) {
+    updateUser(userId: $userId, skills: $skills) {
       username
-      image
-    }
-  }
-`;
-
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!, $thoughtAuthor: String!) {
-    addThought(thoughtText: $thoughtText, thoughtAuthor: $thoughtAuthor) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-      }
-    }
-  }
-`;
-
-export const ADD_COMMENT = gql`
-  mutation addComment(
-    $thoughtId: ID!
-    $commentText: String!
-    $commentAuthor: String!
-  ) {
-    addComment(
-      thoughtId: $thoughtId
-      commentText: $commentText
-      commentAuthor: $commentAuthor
-    ) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
+      skills {
+        skillName
       }
     }
   }
@@ -104,15 +53,7 @@ export const MATCH_TUTOR = gql`
   query getTutors {
     tutors {
       _id
-      thoughtText
-      thoughtAuthor
       createdAt
     }
   }
 `;
-
-// export const ADD_PHOTO = gql`
-//   query addPhoto {
-    
-//   }
-// `;

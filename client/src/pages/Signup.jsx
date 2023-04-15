@@ -17,6 +17,8 @@ import {
   ListItemText,
 } from '@mui/material';
 import Auth from '../utils/auth';
+// import { UserImage } from '../components/ImageUpload/UserImage';
+// import {UploadWidget} from '../components/ImageUpload/UploadWidget'
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -32,7 +34,6 @@ const Signup = () => {
   // Query skills from database
   const { data: skillData } = useQuery(QUERY_SKILLS);
 
-  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -84,28 +85,32 @@ const Signup = () => {
             </p>
           ) : (
             <FormControl
-              onSubmit={handleFormSubmit}
-              sx={{
-                border: 1,
-                borderColor: '#4F2683',
-                width: '20rem',
-                padding: 5,
-                borderRadius: 11,
-                boxShadow: '3',
-              }}
+            onSubmit={handleFormSubmit}
+            sx={{
+              border: 2,
+              borderColor: '#4F2683',
+              width: '20rem',
+              padding: 5,
+              borderRadius: 11,
+              boxShadow: '3',
+              margin: 5
+            }}
             >
-              <form>
+                {/* <UserImage/> */}
+                {/* <UploadWidget/> */}
+              <form style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                 <TextField
                   required
                   margin='normal'
                   variant='outlined'
-                  helperText='Please create a unique username'
                   label='Username'
                   name='username'
+                  fullWidth
                   onChange={handleChange}
                   value={formState.name}
                 />
                 <TextField
+                fullWidth
                   margin='normal'
                   variant='outlined'
                   required
@@ -117,6 +122,7 @@ const Signup = () => {
                 <TextField
                   margin='normal'
                   variant='outlined'
+                  fullWidth
                   required
                   label='Password'
                   name='password'
@@ -128,7 +134,7 @@ const Signup = () => {
                 <FormControl margin='normal'>
                   <InputLabel>Skills</InputLabel>
                   <Select
-                    sx={{ minWidth: '15rem', maxWidth: '20rem' }}
+                    sx={{ minWidth: '20rem', maxWidth: '20rem' }}
                     multiple
                     id='selection'
                     name='skills'

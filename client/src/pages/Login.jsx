@@ -61,16 +61,25 @@ const Login = (props) => {
             <FormControl
               onSubmit={handleFormSubmit}
               sx={{
-                border: 1,
+                border: 2,
                 borderColor: '#4F2683',
                 width: '20rem',
                 padding: 5,
                 borderRadius: 11,
                 boxShadow: '3',
+                margin: 5
               }}
             >
-              <form>
+              <form
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
                 <TextField
+                role='username-login'
                   margin='normal'
                   variant='outlined'
                   required
@@ -81,6 +90,7 @@ const Login = (props) => {
                   value={formState.username}
                 />
                 <TextField
+                role='password-login'
                   margin='normal'
                   variant='outlined'
                   required
@@ -91,8 +101,10 @@ const Login = (props) => {
                   value={formState.password}
                 />
                 <Button
+                  role='login-form-submit'
                   color='secondary'
-                  sx={{ cursor: 'pointer', color: '#4F2683' }}
+                  aria-label='button'
+                  sx={{ cursor: 'pointer', color: '#4F2683', marginTop:  1 }}
                   type='submit'
                   variant='outlined'
                 >
