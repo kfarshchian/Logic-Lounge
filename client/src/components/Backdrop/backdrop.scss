@@ -1,0 +1,15 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000be;
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  // justify-content: center;
+  // display: grid;
+  // grid-template-columns: 25%;
+  z-index: 1000000;
+}

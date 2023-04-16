@@ -4,9 +4,33 @@ import Auth from '../../utils/auth';
 import "./navbar.scss"
 import { Typography } from '@mui/material';
 import PageLink from '../PageLink/PageLink';
+import AppMenu from '../AppMenu';
+import UserMenuButton from '../UserMenuButton';
+import { motion } from 'framer-motion';
 
 const pageNames = ['Find a Match','Chatrooms']
 const pageLinks = ['/match','/chatrooms']
+
+const buttonVariants = {
+  initial: {
+    opacity: 0.8,
+    background: 'rgba(139, 139, 139, 0)',
+  },
+  hover: {
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+    },
+  },
+  tap: {
+    scale: 0.95,
+    opacity: 1,
+    background: 'rgba(139, 139, 139, 0.2)',
+    transition: {
+      duration: 0.1,
+    },
+  }
+}
 
 const Header = () => {
   const logout = (event) => {
@@ -17,9 +41,21 @@ const Header = () => {
     <>
       <div className='navbar'>
         {/* This is the logo section */}
-        <div className='logo'>
-          <Link to='/'>
-            {/**Logo goes here */}
+        <AppMenu pages={pageNames} pageLinks={pageLinks}/>
+        <div className='logo-container'>
+          <Link 
+            to='/'
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <img 
+              className='logo'
+              src='./logos/navbar-logo.png'
+              alt='Logic Lounge logo'
+            />
             <Typography 
               sx={{
                 fontFamily: 'Franklin Gothic Medium'    
@@ -55,9 +91,16 @@ const Header = () => {
         <div className='user-links'>
           {Auth.loggedIn() ? (
             <>
-              <button onClick={logout}>
+              <motion.button 
+                className='nav-logout'
+                variants={buttonVariants}
+                initial='initial'
+                whileHover='hover'
+                whileTap='tap'
+                onClick={logout}
+              >
                 Logout
-              </button>
+              </motion.button>
             </>
           ) : (
             <> 
@@ -66,9 +109,7 @@ const Header = () => {
             </>
           )}
         </div>
-        <div className='navbar app'>
-
-        </div>
+        <UserMenuButton logout={logout}/>
       </div>
     </>
   );

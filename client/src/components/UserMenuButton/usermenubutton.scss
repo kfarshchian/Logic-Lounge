@@ -1,0 +1,15 @@
+.user-menu-button{
+  display: none;
+  justify-content: flex-end;
+  align-items: center;
+  color: #4F2683;
+  // padding: 0 0 0 1rem;
+  margin: 0 0.5rem 0 0;
+  // background: red;
+}
+
+@media screen and (max-width: 750px) {
+  .user-menu-button{
+    display: flex;
+  }
+}
