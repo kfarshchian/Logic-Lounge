@@ -46,4 +46,4 @@ export const QUERY_IMAGE = gql `
   query getImage {
     image
   }
-`
+`;

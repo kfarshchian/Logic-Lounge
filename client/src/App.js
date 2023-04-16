@@ -20,6 +20,7 @@ import Checkout from './components/checkout/checkout.jsx';
 import PaymentProcessed from './components/PaymentProcessed/PaymentProcessed.jsx'
 
 
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
