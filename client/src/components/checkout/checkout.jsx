@@ -35,7 +35,7 @@ export default function Checkout() {
       display: 'block',
       width: 'fit-content'
     }}>
-      <h3>What day would you Like to get coffee?</h3>
+      <h3>What day would you like to learn?</h3>
       <TextField
         label="Choose Date"
         type="date"
@@ -65,8 +65,6 @@ export default function Checkout() {
       alt="The cover of Stubborn Attachments"
     />
     
-
-  
     <h3>Tutor Session</h3>
     <h5>$24.99</h5>
     
