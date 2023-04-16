@@ -53,6 +53,7 @@ function Home() {
       margin: '16px',
     },
     button: {
+      position: 'initial',
       margin: '8px',
       backgroundColor: '#ddcdc6 ',
       color: 'black',
@@ -211,7 +212,7 @@ function Home() {
                   color="primary"
                   sx={{
                     cursor: 'pointer',
-
+                    position: 'initial',
                     backgroundColor: '#ddcdc6',
                     fontFamily: 'EB Garamond',
                     fontweight: '800',

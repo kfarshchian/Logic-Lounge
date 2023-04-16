@@ -51,6 +51,7 @@ const MatchBox = styled(Box)(({ theme }) => ({
 }));
 
 const MatchImage = styled(Avatar)(({ theme }) => ({
+  position: 'initial',
   width: '80px',
   height: '80px',
   margin: theme.spacing(2),
@@ -153,6 +154,7 @@ function Profile() {
       marginBottom: '25px',
     },
     button: {
+      position: 'initial',
       margin: '8px',
       backgroundColor: '#4F2683 ',
     },
