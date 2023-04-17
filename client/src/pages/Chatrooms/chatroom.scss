@@ -27,25 +27,44 @@
   overflow-y: auto;
   overflow-x: hidden;
   // overflow: scroll;
-  height: 66vh;
+  height: 63vh;
   border-top: 1px solid #4F2683;
   border-left: 1px solid #4F2683;
   border-right: 1px solid #4F2683;
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
+.chat-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .title{
+  flex-grow: 10;
   padding: 0;
-  margin: 0;
+  margin: 0 1.9rem 0 0;
   text-align: center;
   font-size: 50px;
   // font-weight: bold;
   color: #4F2683;
-  font-family: "Franklin Gothic Medium"
+  font-family: "Franklin Gothic Medium";
 }
 
 @media screen and (max-height: 825px) {
   .title{
-    font-size: 45px;
+    font-size: 24px;
+  }
+  .message-container{
+    height: 67vh;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .title{
+    font-size: 24px;
+  }
+  .message-container{
+    height: 69vh;
   }
 }

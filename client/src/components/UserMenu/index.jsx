@@ -1,9 +1,9 @@
-import auth from '../../utils/auth'
-import { Backdrop } from '../Backdrop'
 import './usermenu.scss'
 import React from 'react'
 import { motion } from 'framer-motion';
 import AppNavItem from './../AppNavItem/index';
+import auth from '../../utils/auth'
+import { Backdrop } from '../Backdrop'
 
 function UserMenu({logout,handleClose, pages, pageLinks, children}) {
   const slideIn = {

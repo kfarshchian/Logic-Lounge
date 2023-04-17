@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 const app = express(); //creates an instance of an express server
 // import the socket.io server connection
 const connectSocketServer = require('./config/socket')
+require('dotenv').config()
 
 const apolloServer = new ApolloServer({
   typeDefs,
@@ -37,7 +38,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-//stripe start
+//stripe start 
 // This is your test secret API key.
 const stripe = require('stripe')('sk_test_51MvvjSH6SVkRFfSTatGzg2d2NKOeeYorl900gptT3ESf8I8lyQqhsnFFZ42VHO8DLr9eBCMVi8cvsZLFhFINUTxg00ISUVIrMX');
 app.use(express.static('public'));

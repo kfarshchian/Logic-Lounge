@@ -1,8 +1,8 @@
+import './usermenubutton.scss'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faUser} from '@fortawesome/free-solid-svg-icons'
 import { AnimatePresence } from 'framer-motion';
-import './usermenubutton.scss'
 import { useState } from 'react';
 import UserMenu from './../UserMenu/index';
 
