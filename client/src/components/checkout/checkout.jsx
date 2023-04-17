@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Stack, TextField} from "@mui/material";
 import TutorCard from "../TutorCard/TutorCard";
-import { left } from "@cloudinary/url-gen/qualifiers/textAlignment";
 
 
 export default function Checkout() {
