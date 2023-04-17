@@ -7,7 +7,6 @@ const messageSchema = new mongoose.Schema({
     minLength: 1,
     maxLength: 500,
     required: 'Message must have text!',
-    trim: true,
   },
   createAt: {
     type: Date,
