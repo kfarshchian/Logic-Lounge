@@ -54,13 +54,19 @@ N/A
 
 Add your screenshots here:
 
-![ALT TEXT](URL)
+![Screen Shot 2023-04-17 at 4 17 44 PM](https://user-images.githubusercontent.com/92850947/232623168-96507a18-5122-45e9-931b-bd3d14fda126.png)
+
+![Screen Shot 2023-04-17 at 4 18 12 PM](https://user-images.githubusercontent.com/92850947/232623208-ca5748e8-ac5f-4740-82ee-96e07696152a.png)
+
+![Screen Shot 2023-04-17 at 4 20 10 PM](https://user-images.githubusercontent.com/92850947/232623222-cd0d9815-39ce-496a-981a-816572971409.png)
+
+![Screen Shot 2023-04-17 at 4 18 28 PM](https://user-images.githubusercontent.com/92850947/232623237-a04936b7-afad-4d1c-b96c-cb47abef6ed0.png)
 
 ## **Links**
 
 Add any relevant links for this project below:
 
-[Your Website](URL)
+[Logic Lounge](https://logic-lounge-production.up.railway.app/)
 
 ## License
 
@@ -72,14 +78,8 @@ Detailed information about this license can be found here: [License Info](https:
 
 Any question about this project contact us here:
 
-- [Cornelius](https://github.com/ValentaCodes)
-- [Kameron](https://github.com/kfarshchian)
-- [Gustavo](https://github.com/0zrk23)
-- [Jeremiah](https://github.com/MiahHub)
-- [Anthony](https://github.com/Anthonyshakurangelos)
-
-- <ValentaCodes@gmail.com>
-- <kfarshchian@gmail.com>
-- <gus.carrillo1221@gmail.com>
-- <msgrmiah@gmail.com>
-- <anthonyshakurangelos@gmail.com>
+- [Cornelius](https://github.com/ValentaCodes) | <ValentaCodes@gmail.com>
+- [Kameron](https://github.com/kfarshchian) | <kfarshchian@gmail.com>
+- [Gustavo](https://github.com/0zrk23) | <gus.carrillo1221@gmail.com>
+- [Jeremiah](https://github.com/MiahHub) | <msgrmiah@gmail.com>
+- [Anthony](https://github.com/Anthonyshakurangelos) | <anthonyshakurangelos@gmail.com>
