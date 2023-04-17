@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Stack, TextField } from "@mui/material";
 import TutorCard from "../TutorCard/TutorCard";
 
+
 export default function Checkout() {
   const tutorInfo = [];
   tutorInfo.push(JSON.parse(localStorage.getItem("pickedTutor")));

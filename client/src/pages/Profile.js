@@ -22,13 +22,11 @@ import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 import { QUERY_SINGLE_USER } from "../utils/queries";
 import { UPDATE_USER } from '../utils/mutations';
-import { QUERY_USER } from '../utils/queries';
 import { QUERY_SKILLS } from '../utils/queries';
 import { MATCH_TUTOR } from "../utils/queries";
 
 
 
-// import Auth from "../utils/auth";
 
 const ProfileBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -64,10 +62,6 @@ function Profile() {
   const { loading, error,  data: tutorData } = useQuery(MATCH_TUTOR);
   console.log(tutorData);
   const { userId } = useParams();
-
-  const { data: userData } = useQuery(QUERY_USER, {
-    variables: { _id: userId },
-  });
 
   const { data: userName } = useQuery(QUERY_SINGLE_USER, {
     variables: { id: userId },
@@ -171,8 +165,6 @@ console.log(userName);
       <Grid container spacing={10} justifyContent='flex=end'>
         <Grid item xs={10} sm={4} md={3}>
           <ProfileBox>
-            {/* <ImageUpload/> */}
-            {/* Need to render profile img */}
             {user ? (
               <>
                 <Avatar style={styles.avatar} />
@@ -206,12 +198,6 @@ console.log(userName);
                   label=''
                   value={profilePicture.img}
                 />
-                {/* <TextField
-                  label="Skills"
-                  value={skills}
-                  onChange={(event) => setSkills(event.target.value)}
-                /> */}
-
                   <FormControl margin='normal'>
                     <form onSubmit={handleSave}>
                     <InputLabel>Skills</InputLabel>
@@ -247,7 +233,6 @@ console.log(userName);
             )}
           </ProfileBox>
         </Grid>
-        {/* {matches.length > 0 && ( */}
          <Grid  item xs={12} sm={6} md={4} lg={5 }>
             <Typography variant="h4" gutterBottom>
               Matches your skills
