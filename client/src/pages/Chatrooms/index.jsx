@@ -1,25 +1,13 @@
 import { useEffect, useState } from 'react'
-// import ChatroomNav from '../../components/ChatroomNav';
-import { Typography } from '@mui/material';
 import Message from '../../components/Message';
 import MessageForm from '../../components/MessageForm';
 import './chatroom.scss'
 import { useRef } from 'react';
-
-const style={
-  title: {
-    display: 'flex',
-    justifyContent: 'center',
-    color: '#4F2683',
-    fontFamily: "Franklin Gothic Medium",
-    fontWeight: 'normal',
-    fontSize: '40px'
-  }
-}
+import LoungeMenuBtn from '../../components/LoungeMenu/LoungeMenuBtn';
 
 function Chatrooms({socket}) {
   const [chatrooms,setChatrooms] = useState([]);  
-  const [selectedChat] = useState(null); //,setSelectedChat
+  const [selectedChat,setSelectedChat] = useState(null); //
   const [init, setInit] = useState(true);
   const messageContainerRef = useRef(null);
   //use effect fires on page open. Queries chatrooms
@@ -45,12 +33,12 @@ function Chatrooms({socket}) {
     setChatrooms(await JSON.parse(data));
   })
 
-  //Handler for selecting chatroom
-  // const selectChatroom  = (e) => {
-  //   const id = e.target.getAttribute('chat-id');
-  //   // setSelectedChat(chatrooms.find(chatroom => chatroom._id === id))
-  //   setSelectedChat(id);
-  // }
+  // Handler for selecting chatroom
+  const selectChatroom  = (e) => {
+    const id = e.target.getAttribute('chat-id');
+    // setSelectedChat(chatrooms.find(chatroom => chatroom._id === id))
+    setSelectedChat(id);
+  }
 
 
   return (
@@ -58,16 +46,16 @@ function Chatrooms({socket}) {
       {chatrooms[0] ? (
         <div className='chatroom'>
         {/* Side navebar for the chatrooms */}
-        {/* <ChatroomNav chatrooms={chatrooms} selectChatroom={selectChatroom} selectedChatroom={selectedChat}/> */}
+        
         {/* If a chat is selected, display the chatroom, otherwise display select chatroom */}
         {selectedChat ? (
           <div className='chat-container'>
-            <Typography
-              // variant='h4'
-              sx={style.title}
-            >
-              {chatrooms.find(chatroom => chatroom._id === selectedChat).chatroomName}
-            </Typography>
+            <div className='chat-header'>
+              <LoungeMenuBtn chatrooms={chatrooms} selectChatroom={selectChatroom} selectedChatroom={selectedChat}/>
+              <p className='title'>
+                {chatrooms.find(chatroom => chatroom._id === selectedChat).chatroomName}
+              </p>
+            </div>
             {/* Map through the chatrooms */}
             {/* <div> */}
             <div 
@@ -85,15 +73,12 @@ function Chatrooms({socket}) {
           </div>
         ) : (
           <div className='chat-container'>
-            {/* <Typography
-              // variant='h4'
-              sx={style.title}
-            >
-              {chatrooms.find(chatroom => chatroom.chatroomName === 'JavaScript').chatroomName}
-            </Typography> */}
-            <p className='title'>
-              {chatrooms.find(chatroom => chatroom.chatroomName === 'JavaScript').chatroomName}
-            </p>
+            <div className='chat-header'>
+              <LoungeMenuBtn chatrooms={chatrooms} selectChatroom={selectChatroom} selectedChatroom={selectedChat}/>
+              <p className='title'>
+                {chatrooms.find(chatroom => chatroom.chatroomName === 'JavaScript').chatroomName}
+              </p>
+            </div>
             {/* Map through the chatrooms */}
             {/* <div> */}
             <div 
