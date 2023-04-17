@@ -4,38 +4,35 @@ import {
   CardHeader,
   CardMedia,
   CardContent,
-  Button
+  Button,
 } from "@mui/material";
-import './style.scss';
+import "./style.scss";
 import { useNavigate } from "react-router-dom";
 
 const TutorCard = (props) => {
   const { tutorInfo, checkout } = props;
-  
 
-  let navigate = useNavigate(); 
-  const routeChange = () =>{ 
-    let path = `/checkout`; 
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/checkout`;
     navigate(path);
-  }
-console.log(tutorInfo);
+  };
+
   const handleClick = (event) => {
     event.preventDefault();
     const pickedTutor = event.target.value;
-    console.log(pickedTutor);
-    
-    localStorage.setItem("pickedTutor", pickedTutor)
 
-  routeChange()
-  }
+    localStorage.setItem("pickedTutor", pickedTutor);
+
+    routeChange();
+  };
 
   return (
-<div class={tutorInfo.length > 1? "scrolling-wrapper": ""}>
+    <div class={tutorInfo.length > 1 ? "scrolling-wrapper" : ""}>
       {/* <div class="scrolling-wrapper"> */}
       {tutorInfo?.map((product, index) => (
         <Card
-        
-        class="card"
+          class="card"
           title={product}
           key={index}
           sx={{
@@ -64,16 +61,16 @@ console.log(tutorInfo);
               width: "15vp",
               height: "15rem",
               justifyContent: "center",
-              objectFit: "scale-down"
+              objectFit: "scale-down",
             }}
             image={product.image}
             alt={`${product.tutorName}`}
           />
-          <CardContent >
-            <div class='aboutMe'>
+          <CardContent>
+            <div class="aboutMe">
               <h3>About me:</h3>
-              <p class='bioSection'>{product.bio}</p>
-              </div>
+              <p class="bioSection">{product.bio}</p>
+            </div>
             <h3>skills:</h3>
             <ul>
               {product.skills.map((skill, index) => (
@@ -82,19 +79,20 @@ console.log(tutorInfo);
             </ul>
           </CardContent>
           {!checkout && (
-          <Button
-          onClick={handleClick}
-          color='secondary'
-          sx={{ cursor: 'pointer', color: '#4F2683' }}
-          type=''
-          value={JSON.stringify(product)}
-          variant='outlined'
-          >Buy A Coffee</Button>
+            <Button
+              onClick={handleClick}
+              color="secondary"
+              sx={{ cursor: "pointer", color: "#4F2683" }}
+              type=""
+              value={JSON.stringify(product)}
+              variant="outlined"
+            >
+              Buy A Coffee
+            </Button>
           )}
         </Card>
       ))}
-      </div>
-
+    </div>
   );
 };
 
