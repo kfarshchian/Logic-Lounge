@@ -20,12 +20,13 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
-// import { QUERY_SINGLE_USER } from "../utils/queries";
+import { QUERY_SINGLE_USER } from "../utils/queries";
 import { UPDATE_USER } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
 import { QUERY_SKILLS } from '../utils/queries';
+import { MATCH_TUTOR } from "../utils/queries";
 
-// import { QUERY_SINGLE_USER } from "../utils/queries"
+
 
 // import Auth from "../utils/auth";
 
@@ -59,14 +60,19 @@ const MatchImage = styled(Avatar)(({ theme }) => ({
 
 function Profile() {
   // This will query the available skills from the database
-  const { loading, error, data: skillData } = useQuery(QUERY_SKILLS);
-
+  const { data: skillData } = useQuery(QUERY_SKILLS);
+  const { loading, error,  data: tutorData } = useQuery(MATCH_TUTOR);
+  console.log(tutorData);
   const { userId } = useParams();
 
   const { data: userData } = useQuery(QUERY_USER, {
     variables: { _id: userId },
   });
 
+  const { data: userName } = useQuery(QUERY_SINGLE_USER, {
+    variables: { id: userId },
+  });
+console.log(userName);
   // This will access the gql mutation by accessing the needed userId variable
   const [updateUser] = useMutation(UPDATE_USER, {
     variables: {userId}
@@ -119,7 +125,7 @@ function Profile() {
     },
   };
 
-  // const user = data?.user || data?.user || {};
+  const user = userName?.user || userName?.user || {};
 
   if (loading) {
     return <div>Loading...</div>;
@@ -167,11 +173,11 @@ function Profile() {
           <ProfileBox>
             {/* <ImageUpload/> */}
             {/* Need to render profile img */}
-            {userData ? (
+            {user ? (
               <>
                 <Avatar style={styles.avatar} />
                 <Typography variant='h6' style={styles.name}>
-                  {userData}
+                  {user.username}
                 </Typography>
                 <Typography variant='body1' style={styles.bio}>
                   {/* {userData.skills} */}
@@ -242,37 +248,59 @@ function Profile() {
           </ProfileBox>
         </Grid>
         {/* {matches.length > 0 && ( */}
-        <Grid item xs={12} sm={6} md={4}>
-          <Typography variant='h4' gutterBottom>
-            Matches
-          </Typography>
-          <Stack direction='column' justifyContent='center'>
-            {/* {matches.map(match => ( */}
-            <MatchBox>
-              <MatchImage />
-              <Typography variant='h6' gutterBottom>
-                Match Name
-              </Typography>
-              <Typography variant='body1'>Match Bio</Typography>
-            </MatchBox>
-            {/* <MatchBox>
-              <MatchImage />
-              <Typography variant="h6" gutterBottom>
-                Match Name
-              </Typography>
-              <Typography variant="body1">Match Bio</Typography>
-            </MatchBox>
-            <MatchBox>
-              <MatchImage />
-              <Typography variant="h6" gutterBottom>
-                Match Name
-              </Typography>
-              <Typography variant="body1">Match Bio</Typography>
-            </MatchBox> */}
-            {/* ))} */}
-          </Stack>
-        </Grid>
+         <Grid  item xs={12} sm={6} md={4} lg={5 }>
+            <Typography variant="h4" gutterBottom>
+              Matches your skills
+            </Typography>
+            <Stack direction="column" justifyContent="center">
+              <MatchBox>
+                <MatchImage src={tutorData.tutors[0].image}>
+                  </MatchImage>
+                <Typography variant="h6" gutterBottom>
+                  {tutorData.tutors[0].tutorName}
+                </Typography>
+                <Typography variant="body1">
+                  {tutorData.tutors[0].bio}
+                  </Typography>
+              </MatchBox>
+            </Stack>
+          </Grid>
+          <Grid  item xs={12} sm={6} md={4} lg={5 }>
+            <Typography variant="h4" gutterBottom>
+              Matches your skills
+            </Typography>
+            <Stack direction="column" justifyContent="center">
+              <MatchBox>
+                <MatchImage src={tutorData.tutors[1].image}>
+                  </MatchImage>
+                <Typography variant="h6" gutterBottom>
+                  {tutorData.tutors[1].tutorName}
+                </Typography>
+                <Typography variant="body1">
+                  {tutorData.tutors[1].bio}
+                  </Typography>
+              </MatchBox>
+            </Stack>
+          </Grid>
+          <Grid  item xs={12} sm={6} md={4} lg={5 }>
+            <Typography variant="h4" gutterBottom>
+              Matches your skills
+            </Typography>
+            <Stack direction="column" justifyContent="center">
+              <MatchBox>
+                <MatchImage src={tutorData.tutors[2].image}>
+                  </MatchImage>
+                <Typography variant="h6" gutterBottom>
+                  {tutorData.tutors[2].tutorName}
+                </Typography>
+                <Typography variant="body1">
+                  {tutorData.tutors[2].bio}
+                  </Typography>
+              </MatchBox>
+            </Stack>
+          </Grid>
       </Grid>
+      
     </div>
   );
 }

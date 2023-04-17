@@ -72,7 +72,7 @@ console.log(tutorInfo);
           <CardContent >
             <div class='aboutMe'>
               <h3>About me:</h3>
-              <p>{product.bio}</p>
+              <p class='bioSection'>{product.bio}</p>
               </div>
             <h3>skills:</h3>
             <ul>

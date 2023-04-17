@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Stack, TextField} from "@mui/material";
 import TutorCard from "../TutorCard/TutorCard";
+import { left } from "@cloudinary/url-gen/qualifiers/textAlignment";
 
 
 export default function Checkout() {
@@ -8,6 +9,7 @@ export default function Checkout() {
   const tutorInfo = [];
   tutorInfo.push(JSON.parse(localStorage.getItem("pickedTutor")))
 
+  
 
   const dateClick = e => {
     let theDate = e.target.value;
@@ -23,8 +25,10 @@ export default function Checkout() {
   return (
   
     <section>
-      <Stack direction={{ xs: 'column', sm: 'row' }}
-  spacing={{ xs: 1, sm: 2, md: 4 }}>
+      <Stack direction={{ xs: 'column', sm: 'row'}}
+  spacing={{ xs: 1, sm: 2, md: 4 }} 
+  
+  >
      
 
 
