@@ -6,17 +6,19 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import SingleThought from './pages/SingleThought';
 import Header from './components/Navbar';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import Match from './pages/match';
-import Chatrooms from './pages/Chatrooms/Chatrooms';
+import Chatrooms from './pages/Chatrooms/';
+import {io} from 'socket.io-client'
+import Checkout from './components/checkout/checkout.jsx';
+import PaymentProcessed from './components/PaymentProcessed/PaymentProcessed.jsx'
+
 
 
 // Construct our main GraphQL API endpoint
@@ -43,7 +45,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
+// create connection to the socket server that WON'T try to connect more than once
+const socket = io();
+
 function App() {
+
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -63,12 +70,8 @@ function App() {
                 path="/signup" 
                 element={<Signup />} 
               />
-              <Route 
-                path="/thoughts/:thoughtId" 
-                element={<SingleThought />} 
-              />
               <Route
-                path='/profile'
+                path='/users/:userId'
                 element={<Profile />}
               />  
               <Route
@@ -77,7 +80,16 @@ function App() {
               />
               <Route
                 path='/chatrooms'
-                element={<Chatrooms />}
+                element={<Chatrooms socket={socket}/>}
+              />
+              <Route
+                className="link"
+                path='/checkout'
+                element={<Checkout />}
+              />
+              <Route
+              path='/paymentprocessed'
+              element={<PaymentProcessed />}
               />
               </Routes>
             </div>

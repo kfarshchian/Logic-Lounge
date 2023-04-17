@@ -1,260 +1,220 @@
-import React from "react";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
-
-// import Card from "@mui/material/Card";
-// import CardContent from "@mui/material/CardContent";
-// import Auth from '../../utils/auth';
+import React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import {
+  FormControl,
+  OutlinedInput,
+  Checkbox,
+  InputLabel,
+  Select,
+  ListItemText,
+  MenuItem,
+  Container
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { useState } from 'react';
+import { QUERY_SINGLE_USER } from '../utils/queries';
+import { UPDATE_USER } from '../utils/mutations';
+import { QUERY_SKILLS } from '../utils/queries';
+import { MATCH_TUTOR } from '../utils/queries';
+import TutorCard from '../components/TutorCard/TutorCard'
+import '../components/TutorCard/style.scss'
 
 const ProfileBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  flexDirection: "column",
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection: 'column',
   padding: theme.spacing(2),
 }));
 
-const MatchBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  flexDirection: "column",
-  justifyContent: "center",
-  height: "200px",
-  borderRadius: "20px",
-  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-  margin: theme.spacing(1),
-  backgroundColor: "#4F2683 ",
-}));
-
-const MatchImage = styled(Avatar)(({ theme }) => ({
-  width: "96px",
-  height: "96px",
-  margin: theme.spacing(2),
-}));
-
 function Profile() {
+  // This will query the available skills from the database
+  const { data: skillData } = useQuery(QUERY_SKILLS);
+  const { loading, error, data: tutorData } = useQuery(MATCH_TUTOR);
+  console.log(tutorData);
+  
+  const { userId } = useParams();
+  
+  const { data: userName } = useQuery(QUERY_SINGLE_USER, {
+    variables: { id: userId },
+  });
+  console.log(userName);
+  // This will access the gql mutation by accessing the needed userId variable
+  const [updateUser] = useMutation(UPDATE_USER, {
+    variables: { userId },
+  });
 
-    
+  // const [profilePicture, setProfilePicture] = useState({
+  //   img: '',
+  // });
+
+  const [editing, setEditing] = useState(false);
+
+  const handleEdit = () => {
+    setEditing(true);
+  };
+
+  const [formState, setFormState] = useState({
+    skills: [],
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const handleSave = async (event) => {
+    // save profile changes to database
+    event.preventDefault();
+    try {
+      const { data } = await updateUser({
+        variables: { ...formState },
+      });
+      console.log(data, 'err');
+    } catch (err) {
+      console.error(err);
+    }
+    setEditing(false);
+  };
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  const user = userName?.user || userName?.user || {};
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    console.error(error);
+    return <div>Error loading user data.</div>;
+  }
+
   const styles = {
     root: {
+      // backgroundColor: '#DDCDC6',
       flexGrow: 1,
-      paddingTop: "18px",
-      paddingBottom: "18px",
+      paddingTop: '18px',
+      paddingBottom: '18px',
     },
     avatar: {
-      width: "144px",
-      height: "144px",
-      margin: "16px",
+      width: '144px',
+      height: '144px',
+      margin: '16px',
+      border: '5px solid white',
     },
     name: {
-      fontWeight: "bold",
-      marginBottom: "25px",
+      fontWeight: 'bold',
+      marginBottom: '25px',
     },
     bio: {
-      marginBottom: "25px",
+      marginBottom: '25px',
     },
     interest: {
-      marginBottom: "25px",
+      marginBottom: '25px',
     },
     button: {
-      margin: "8px",
-      backgroundColor: '#4F2683 '
+      position: 'initial',
+      margin: '8px',
+      backgroundColor: '#4F2683 ',
     },
   };
 
   return (
     <div style={styles.root}>
-      <Grid container spacing={10} justifyContent="flex=end">
-        <Grid item xs={10} sm={4} md={3}>
-          <ProfileBox>
-            <Avatar style={styles.avatar} />
-            <Typography variant="h6" style={styles.name}>
-              Full Name
-            </Typography>
-            <Typography variant="body1" style={styles.bio}>
-              Bio
-            </Typography>
-            <Typography variant="body1" style={styles.interest}>
-              Interest
-            </Typography>
-            <Button variant="contained" color="primary" style={styles.button}>
+      <Stack
+        direction={{ sm: 'column', md: 'row' }}
+        spacing={{ xs: 1, sm: 2, md: 3 }}
+        alignItems={'center'}
+      >
+        <ProfileBox sx={{ maxWidth: '20rem' }} alignItems={'center'}>
+          {user ? (
+            <>
+              <Avatar style={styles.avatar} sx={{ position: 'initial' }} />
+              <Typography variant='h6' style={styles.name}>
+                {user.username}
+              </Typography>
+              <Typography variant='body1' style={styles.bio}>
+                {/* {userData.skills} */}
+              </Typography>
+            </>
+          ) : (
+            'hit'
+          )}
+          {!editing ? (
+            <Button
+              variant='contained'
+              color='primary'
+              style={styles.button}
+              onClick={handleEdit}
+            >
               Edit Profile
             </Button>
-          </ProfileBox>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4}>
-          <Typography variant="h4" gutterBottom>
-            Matches
-          </Typography>
-          <Stack direction="column" justifyContent="center">
-            <MatchBox>
-              <MatchImage />
-              <Typography variant="h6" gutterBottom>
-                Match Name
-              </Typography>
-              <Typography variant="body1">Match Bio</Typography>
-            </MatchBox>
-            <MatchBox>
-              <MatchImage />
-              <Typography variant="h6" gutterBottom>
-                Match Name
-              </Typography>
-              <Typography variant="body1">Match Bio</Typography>
-            </MatchBox>
-            <MatchBox>
-              <MatchImage />
-              <Typography variant="h6" gutterBottom>
-                Match Name
-              </Typography>
-              <Typography variant="body1">Match Bio</Typography>
-            </MatchBox>
-          </Stack>
-        </Grid>
-      </Grid>
+          ) : (
+            <>
+              <FormControl margin='normal'>
+                <form onSubmit={handleSave}>
+                  <InputLabel>Skills</InputLabel>
+                  <Select
+                    sx={{ minWidth: '12rem', maxWidth: '12rem' }}
+                    multiple
+                    id='selection'
+                    name='skills'
+                    value={formState.skills}
+                    onChange={handleChange}
+                    input={<OutlinedInput label='Skill' />}
+                    renderValue={(selected) => selected.join(',')}
+                    MenuProps={MenuProps}
+                  >
+                    {/* This will render skills dynamically from database */}
+                    {skillData
+                      ? skillData.skills.map((skill) => (
+                          <MenuItem key={skill._id} value={skill.skillName}>
+                            <Checkbox
+                              checked={
+                                formState.skills.indexOf(skill.skillName) > -1
+                              }
+                            />
+                            <ListItemText primary={skill.skillName} />
+                          </MenuItem>
+                        ))
+                      : 'No skills available at this time...'}
+                  </Select>
+                  <Button type='submit'>Save Profile</Button>
+                </form>
+              </FormControl>
+            </>
+          )}
+        </ProfileBox>
+          <Container sx={{ alignItems: 'center' }}>
+            {tutorData === undefined && (
+              <div>No available tutors</div>
+            )}
+            <Stack>
+              {/* if tutorInfo is undefined sets as empty array */}
+              <TutorCard tutorInfo={tutorData.tutors ?? []} checkout={false} />
+            </Stack>
+          </Container>
+      </Stack>
     </div>
-
-    // const styles = {
-    //     root: {
-    //       flexGrow: 1,
-    //     },
-    //     avatar: {
-    //       width: "144px",
-    //       height: "144px",
-    //       margin: "16px",
-    //     },
-    //     name: {
-    //       fontWeight: "bold",
-    //       marginBottom: "16px",
-    //     },
-    //     bio: {
-    //       marginBottom: "16px",
-    //     },
-    //     button: {
-    //       margin: "8px",
-    //     },
-    //     matchContainer: {
-    //       display: "flex",
-    //       flexDirection: "column",
-    //       alignItems: "center",
-    //       marginBottom: "16px",
-    //     },
-    //     matchBarContainer: {
-    //       display: "flex",
-    //       alignItems: "center",
-    //       justifyContent: "space-between",
-    //       width: "100%",
-    //       height: "48px",
-    //       backgroundColor: "#eee",
-    //       borderRadius: "24px",
-    //       padding: "0 16px",
-    //       marginBottom: "8px",
-    //     },
-    //     matchBarFill: {
-    //       height: "100%",
-    //       borderRadius: "24px",
-    //       backgroundColor: "#3f51b5",
-    //       transition: "width 0.5s",
-    //     },
-    //     matchBarLabel: {
-    //       fontWeight: "bold",
-    //       color: "#333",
-    //     },
-    //   };
-
-    //   const matches = [
-    //     { name: "Match 1", value: 0.8 },
-    //     { name: "Match 2", value: 0.6 },
-    //     { name: "Match 3", value: 0.4 },
-    //     { name: "Match 4", value: 0.2 },
-    //     { name: "Match 5", value: 0.1 },
-    //   ];
-
-    //   return (
-    //     <div style={styles.root}>
-    //       <Grid container spacing={3}>
-    //         <Grid item xs={12} sm={4} md={3}>
-    //           <Avatar style={styles.avatar} />
-    //           <Typography variant="h6" style={styles.name}>
-    //             Full Name
-    //           </Typography>
-    //           <Typography variant="body1" style={styles.bio}>
-    //             Bio
-    //           </Typography>
-    //         </Grid>
-    //         <Grid item xs={12} sm={8} md={9}>
-    //           Interest
-    //         </Grid>
-    //         <Grid item xs={12} sm={6} md={4}>
-    //           <Box style={styles.matchContainer}>
-    //             {matches.map((match) => (
-    //               <div key={match.name} style={styles.matchBarContainer}>
-    //                 <div
-    //                   style={{
-    //                     ...styles.matchBarFill,
-    //                     width: `${match.value * 100}%`,
-    //                   }}
-    //                 />
-    //                 <Typography variant="body1" style={styles.matchBarLabel}>
-    //                   {match.name}
-    //                 </Typography>
-    //               </div>
-    //             ))}
-    //           </Box>
-    //         </Grid>
-    //         <Grid item xs={12} sm={6} md={8}>
-    //           About Me
-    //         </Grid>
-    //         <Grid item xs={12}>
-    //           <Button variant="contained" color="primary" style={styles.button}>
-    //             Edit Profile
-    //           </Button>
-    //         </Grid>
-    //       </Grid>
-    //     </div>
-    //   const styles = {
-    //     root: {
-    //       flexGrow: 1,
-    //     },
-    //     avatar: {
-    //       width: "144px",
-    //       height: "144px",
-    //       margin: "16px",
-    //     },
-    //     name: {
-    //       fontWeight: "bold",
-    //       marginBottom: "16px",
-    //     },
-    //     bio: {
-    //       marginBottom: "16px",
-    //     },
-    //     button: {
-    //       margin: "8px",
-    //     },
-    //   };
-    //   return (
-    //     <div style={styles.root}>
-    //       <Grid container spacing={3}>
-    //         <Grid item xs={12} sm={4} md={3}>
-    //           <Avatar style={styles.avatar} />
-    //           <Typography variant="h6" style={styles.name}>
-    //             Full Name
-    //           </Typography>
-    //           <Typography variant="body1" style={styles.bio}>
-    //             Bio
-    //           </Typography>
-    //         </Grid>
-    //         <Grid item xs={12} sm={8} md={9}>
-    //           Interest
-    //         </Grid>
-    //           <Button variant="contained" color="primary" style={styles.button}>
-    //             Edit Profile
-    //           </Button>
-    //       </Grid>
-    //     </div>
   );
 }
 

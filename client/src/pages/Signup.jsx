@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
+import { QUERY_SKILLS } from '../utils/queries';
 import {
   Button,
   TextField,
@@ -16,14 +17,22 @@ import {
   ListItemText,
 } from '@mui/material';
 import Auth from '../utils/auth';
+// import { UserImage } from '../components/ImageUpload/UserImage';
+// import {UploadWidget} from '../components/ImageUpload/UploadWidget'
 
 const Signup = () => {
   const [formState, setFormState] = useState({
     username: '',
     email: '',
     password: '',
+    skills: [],
   });
+
+  // Add a user to database
   const [addUser, { error, data }] = useMutation(ADD_USER);
+
+  // Query skills from database
+  const { data: skillData } = useQuery(QUERY_SKILLS);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,26 +44,14 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
-
     try {
       const { data } = await addUser({
         variables: { ...formState },
       });
-
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
-  };
-
-  // This allows us to list each in out selection
-  const [skill, setSkill] = useState([]);
-  const skillChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setSkill(typeof value === 'string' ? value.split(',') : value);
   };
 
   // This controls how the skills look when the popup menu renders
@@ -68,20 +65,6 @@ const Signup = () => {
       },
     },
   };
-
-  const skills = [
-    'JavaScript',
-    'HTML',
-    'CSS',
-    'React',
-    'Linux',
-    'LinkedIn',
-    'Python',
-    'MySQL',
-    'MongoDB',
-    'GoLang',
-    'Algorithms & Data Structures',
-  ];
 
   return (
     <>
@@ -102,28 +85,32 @@ const Signup = () => {
             </p>
           ) : (
             <FormControl
-              onSubmit={handleFormSubmit}
-              sx={{
-                border: 1,
-                borderColor: '#4F2683',
-                width: '20rem',
-                padding: 5,
-                borderRadius: 11,
-                boxShadow: '3',
-              }}
+            onSubmit={handleFormSubmit}
+            sx={{
+              border: 2,
+              borderColor: '#4F2683',
+              width: '20rem',
+              padding: 5,
+              borderRadius: 11,
+              boxShadow: '3',
+              margin: 5
+            }}
             >
-              <form>
+                {/* <UserImage/> */}
+                {/* <UploadWidget/> */}
+              <form style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                 <TextField
                   required
                   margin='normal'
                   variant='outlined'
-                  helperText='Please create a unique username'
                   label='Username'
                   name='username'
+                  fullWidth
                   onChange={handleChange}
                   value={formState.name}
                 />
                 <TextField
+                fullWidth
                   margin='normal'
                   variant='outlined'
                   required
@@ -135,6 +122,7 @@ const Signup = () => {
                 <TextField
                   margin='normal'
                   variant='outlined'
+                  fullWidth
                   required
                   label='Password'
                   name='password'
@@ -146,24 +134,31 @@ const Signup = () => {
                 <FormControl margin='normal'>
                   <InputLabel>Skills</InputLabel>
                   <Select
-                    sx={{ minWidth: '15rem', maxWidth: '20rem' }}
+                    sx={{ minWidth: '20rem', maxWidth: '20rem' }}
                     multiple
                     id='selection'
-                    value={skill}
-                    onChange={skillChange}
+                    name='skills'
+                    value={formState.skills}
+                    onChange={handleChange}
                     input={<OutlinedInput label='Skill' />}
                     renderValue={(selected) => selected.join(',')}
                     MenuProps={MenuProps}
                   >
-                    {skills.map((newSkill) => (
-                      <MenuItem key={newSkill} value={newSkill}>
-                        <Checkbox checked={skill.indexOf(newSkill) > -1} />
-                        <ListItemText primary={newSkill} />
-                      </MenuItem>
-                    ))}
+                    {/* This will render skills dynamically from database */}
+                    {skillData
+                      ? skillData.skills.map((skill) => (
+                          <MenuItem key={skill._id} value={skill.skillName}>
+                            <Checkbox
+                              checked={
+                                formState.skills.indexOf(skill.skillName) > -1
+                              }
+                            />
+                            <ListItemText primary={skill.skillName} />
+                          </MenuItem>
+                        ))
+                      : 'No skills available at this time...'}
                   </Select>
                 </FormControl>
-                {/* NOTE: wtf is formik validation */}
                 <Button
                   color='secondary'
                   sx={{ cursor: 'pointer', color: '#4F2683' }}

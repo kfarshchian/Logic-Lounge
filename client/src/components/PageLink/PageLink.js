@@ -7,16 +7,19 @@ import {motion} from 'framer-motion'
 //These are the framer-motion variants for the link
 const linkVariants = {
     initial: {
-  
+      opacity: 0.8,
+      background: 'rgba(139, 139, 139, 0)',
     },
     hover: {
-      scale: 1.1,
+      opacity: 1,
       transition: {
         duration: 0.1,
       },
     },
     tap: {
-      scale: 0.9,
+      scale: 0.95,
+      opacity: 1,
+      background: 'rgba(139, 139, 139, 0.2)',
       transition: {
         duration: 0.1,
       },

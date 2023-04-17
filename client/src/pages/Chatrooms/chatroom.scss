@@ -1,0 +1,51 @@
+@import '../../theme.scss';
+
+
+
+.chatroom{
+  display: grid;
+  grid-template-columns: auto;
+  p{
+    // margin: initial;
+    height: initial;
+    width: initial;
+  }
+  
+  // button{
+  // width: 50%;
+  //   position: relative;
+  //   margin: 0 10% 0 10%;
+  // }
+}
+
+.chat-container{
+  // border: 1px solid black;
+  // height: 89vh
+}
+
+.message-container{
+  overflow-y: auto;
+  overflow-x: hidden;
+  // overflow: scroll;
+  height: 66vh;
+  border-top: 1px solid #4F2683;
+  border-left: 1px solid #4F2683;
+  border-right: 1px solid #4F2683;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.title{
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 50px;
+  // font-weight: bold;
+  color: #4F2683;
+  font-family: "Franklin Gothic Medium"
+}
+
+@media screen and (max-height: 825px) {
+  .title{
+    font-size: 45px;
+  }
+}

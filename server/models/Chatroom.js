@@ -1,37 +1,18 @@
-const {Schema, model} = require('mongoose');
-const dateFormate = require('../utils/dateFormat');
+const mongoose = require('mongoose')
+const messageSchema = require('./Message');
 
-const messageSchema = new Schema({
-  messageText: {
+const chatroomSchema = new mongoose.Schema({
+  chatroomName:{
     type: String,
-    required: 'Message must have text!',
-    minLength: 1,
-    maxlength: 280,
-    string: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormate(timestamp),
-  },
-  messageAuthor: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: 'Message must have author!',
-  }
-})
-
-const chatroomSchema = new Schema({
-  chatroomName: {
-    type: String,
-    required: 'Chatroom must have a name!',
+    required: 'You need to leave a thought!',
     minlength: 1,
     maxlength: 50,
     trim: true,
+    unique: true,
   },
   messages: [messageSchema]
 })
 
-const Chatroom = model('Chatroom', chatroomSchema);
+const Chatroom = mongoose.model('Chatroom',chatroomSchema);
 
-module.exports = Chatroom
+module.exports = Chatroom;
