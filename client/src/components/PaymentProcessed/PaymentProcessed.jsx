@@ -25,7 +25,7 @@ const PaymentProcessed = () => {
       alignItems: "center",
     }}>
     <Stack sx={{
-      width: "30rem",
+      width: "30vp",
       height: "auto",
       padding: 1,
       margin: 1,
