@@ -1,7 +1,6 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -26,15 +25,22 @@ const BlockOneBox = styled(Box)(({ theme }) => ({
 const BlockTitleBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  flexDirection: 'row',
+  flexDirection: 'column',
   justifyContent: 'center',
   height: '50px',
   backgroundColor: '#ddcdc6 ',
 }));
 
+const BlockTwoBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  height: '300px',
+  backgroundColor: '#ddcdc6 ',
+}));
+
 function Home() {
-
-
   const styles = {
     root: {
       flexGrow: 1,
@@ -54,168 +60,133 @@ function Home() {
     },
   };
 
-
   return (
     <>
-      <Box
-        sx={{
-          backgroundColor: '#4F2683',
-          border: 'none',
-          borderRadius: 'none',
-          boxShadow: 'none',
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignContent: 'center',
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-          display: 'flex',
-          maxWidth: '1500px',
-          margin: 'auto',
-        }}>
-        <CardContent>
+      <div style={styles.root}>
+        {/*top section*/}
+        <Grid item xs={12} sm={6} md={4}>
           <Stack direction="column" justifyContent="center">
-            <BlockOneBox style={{ boxShadow: 'none' }}>
-              <img src={Logo} width="175rem" alt="Logic Lounge Logo" />
-            </BlockOneBox>
-          </Stack>
-          <Typography
-            variant="h3"
-            sx={{
-              color: '#ddcdc6',
+            <BlockOneBox>
+              <img src={Logo} width="100rem" alt="Logic Lounge Logo" />
+              <Typography
+                variant="h3"
+                sx={{
+                  color: '#ddcdc6',
 
-              textAlign: 'left',
-              fontFamily: 'EB Garamond',
-              fontWeight: '500',
-            }}>
-            Logic Lounge
-          </Typography>
-        </CardContent>
-      </Box>
-
-      {/*middle section*/}
-      <Grid item xs={12} sm={6} md={4}>
-        <BlockTitleBox>
-          <Typography
-            variant="h5"
-            margin="15px"
-            marginBottom={'10px'}
-            sx={{
-              fontSize: {
-                lg: 32,
-                md: 20,
-                sm: 14,
-                xs: 10,
-                color: '#000000',
-                textAlign: 'center',
-                fontFamily: 'EB Garamond',
-                fontWeight: '600',
-              },
-              wordWrap: 'beak-word',
-              width: '75rem',
-            }}>
-            Pair your learning needs with one of our tutors...
-          </Typography>
-        </BlockTitleBox>
-      </Grid>
-      {/*cards with student and instructors*/}
-      <Grid
-        container
-        direction={{ xs: 'column', md: 'row' }}
-        sx={{ backgroundColor: '#ddcdc6' }}>
-        <Box
-          sx={{
-            backgroundColor: '#ddcdc6',
-            border: 'none',
-            borderRadius: 'none',
-            boxShadow: 'none',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            flexWrap: 'wrap',
-            display: 'flex',
-            maxWidth: '1500px',
-            margin: 'auto',
-          }}>
-          <img
-            src={StudentOutlined}
-            height="275rem"
-            alt="Student Outlined"
-            alignItems="center"
-          />
-          <CardContent>
-            <Typography
-              variant="h5"
-              component="div"
-              sx={{
-                color: '#00000',
-                textAlign: 'center',
-                fontFamily: 'EB Garamond',
-                fontWeight: '600',
-              }}>
-              Tom
-            </Typography>
-            <Typography
-              variant="body2"
-              margin="25px"
-              sx={{
-                fontSize: {
-                  lg: 18,
-                  md: 14,
-                  sm: 12,
-                  xs: 10,
-                  color: '#000000',
-                  textAlign: 'center',
+                  textAlign: 'left',
                   fontFamily: 'EB Garamond',
                   fontWeight: '500',
-                },
-                wordWrap: 'beak-word',
-                width: '15rem',
-              }}>
-              Wants to learn more about AWS Lambda and S3
-            </Typography>
-          </CardContent>
-        </Box>
-
-
-        <Box
-          sx={{
-            backgroundColor: '#ddcdc6',
-            border: 'none',
-            borderRadius: 'none',
-            boxShadow: 'none',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            flexWrap: 'wrap',
-            display: 'flex',
-            maxWidth: '1500px',
-            margin: 'auto',
-          }}>
-          <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              sx={{
-                color: '#00000',
-                textAlign: 'center',
-                fontFamily: 'EB Garamond',
-                fontWeight: '600',
-              }}>
-              Michelle
-            </Typography>
-            <Typography
-              variant="body2"
-              margin="25px"
-              sx={{
-                fontSize: {
-                  lg: 18,
-                  md: 14,
-                  sm: 12,
-                  xs: 10,
+                }}>
+                Logic Lounge
+              </Typography>
+            </BlockOneBox>
+          </Stack>
+        </Grid>
+      </div>
+      <div style={styles.root}>
+        {/*middle section*/}
+        <Grid item xs={12} sm={6} md={4}>
+          <Stack direction="column" justifyContent="center">
+            <BlockTitleBox>
+              <Typography
+                variant="h5"
+                margin="15px"
+                sx={{
                   color: '#000000',
-                  textAlign: 'center',
 
+                  textAlign: 'left',
+                  fontFamily: 'EB Garamond',
+                  fontWeight: '500',
+                }}>
+                Pair your learning needs with one of our tutors...
+              </Typography>
+            </BlockTitleBox>
+          </Stack>
+        </Grid>
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+          <BlockTwoBox>
+            <Stack direction="column" justifyContent="center">
+              <BlockTwoBox>
+                <img
+                  src={StudentOutlined}
+                  height="200rem"
+                  alt="Student Outlined"
+                />
+                <Typography
+                  variant="h4"
+                  sx={{
+                    color: '#000000',
+
+                    textAlign: 'left',
+                    fontFamily: 'EB Garamond',
+                    fontweight: 'bold',
+                  }}>
+                  Tom
+                </Typography>
+                <Typography
+                  variant="h8"
+                  sx={{
+                    color: '#000000',
+
+                    textAlign: 'left',
+                    fontFamily: 'EB Garamond',
+                    fontweight: 'bold',
+                    padding: '10px',
+                  }}>
+                  Wants to learn more about AWS Lambda and S3
+                </Typography>
+              </BlockTwoBox>
+            </Stack>
+          </BlockTwoBox>
+          <BlockTwoBox>
+            <Stack direction="column" justifyContent="center">
+              <BlockTwoBox>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    color: '#000000',
+
+                    textAlign: 'left',
+                    fontFamily: 'EB Garamond',
+                    fontweight: 'bold',
+                  }}>
+                  Michelle
+                </Typography>
+                <Typography
+                  variant="h8"
+                  sx={{
+                    color: '#000000',
+
+                    textAlign: 'left',
+                    fontFamily: 'EB Garamond',
+                    fontweight: '600',
+                    padding: '10px',
+                  }}>
+                  Industry expert and AWS Certified Professional
+                </Typography>
+                <img
+                  src={FeaturedInstructor}
+                  height="200rem"
+                  alt="Featured Instructor"
+                />
+              </BlockTwoBox>
+            </Stack>
+          </BlockTwoBox>
+          <BlockTwoBox>
+            <Stack
+              direction="row"
+              justifyContent="center"
+              justifyItems="center">
+              <BlockTwoBox>
+                <img
+                  src={InstructorFilmstrip}
+                  height="400rem"
+                  alt="Instructor Filmstrip"
+                />
+              </BlockTwoBox>
+            </Stack>
+          </BlockTwoBox>
+        </Box>
         <Grid
           container
           Spacing={0}
@@ -257,114 +228,15 @@ function Home() {
                   color: '#ffffff',
                   variant: 'h8',
                   textAlign: 'left',
-
                   fontFamily: 'EB Garamond',
-                  fontWeight: '500',
-                },
-                wordWrap: 'beak-word',
-                width: '15rem',
-              }}>
-              Indutry expert and AWS Certified Professional
-            </Typography>
-          </CardContent>
-          <img
-            src={FeaturedInstructor}
-            height="275rem"
-            alt="Featured Intructor"
-            alignItems="center"
-          />
-        </Box>
-        <Box
-          sx={{
-            backgroundColor: '#ddcdc6',
-            border: 'none',
-            borderRadius: 'none',
-            boxShadow: 'none',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            flexWrap: 'wrap',
-            display: 'flex',
-            maxWidth: '1500px',
-            margin: 'auto',
-          }}>
-          <CardContent>
-            <img
-              src={InstructorFilmstrip}
-              height="500rem"
-              alt="Instructor Filmstrip"
-            />
-          </CardContent>
-        </Box>
-      </Grid>
-
-      <Box
-        sx={{
-          backgroundColor: '#4F2683',
-          border: 'none',
-          borderRadius: 'none',
-          boxShadow: 'none',
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignContent: 'center',
-          flexDirection: 'column',
-          flexWrap: 'wrap',
-          display: 'flex',
-          maxWidth: '1500px',
-          margin: 'auto',
-        }}>
-        <CardContent>
-          <Typography
-            variant="h5"
-            component="div"
-            sx={{
-              color: '#ffffff',
-              textAlign: 'center',
-              fontFamily: 'EB Garamond',
-              fontWeight: '600',
-            }}>
-            Just sign-up, search and match!
-          </Typography>
-
-          <Link to="/signup">
-            <Button
-              style={{
-                margin: 'auto',
-                marginTop: '15px',
-                display: 'flex',
-                color: '#000000',
-                cursor: 'pointer',
-                backgroundColor: '#ddcdc6',
-                fontFamily: 'EB Garamond',
-                fontweight: '800',
-                alignContent: 'center',
-              }}
-              type="submit">
-              {' '}
-              Sign-up
-            </Button>
-          </Link>
-          <Typography
-            variant="body2"
-            margin="25px"
-            sx={{
-              fontSize: {
-                lg: 18,
-                md: 14,
-                sm: 12,
-                xs: 10,
-                color: '#ffffff',
-                textAlign: 'center',
-                fontFamily: 'EB Garamond',
-                fontWeight: '500',
-              },
-              wordWrap: 'beak-word',
-              width: '20rem',
-            }}>
-            Copyright 2023, Logic Lounge, LLC
-          </Typography>
-        </CardContent>
-      </Box>
+                  fontweight: 'bold',
+                }}>
+                Copyright 2023, Logic Lounge, LLC.
+              </Typography>
+            </BlockOneBox>
+          </Stack>
+        </Grid>
+      </div>
     </>
   );
 }
