@@ -12,13 +12,12 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_SINGLE_USER = gql`
-  query singleProfile($_id: String!) {
-    user(_id: $_id) {
-      _id
-      username
-      email
-    }
+   query Query($id: ID!) {
+  user(_id: $id) {
+    _id
+    username
   }
+}
 `;
 
 export const MATCH_TUTOR = gql`
