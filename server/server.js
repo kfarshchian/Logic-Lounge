@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
 
 //stripe start 
 // This is your test secret API key.
-const stripe = require('stripe')(process.env.REACT_APP_STRIPE);
+const stripe = require('stripe')('sk_test_51MvvjSH6SVkRFfSTatGzg2d2NKOeeYorl900gptT3ESf8I8lyQqhsnFFZ42VHO8DLr9eBCMVi8cvsZLFhFINUTxg00ISUVIrMX');
 app.use(express.static('public'));
 
 // this is for live site 
