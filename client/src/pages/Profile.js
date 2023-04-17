@@ -12,6 +12,7 @@ import {
   Select,
   ListItemText,
   MenuItem,
+  Container
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useParams } from 'react-router-dom';
@@ -22,6 +23,8 @@ import { QUERY_SINGLE_USER } from '../utils/queries';
 import { UPDATE_USER } from '../utils/mutations';
 import { QUERY_SKILLS } from '../utils/queries';
 import { MATCH_TUTOR } from '../utils/queries';
+import TutorCard from '../components/TutorCard/TutorCard'
+import '../components/TutorCard/style.scss'
 
 const ProfileBox = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -30,34 +33,14 @@ const ProfileBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
 }));
 
-const MatchBox = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  height: '200px',
-  width: '50%',
-  borderRadius: '20px',
-  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-  margin: theme.spacing(1),
-  backgroundColor: '#4F2683 ',
-  border: '5px solid white',
-}));
-
-const MatchImage = styled(Avatar)(({ theme }) => ({
-  position: 'initial',
-  width: '80px',
-  height: '80px',
-  margin: theme.spacing(2),
-}));
-
 function Profile() {
   // This will query the available skills from the database
   const { data: skillData } = useQuery(QUERY_SKILLS);
   const { loading, error, data: tutorData } = useQuery(MATCH_TUTOR);
   console.log(tutorData);
+  
   const { userId } = useParams();
-
+  
   const { data: userName } = useQuery(QUERY_SINGLE_USER, {
     variables: { id: userId },
   });
@@ -172,9 +155,6 @@ function Profile() {
               <Typography variant='body1' style={styles.bio}>
                 {/* {userData.skills} */}
               </Typography>
-              {/* <Typography variant="body1" style={styles.interest}>
-            Interest
-          </Typography> */}
             </>
           ) : (
             'hit'
@@ -190,12 +170,6 @@ function Profile() {
             </Button>
           ) : (
             <>
-              {/* <TextField
-                type='file'
-                onChange={(event) => setProfilePicture(event.target.value)}
-                label=''
-                value={profilePicture.img}
-              /> */}
               <FormControl margin='normal'>
                 <form onSubmit={handleSave}>
                   <InputLabel>Skills</InputLabel>
@@ -230,52 +204,15 @@ function Profile() {
             </>
           )}
         </ProfileBox>
-        <Stack
-          direction={{ sm: 'column', md: 'row' }}
-          flexWrap={'wrap'}
-          spacing={{ xs: 1, sm: 2, md: 0 }}
-          alignItems={'center'}
-          justifyContent={'space-even'}
-        >
-          <Stack direction='column' justifyContent='center'>
-            <MatchBox minWidth={'15rem'}>
-              <Typography variant='h6' gutterBottom color={'white'}>
-                Matches your skills
-              </Typography>
-              <MatchImage src={tutorData.tutors[0].image}></MatchImage>
-              <Typography variant='h6' gutterBottom color={'white'}>
-                {tutorData.tutors[0].tutorName}
-              </Typography>
-              <Typography variant='h6'>{tutorData.tutors[0].bio}</Typography>
-            </MatchBox>
-          </Stack>
-          <Stack direction='column' justifyContent='center'>
-            <MatchBox minWidth={'15rem'}>
-              <Typography variant='h6' gutterBottom color={'white'}>
-                Matches your skills
-              </Typography>
-              <MatchImage src={tutorData.tutors[1].image}></MatchImage>
-              <Typography variant='h6' gutterBottom color={'white'}>
-                {tutorData.tutors[1].tutorName}
-              </Typography>
-              <Typography variant='h6'>{tutorData.tutors[1].bio}</Typography>
-            </MatchBox>
-          </Stack>
-          <Stack direction='column' justifyContent='center'>
-            <MatchBox minWidth={'15rem'}>
-              <Typography variant='h6' gutterBottom color={'white'}>
-                Matches your skills
-              </Typography>
-              <MatchImage src={tutorData.tutors[2].image}></MatchImage>
-              <Typography variant='h6' gutterBottom color={'white'}>
-                {tutorData.tutors[2].tutorName}
-              </Typography>
-              <Typography variant='h6' color={'white'} gutterBottom>
-                {tutorData.tutors[2].bio}
-              </Typography>
-            </MatchBox>
-          </Stack>
-        </Stack>
+          <Container sx={{ alignItems: 'center' }}>
+            {tutorData === undefined && (
+              <div>No available tutors</div>
+            )}
+            <Stack>
+              {/* if tutorInfo is undefined sets as empty array */}
+              <TutorCard tutorInfo={tutorData.tutors ?? []} checkout={false} />
+            </Stack>
+          </Container>
       </Stack>
     </div>
   );
