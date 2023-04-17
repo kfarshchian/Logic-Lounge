@@ -14,7 +14,7 @@ import Header from './components/Navbar';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import Match from './pages/match';
-import Chatrooms from './pages/Chatrooms/Chatrooms';
+import Chatrooms from './pages/Chatrooms/';
 import {io} from 'socket.io-client'
 import Checkout from './components/checkout/checkout.jsx';
 import PaymentProcessed from './components/PaymentProcessed/PaymentProcessed.jsx'

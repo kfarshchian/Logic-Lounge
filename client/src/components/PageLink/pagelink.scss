@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     height: 100%;
+    border-radius: 0.5rem;
 }
 
 .page-link{
@@ -11,4 +12,8 @@
     // vertical-align:baseline;
     display: flex;
     align-items: center;
+}
+
+.note{
+    color: rgba(139, 139, 139, 0.2)
 }

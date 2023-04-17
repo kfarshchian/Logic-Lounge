@@ -33,6 +33,28 @@ const BlockTitleBox = styled(Box)(({ theme }) => ({
 }));
 
 function Home() {
+
+
+  const styles = {
+    root: {
+      flexGrow: 1,
+      paddingTop: '0px',
+      paddingBottom: '0px',
+    },
+    Logo: {
+      width: '144px',
+      height: '144px',
+      margin: '16px',
+    },
+    button: {
+      position: 'initial',
+      margin: '8px',
+      backgroundColor: '#ddcdc6 ',
+      color: 'black',
+    },
+  };
+
+
   return (
     <>
       <Box
@@ -154,6 +176,7 @@ function Home() {
           </CardContent>
         </Box>
 
+
         <Box
           sx={{
             backgroundColor: '#ddcdc6',
@@ -192,6 +215,49 @@ function Home() {
                   xs: 10,
                   color: '#000000',
                   textAlign: 'center',
+
+        <Grid
+          container
+          Spacing={0}
+          columnSpacing={{ xs: 12, sm: 6, md: 2 }}></Grid>
+      </div>
+      <div style={styles.root}>
+        {/*bottom section*/}
+        <Grid item xs={12} sm={6} md={4}>
+          <Stack direction="column" justifyContent="center">
+            <BlockOneBox>
+              <Typography
+                variant="h4"
+                sx={{
+                  color: '#ffffff',
+                  textAlign: 'left',
+                  fontFamily: 'EB Garamond',
+                  fontweight: 'bold',
+                }}>
+                Just sign-up, search and match!
+              </Typography>
+              <Link to="/signup">
+                <Button
+                  color="primary"
+                  sx={{
+                    cursor: 'pointer',
+                    position: 'initial',
+                    backgroundColor: '#ddcdc6',
+                    fontFamily: 'EB Garamond',
+                    fontweight: '800',
+                    color: '#000000',
+                    margin: '20px',
+                  }}
+                  type="submit">
+                  Sign-up
+                </Button>
+              </Link>
+              <Typography
+                sx={{
+                  color: '#ffffff',
+                  variant: 'h8',
+                  textAlign: 'left',
+
                   fontFamily: 'EB Garamond',
                   fontWeight: '500',
                 },

@@ -2,6 +2,7 @@
     font-family: 'Noto Serif JP', serif;
     
 }
+
 .scrolling-wrapper {
     overflow-x: scroll;
     overflow-y: hidden;
@@ -12,12 +13,12 @@
       margin: 5px;
     }
   }
-@mixin flex-row{
+@mixin flx-row{
     display: flex;
     flex-direction: row;
 }
 
-@mixin flex-column{
+@mixin flx-column{
     display: flex;
     flex-direction: column;
 }
