@@ -25,8 +25,17 @@ Have you ever felt stuck on a coding problem, found the solution on google but w
 
 - ReactJS
 - MongoDB
+- Mongoose
+- Express.js
+- JWT
 - MUI (Material UI)
 - GraphQL
+- Framer
+- Stripe
+- Socket.io
+- Cloudinary
+- Moment.js
+- Railway
 
 ## **Motivation**
 
