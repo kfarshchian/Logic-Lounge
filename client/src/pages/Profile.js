@@ -37,14 +37,12 @@ function Profile() {
   // This will query the available skills from the database
   const { data: skillData } = useQuery(QUERY_SKILLS);
   const { loading, error, data: tutorData } = useQuery(MATCH_TUTOR);
-  console.log(tutorData);
   
   const { userId } = useParams();
   
   const { data: userName } = useQuery(QUERY_SINGLE_USER, {
     variables: { id: userId },
   });
-  console.log(userName);
   // This will access the gql mutation by accessing the needed userId variable
   const [updateUser] = useMutation(UPDATE_USER, {
     variables: { userId },
@@ -76,16 +74,16 @@ function Profile() {
     // save profile changes to database
     event.preventDefault();
     try {
-      const { data } = await updateUser({
+      await updateUser({
         variables: { ...formState },
       });
-      console.log(data, 'err');
     } catch (err) {
       console.error(err);
     }
     setEditing(false);
   };
 
+  // This is needed to style the items in the selection for skills
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -110,7 +108,6 @@ function Profile() {
 
   const styles = {
     root: {
-      // backgroundColor: '#DDCDC6',
       flexGrow: 1,
       paddingTop: '18px',
       paddingBottom: '18px',
