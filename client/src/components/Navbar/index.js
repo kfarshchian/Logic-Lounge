@@ -8,7 +8,7 @@ import AppMenu from '../AppMenu';
 import UserMenuButton from '../UserMenuButton';
 import { motion } from 'framer-motion';
 
-const pageNames = ['Find a Match','Lounges']
+const pageNames = ['Find a New Skill','Lounges']
 const pageLinks = ['/match','/chatrooms']
 
 const buttonVariants = {
