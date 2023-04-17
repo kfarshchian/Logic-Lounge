@@ -1,6 +1,39 @@
+.message-form{
+  display: grid;
+  grid-template-columns: auto 70px;
+  border: 1px solid #4F2683;
+  border-radius: 0 0 0.5rem 0.5rem;
+  padding: 0.5rem;
+  
+
+  input{
+    margin: initial;
+    padding: initial;
+    padding: 1rem;
+    height: 4rem;
+    width: 100%;
+  }
+}
+
 .message{
-  .p{
-    width: initial;
-    height: initial;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0.5rem 0 0;
+}
+
+.button-container{
+  display: flex;
+  align-items: center;
+  button{
+    height: 4rem;
+    margin: 0 0 1.4rem 0;
+  }
+}
+
+@media screen and (max-height: 825px) {
+  .message-form{
+    input{
+      height: 1.5rem;
+    }
   }
 }

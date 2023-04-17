@@ -19,7 +19,10 @@ db.once('open', async () => {
     console.log('Skills Seeded!')
     
     await Chatroom.collection.drop();
-    await Chatroom.insertMany(chatroomSeeds);
+    const skills = await Skill.find().lean();
+    for(let i=0; i<skills.length; i++){
+      await Chatroom.create({chatroomName: skills[i].skillName})
+    } 
     console.log('Chatrooms Seeded!');
 
     console.log('Database seeded!')

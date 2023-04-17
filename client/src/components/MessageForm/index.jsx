@@ -1,14 +1,16 @@
 import { Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import Auth from '../../utils/auth'
+import './messageform.scss'
 
-const formStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  border: '1px solid #4F2683',
-  // width: '98.5vw',
-  // padding: 5,
-}
+// const formStyle = {
+//   display: 'flex',
+//   flexDirection: 'column',
+//   border: '1px solid #4F2683',
+//   height: ''
+//   // width: '98.5vw',
+//   // padding: 5,
+// }
 
 function MessageForm({socket,selectedChat}) {
   const [messageText,setMessageText] = useState('')
@@ -33,26 +35,31 @@ function MessageForm({socket,selectedChat}) {
     <form 
       className='message-form' 
       onSubmit={sendMessage}
-      style={formStyle}
     >
-        <TextField
-          required
-          margin='normal'
-          variant='outlined'
-          label='Message'
-          name='message'
-          helperText='Type message here'
-          onChange={handleChange}
-          value={messageText}
-        />
-        <Button
-          color='secondary'
-          sx={{ cursor: 'pointer', color: '#4F2683' }}
-          type='submit'
-          variant='outlined'
+        <div
+          className='message' 
         >
-          Send
-        </Button>
+          <TextField
+            required
+            margin='none'
+            variant='outlined'
+            label='Message'
+            name='message'
+            helperText='Type message here'
+            onChange={handleChange}
+            value={messageText}
+          />
+        </div>
+        <div className='button-container'>
+          <Button
+            color='secondary'
+            sx={{ cursor: 'pointer', color: '#4F2683' }}
+            type='submit'
+            variant='outlined'
+          >
+            Send
+          </Button>
+        </div>
     </form>
   )
 }
