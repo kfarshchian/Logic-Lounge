@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useState } from "react";
 import {
@@ -13,7 +12,7 @@ import {
   OutlinedInput,
   ListItemText,
   Stack,
-  Container
+  Container,
 } from "@mui/material";
 import { MATCH_TUTOR } from "../utils/queries.js";
 import { useQuery } from "@apollo/client";
@@ -88,7 +87,6 @@ const Match = () => {
   ];
 
   return (
-    
     <div className="example">
       <div className="controls">
         {/* <form onSubmit={this.handleSubmit}> */}
@@ -160,7 +158,12 @@ const Match = () => {
 
               <Button
                 color="secondary"
-                sx={{ cursor: "pointer", color: "#4F2683", display: 'block', width: "15rem"}}
+                sx={{
+                  cursor: "pointer",
+                  color: "#4F2683",
+                  display: "block",
+                  width: "15rem",
+                }}
                 type="submit"
                 value="submit"
                 variant="outlined"
@@ -170,15 +173,15 @@ const Match = () => {
             </form>
           </FormControl>
         </Box>
-        <Container sx={{alignItems: "center",}}>
-        {tutorInfo === undefined && (
-          <div>You haven't selected a skill yet.</div>
-        )}
-        <Stack  >
-          {/* if tutorInfo is undefined sets as empty array */}
-          <TutorCard tutorInfo={tutorInfo ?? []} checkout={false} />
-        </Stack>
-        </Container >
+        <Container sx={{ alignItems: "center" }}>
+          {tutorInfo === undefined && (
+            <div class="">You haven't selected a skill yet.</div>
+          )}
+          <Stack>
+            {/* if tutorInfo is undefined sets as empty array */}
+            <TutorCard tutorInfo={tutorInfo ?? []} checkout={false} />
+          </Stack>
+        </Container>
         <div id="printTutor"></div>
       </div>
     </div>
