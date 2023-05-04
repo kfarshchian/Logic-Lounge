@@ -6,7 +6,7 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { Button, TextField, FormControl, Typography, Box } from '@mui/material';
 
-const Login = (props) => {
+const TutorLogin = (props) => {
   const [formState, setFormState] = useState({ username: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
@@ -50,7 +50,7 @@ const Login = (props) => {
           alignItems: 'center',
         }}
       >
-        <Typography variant='h6'>Log In</Typography>
+        <Typography variant='h6'>Tutor Log In</Typography>
         <div>
           {data ? (
             <p>
@@ -117,10 +117,9 @@ const Login = (props) => {
             <div className='my-3 p-3 bg-danger text-white'>{error.message}</div>
           )}
         </div>
-        <Link to="/tutorlogin" sx={{ cursor: 'pointer', color: '#4F2683' }}>Tutor Log In</Link>
       </Box>
     </>
   );
 };
 
-export default Login;
+export default TutorLogin;

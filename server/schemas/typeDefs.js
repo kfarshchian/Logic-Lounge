@@ -23,6 +23,8 @@ const typeDefs = gql`
   type Tutor {
     _id: ID
     tutorName: String
+    email: String
+    password: String
     image: String
     bio: String
     skills: [String]
@@ -56,6 +58,8 @@ const typeDefs = gql`
     ): Chatroom
     addTutor(
       tutorName: String!
+      email: String!
+      password: String!
       image: String
       bio: String
       skills: [String]!
@@ -64,6 +68,8 @@ const typeDefs = gql`
     updateTutor(
       tutorId: ID!
       tutorName: String
+      email: String
+      password: String
       image: String
       bio: String
       skills: String
@@ -89,6 +95,8 @@ const typeDefs = gql`
     removeSkill(skillId: ID!): Skill
     # This will allow a user to login
     login(username: String!, password: String!): Auth
+    # This will allow a user to login
+    tutorLogin(username: String!, password: String!): Auth
   }
 `;
 

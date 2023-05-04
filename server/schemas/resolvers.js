@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Tutor, Skill, Chatroom } = require('../models');
-const { signToken } = require('../utils/auth');
+const { signToken, signTutorToken } = require('../utils/auth');
+
 
 const resolvers = {
   Query: {
@@ -30,9 +31,11 @@ const resolvers = {
   },
 
   Mutation: {
-    addTutor: async (parent, { tutorName, skills, image, bio }) => {
-      const tutor = await Tutor.create({ tutorName, skills, image, bio });
-      return tutor;
+    //Tutor sign up
+    addTutor: async (parent, { tutorName, email, password, bio, skills }) => {
+      const tutor = await Tutor.create({ tutorName, email, password, bio, skills });
+      const token = signTutorToken(tutor);
+      return { token, tutor };
     },
     //Adds a message to a chatroom
     addMessage: async (
@@ -131,6 +134,21 @@ const resolvers = {
       }
 
       const token = signToken(user);
+      return { token, user };
+    },
+    tutorLogin: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
+      // If the username isn't found throw following error
+      if (!user) {
+        throw new AuthenticationError('No user found with this username');
+      }
+      const correctPw = await user.isCorrectPassword(password);
+      // If the password doesn't match the one in the db throw error
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signTutorToken(user);
       return { token, user };
     },
   },
