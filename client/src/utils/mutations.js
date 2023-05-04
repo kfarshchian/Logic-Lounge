@@ -49,6 +49,43 @@ export const UPDATE_USER = gql`
   }
 `;
 
+export const ADD_TUTOR = gql`
+  mutation ADD_TUTOR($tutorName: String!, $email: String!, $password: String!, $skills: [String]!, $bio: String) {
+  addTutor(tutorName: $tutorName, email: $email, password: $password, skills: $skills, bio: $bio) {
+    bio
+    email
+    password
+    skills
+    tutorName
+  }
+  # {
+  #     tutor {
+  #       _id
+  #       tutorName
+  #       email
+  #       bio
+  #       skills {
+  #         skillName
+  #       }
+  #     }
+  #     token
+  #   }
+  }
+`;
+
+// export const ADD_TUTOR = gql`
+// mutation ADD_TUTOR($tutorName: String!, $email: String!, $password: String!, $skills: [String]!, $bio: String) {
+//   addTutor(tutorName: $tutorName, email: $email, password: $password, skills: $skills, bio: $bio) {
+//     bio
+//     email
+//     password
+//     skills
+//     tutorName
+//   }
+// }
+// `;
+
+
 export const MATCH_TUTOR = gql`
   query getTutors {
     tutors {

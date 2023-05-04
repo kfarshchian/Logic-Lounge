@@ -18,6 +18,9 @@ import Chatrooms from './pages/Chatrooms/';
 import {io} from 'socket.io-client'
 import Checkout from './components/checkout/checkout.jsx';
 import PaymentProcessed from './components/PaymentProcessed/PaymentProcessed.jsx'
+import TutorSignup from './pages/Tutorsignup';
+import TutorLogin from './pages/Tutorlogin';
+import Tutorprofile from './pages/Tutorprofile';
 
 
 
@@ -67,12 +70,24 @@ function App() {
                 element={<Login />} 
               />
               <Route 
+                path="/tutorlogin" 
+                element={<TutorLogin />} 
+              />
+              <Route 
                 path="/signup" 
                 element={<Signup />} 
+              />
+              <Route 
+                path="/tutorsignup" 
+                element={<TutorSignup />} 
               />
               <Route
                 path='/users/:userId'
                 element={<Profile />}
+              />  
+              <Route
+                path='/tutors/:tutorsId'
+                element={<Tutorprofile />}
               />  
               <Route
                 path='/match'

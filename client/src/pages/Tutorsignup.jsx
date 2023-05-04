@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { ADD_TUTOR } from '../utils/mutations';
 import { QUERY_SKILLS } from '../utils/queries';
 import {
   Button,
@@ -20,16 +20,18 @@ import Auth from '../utils/auth';
 // import { UserImage } from '../components/ImageUpload/UserImage';
 // import {UploadWidget} from '../components/ImageUpload/UploadWidget'
 
-const Signup = () => {
+const TutorSignup = () => {
   const [formState, setFormState] = useState({
-    username: '',
+    tutorName: '',
     email: '',
     password: '',
+    bio: '',
     skills: [],
   });
-
+  
+console.log(formState);
   // Add a user to database
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const [addTutor, { error, data }] = useMutation(ADD_TUTOR);
 
   // Query skills from database
   const { data: skillData } = useQuery(QUERY_SKILLS);
@@ -43,12 +45,13 @@ const Signup = () => {
   };
 
   const handleFormSubmit = async (event) => {
+    console.log(event);
     event.preventDefault();
     try {
-      const { data } = await addUser({
+      const { data } = await addTutor({
         variables: { ...formState },
       });
-      Auth.login(data.addUser.token);
+      Auth.tutorLogin(data.addTutor.token);
     } catch (e) {
       console.error(e);
     }
@@ -76,7 +79,7 @@ const Signup = () => {
           alignItems: 'center',
         }}
       >
-        <Typography variant='h6'>Sign Up</Typography>
+        <Typography variant='h6'>Tutor Sign Up</Typography>
         <div>
           {data ? (
             <p>
@@ -104,10 +107,10 @@ const Signup = () => {
                   margin='normal'
                   variant='outlined'
                   label='Username'
-                  name='username'
+                  name='tutorName'
                   fullWidth
                   onChange={handleChange}
-                  value={formState.name}
+                  value={formState.tutorName}
                 />
                 <TextField
                 fullWidth
@@ -129,6 +132,17 @@ const Signup = () => {
                   type='password'
                   onChange={handleChange}
                   value={formState.password}
+                />
+                <TextField
+                  margin='normal'
+                  variant='outlined'
+                  fullWidth
+                  label='Bio'
+                  multiline
+                  rows={4}
+                  name='bio'
+                  onChange={handleChange}
+                  value={formState.bio}
                 />
                 {/* This is for the skill the selection */}
                 <FormControl margin='normal'>
@@ -159,7 +173,6 @@ const Signup = () => {
                       : 'No skills available at this time...'}
                   </Select>
                 </FormControl>
-                
                 <Button
                   color='secondary'
                   sx={{ cursor: 'pointer', color: '#4F2683' }}
@@ -175,10 +188,9 @@ const Signup = () => {
             <div className='my-3 p-3 bg-danger text-white'>{error.message}</div>
           )}
         </div>
-        <Link to="/tutorsignup" >Tutor Sign Up</Link>
       </Box>
     </>
   );
 };
 
-export default Signup;
+export default TutorSignup;
