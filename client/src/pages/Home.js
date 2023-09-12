@@ -180,7 +180,7 @@ function Home() {
               <BlockTwoBox>
                 <img
                   src={InstructorFilmstrip}
-                  height="400rem"
+                  height="375rem"
                   alt="Instructor Filmstrip"
                 />
               </BlockTwoBox>
