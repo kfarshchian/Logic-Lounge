@@ -1,0 +1,27 @@
+
+.homeCards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    & .homeCardLeft { 
+        display: flex;
+        flex-direction: row;
+        height: 40rem;
+        width: 95%;
+        background-color: rgb(232, 231, 229);
+        border-radius: 40px; 
+        box-shadow: 2px 2px 5px 2px rgb(207, 207, 207);
+        overflow: hidden;
+        
+        & .homeCardRight {
+            position: relative;
+            left: 45%;
+            border-radius: 40px;
+            background-color: white;
+            height: 100%;
+            width: 65%;
+            overflow: inherit;
+        }
+    }
+}
