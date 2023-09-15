@@ -63,7 +63,7 @@ N/A
 
 Add your screenshots here:
 
-![Screen Shot 2023-04-17 at 4 17 44 PM](https://user-images.githubusercontent.com/92850947/232623168-96507a18-5122-45e9-931b-bd3d14fda126.png)
+![Screen Shot 2023-09-15 at 10 09 12 AM](https://github.com/kfarshchian/Logic-Lounge/assets/92850947/e0efd5c3-97fc-4bdd-a219-1ec6ad644963)
 
 ![Screen Shot 2023-04-17 at 4 18 12 PM](https://user-images.githubusercontent.com/92850947/232623208-ca5748e8-ac5f-4740-82ee-96e07696152a.png)
 
