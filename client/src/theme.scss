@@ -1,6 +1,5 @@
 * {
     font-family: 'Noto Serif JP', serif;
-    
 }
 
 .scrolling-wrapper {
@@ -13,6 +12,7 @@
       margin: 5px;
     }
   }
+
 @mixin flx-row{
     display: flex;
     flex-direction: row;
