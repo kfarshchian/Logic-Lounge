@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2&display=swap')
+
+.homeCardsContainer
+    height: 100%
+
+    .homeCards
+        display: flex
+        position: relative
+        justify-content: center
+        margin: 8px 0px 8px 0px
+        padding: 8px 0 8px 0
+        align-items: center
+
+        .homeCardLeft
+            display: flex
+            flex-direction: row
+            height: 45rem
+            width: 75%
+            background-color: rgb(238, 238, 238)
+            border-radius: 40px
+            box-shadow: 2px 2px 5px 2px rgb(207, 207, 207)
+            word-wrap: break-word
+
+            .leftCardContent
+                display: flex
+                flex-direction: column
+                // position: relative
+                align-items: center
+                justify-content: center
+                text-align: center
+
+                h2
+                    font-family: 'Exo 2', sans-serif
+                    line-height: normal
+                    font-weight: 200
+                    padding: 0px 8px 0px 8px
+
+                .btn 
+                    margin-top: 8px
+
+            .homeCardRight
+                border-radius: 40px
+                background-color: white
+                height: 100%
+                width: 55%
+                overflow: inherit
+
+                img
+                    position: relative
+                    top: 15%
+                    padding: 8px
+                    margin: 8px
+                    height: 30rem
+
+.btn
+    border-radius: 12px
+    min-height: 2.5rem
+    min-width: 8rem
+    background-color: #53298a
+    color: white
+    font-family: 'Exo 2', sans-serif
+
+@media (max-width: 1378px)
+    .homeCardsContainer
+        &.homeCards
+            &.homeCardLeft
+                height: 50rem
+@media (max-width: 400) 
+    .homeCardscontainer

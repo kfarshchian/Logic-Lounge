@@ -59,8 +59,8 @@
     {
       "tutorName": "Cornelius Davis",
       "image": "https://i.imgur.com/fbz9UMp.png",
-      "bio": "Freelance Web Developer.",
-      "skills": ["JavaScript", "Git", "Github", "Heroku", "Node.js", "SEO", "Responsive Design", "API/JSON", "RESTful API", "HTML5", "CSS3", "jQuery", 
+      "bio": "Former SWE intern at Ancestry",
+      "skills": ["JavaScript", "React.js", "CI/CD", "Git", "GraphQL", "Railway", "Node.js", "HTML5", "CSS3", 
       "Bootstrap", "Firebase", "Node.js","MySQL", "MongoDB", "Express.js", "Handlebars.js", "NoSQL" ]
     }
 ]
