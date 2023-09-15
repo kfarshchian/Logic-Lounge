@@ -1,27 +1,38 @@
 import React from 'react';
-// import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
-// import Grid from '@mui/material/Grid';
-// import Box from '@mui/material/Box';
-// import Stack from '@mui/material/Stack';
-// import { styled } from '@mui/material/styles';
-// import Logo from '../../src/logos/Logic Lounge - Tan.png';
-// import StudentOutlined from '../../src/logos/studentOutlined.png';
-// import InstructorFilmstrip from '../../src/logos/InstructorFilmstrip.png';
-// import FeaturedInstructor from '../../src/logos/FeaturedInstructor.png';
-// import { Link } from 'react-router-dom';
-import './styles/Home.css';
+import { Link } from 'react-router-dom';
+import './styles/Home.sass';
 import Card from '../components/Card/Card';
+import Illustration from '../assets/9 SCENE.svg'
 function Home() {
   return (
-    <>
+    <div className='homeCardsContainer'>
       <section className='homeCards'>
         <Card className='homeCardLeft'>
-          hi
-          <Card className='homeCardRight'>hi</Card>
+          <div className='leftCardContent'>
+            <div>
+
+            <img
+              className='logo'
+              src='./logos/navbar-logo.png'
+              alt='Logic Lounge logo'
+              style={{height: '10rem'}}
+              />
+              </div>
+            {/* <h3>Logic Lounge</h3> */}
+            <h2>
+              Welcome to Logic Lounge, the premier peer-to-peer tutoring
+              platform that bridges the gap between curiosity and expertise!
+            </h2>
+            <Link to={'/signup'}>
+              <button className='btn'>Get Started</button>
+            </Link>
+          </div>
+          <Card className='homeCardRight'>
+            <img src={Illustration} alt='remote learning illustration' />
+          </Card>
         </Card>
       </section>
-    </>
+    </div>
   );
 }
 
