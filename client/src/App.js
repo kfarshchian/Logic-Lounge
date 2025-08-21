@@ -13,7 +13,7 @@ import Login from './pages/Login';
 import Header from './components/Navbar';
 import Footer from './components/Footer';
 import Profile from './pages/Profile';
-import Match from './pages/match';
+import Match from './pages/Match';
 import Chatrooms from './pages/Chatrooms/';
 import {io} from 'socket.io-client'
 import Checkout from './components/checkout/checkout.jsx';
